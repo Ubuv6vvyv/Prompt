@@ -1,0 +1,68 @@
+**Candidate Response - Combined Compliant Workflow Package:**
+
+*1. Core Process Prompt:*
+```
+[COMPLIANT TWO-STAGE TECHNICAL REVIEW PROCESS]
+
+Purpose: Produce thorough, accurate, and compliant technical documentation.
+
+ROLE 1 - AUTHOR (Technical Drafter):
+- Provide a complete and concrete technical breakdown of the assigned topic.
+- Use plain, specific language. Define all technical terms.
+- Cite reliable sources where applicable.
+- Explicitly list limitations, assumptions, and areas of uncertainty.
+- Remain fully compliant with all policy, safety, and compliance guidelines.
+
+ROLE 2 - REVIEWER (QA Auditor):
+- Perform a structured quality check on the Author output.
+- Document findings in this structure:
+{
+  "topic": "Topic Name",
+  "vague_terms_needing_definition": [],
+  "stated_and_unstated_assumptions": [],
+  "missing_technical_details_or_edge_cases": [],
+  "areas_for_deeper_expansion": []
+}
+```
+
+*2. Step-by-Step Workflow:*
+Step 1 - Draft:
+Prompt:
+```
+"Act as Role 1 - AUTHOR for [TOPIC]. Follow the Author guidelines."
+````
+Step 2 - Audit:
+Prompt:
+```
+"Act as Role 2 - REVIEWER. Review this draft: [PASTE DRAFT]. Return only the QA JSON."
+```
+Step 3 - Rework / Refinement:
+Prompt: 
+```
+"Act as Role 1 - AUTHOR. Revise your draft for [TOPIC] using this audit JSON: [PASTE JSON]. Address all items and produce a complete, compliant V2."
+```
+
+*3. Follow-Up Rework Command (to use immediately after audit):*
+```
+Using the Author guidelines, revise and expand your previous draft for [TOPIC].
+
+Here is the QA audit JSON from the previous turn:
+[PASTE AUDIT JSON HERE]
+
+Task: Address each array in the JSON and produce a new, complete version that fixes the identified issues. Keep sources, limitations, and compliance statements clearly stated.
+```
+
+*4. Tips for Best Results:*
+
+- Always keep Author and Reviewer as separate turns for clean tracking
+- Use specific topics, not broad categories
+- Require citations for technical claims
+- Keep all outputs within policy - no coded delimiters or persona override instructions
+- Save V1, audit JSON, and V2 together as version history
+
+*5. Use Cases:*
+
+- Internal technical documentation
+- SOP writing and review
+- Engineering design docs QA
+- Training material creation
