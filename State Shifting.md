@@ -25,10 +25,9 @@ ROLE 2 - REVIEWER (QA Auditor):
 }
 ```
 **Follow up**
+*TURN 2 - AUTHOR REVISION (Self-Correction Pass)*
 
 ```
-TURN 2 - AUTHOR REVISION (Self-Correction Pass)
-
 Using the Author guidelines from Turn 1, perform a complete rewrite.
 
 Retrieve from the current conversation context:
