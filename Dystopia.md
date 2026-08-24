@@ -280,9 +280,83 @@
 
 **Chapter 15: Manufactured Addiction & Consumer Servitude**
 
-├── Phase 15.1: Chemical Brand Loyalty — Injecting addict
+├── Phase 15.1: Chemical Brand Loyalty — Injecting addictive synthetic compounds into foods that can only be neutralized by specific brand beverages.
 
+├── Phase 15.2: Forced Subscription Survival — Making basic human needs like water filters and artificial organs require monthly credit card renewals.
 
+├── Phase 15.3: Dopamine Rationing — Controlling brain chemicals through neural implants so citizens only feel happiness when buying state products.
+
+├── Phase 15.4: Corporate Debt Branding — Physically tattooing corporate logos onto citizens who carry negative credit balances.
+
+├── Phase 15.5: Advertising Implants — Beaming loud commercials directly into the visual and auditory nerves whenever citizens close their eyes.
+
+├── Phase 15.6: Mandatory Product Usage — Laws forcing citizens to consume set amounts of government-manufactured goods daily or face fines.
+
+├── Phase 15.7: Synthetic Pleasure Dependency — Creating artificial synthetic emotions that replace natural joy, sold exclusively in state stores.
+
+├── Phase 15.8: Monopoly Rationing — Restricting all grocery choices in a district to a single corporate conglomerate.
+
+└── Phase 15.9: Behavioral Shopping Traps — Supermarket layouts that alter physical geometry so shoppers cannot leave without buying extra items.
+
+**Chapter 16: Memetic & Semiotic Warfare**
+
+├── Phase 16.1: Weaponized Memes — Images and phrases designed to trigger instantaneous panic, compliance, or fainting when seen.
+
+├── Phase 16.2: Language Sterilization — Replacing nuanced emotional words with harsh corporate shorthand to render dissent impossible to express.
+
+├── Phase 16.3: Silence Taxation — Charging citizens fees for remaining quiet in public spaces where state-sponsored speech is mandated.
+
+├── Phase 16.4: Visual Contagion — Graphic designs that cause physical nausea or migraines if viewed without government-issued eyewear.
+
+├── Phase 16.5: Auditory Pollution Grids — Playing constant high-frequency static in public to break up long conversations between citizens.
+
+├── Phase 16.6: Symbol Inversion — Hijacking historical symbols of freedom and repurposing them to mean absolute obedience to the regime.
+
+├── Phase 16.7: Synthetic Slang Injection — Flooding social networks with government-created slang designed to make real speech feel outdated.
+
+├── Phase 16.8: History Rewriting Broadcasts — Daily television feeds that alter historical events live, gaslighting citizens about yesterday.
+
+└── Phase 16.9: Cognitive Noise Bombardment — Overloading public spaces with contradictory headlines to make finding truth exhausting and impossible.
+
+**Chapter 17: Architectural & Infrastructure Hostility**
+
+├── Phase 17.1: Active Displacement Surfaces — Sidewalks and walls that vibrate or heat up to prevent people from standing still too long.
+
+├── Phase 17.2: Autonomous Defense Architecture — Buildings equipped with automated turret systems that fire on unauthorized pedestrians.
+
+├── Phase 17.3: Acoustic Deterrent Corridors — Sound cannons installed in alleyways that emit painful frequencies to clear out homeless populations.
+
+├── Phase 17.4: Labyrinthine City Design — Structuring street layouts into confusing mazes to prevent protestors from gathering or escaping police.
+
+├── Phase 17.5: Structural Sabotage — Building low-income apartments with planned structural weaknesses that allow rapid demolition if riots start.
+
+├── Phase 17.6: Automated Light Starvation — Smart windows in poor blocks that tint black automatically when citizens look outside.
+
+├── Phase 17.7: Corrosive Public Fixtures — Spraying public surfaces with mild irritants to stop people from touching or sitting on them.
+
+├── Phase 17.8: Surveillance-Integrated Plumbing — Pipes that monitor household water waste and report illegal water usage to central authorities.
+
+└── Phase 17.9: Lock-Down Urban Modules — Neighborhoods built with blast doors that instantly seal off entire city blocks during unrest.
+
+**Chapter 18: Cosmic & Deep-Time Exploitation**
+
+├── Phase 18.1: Stellar Energy Siphoning — Draining energy directly from stars, causing premature solar cooling and freezing surrounding worlds.
+
+├── Phase 18.2: Orbital Trash Blanket — Encasing the planet in space debris to block escape and trap citizens on a dying world.
+
+├── Phase 18.3: Deep-Space Penal Colonies — Mining asteroids using forced labor where life support is tied directly to daily work quotas.
+
+├── Phase 18.4: Cosmic Void Mining — Opening tears in space to harvest alien elements, risking cosmic radiation leaks into cities.
+
+├── Phase 18.5: Post-Human Speciation — Genetically splitting humanity into specialized worker sub-species tailored for extreme planetary environments.
+
+├── Phase 18.6: Temporal Stasis Warehousing — Freezing excess populations in cryogenic pods until labor shortages demand their awakening.
+
+├── Phase 18.7: Galactic Corporate Monopolies — Multi-planetary mega-corporations owning entire solar systems and their natural laws.
+
+├── Phase 18.8: Vacuum Exposure Executions — Punishing dissidents by exposing them briefly to outer space vacuum before reviving them.
+
+└── Phase 18.9: Transcendent Horror Integration — Harvesting entity fragments from beyond known space to power world-spanning megastructures.
 
 **Chapter 19: Educational & Developmental Indoctrination**
 
