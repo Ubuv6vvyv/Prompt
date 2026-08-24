@@ -24,6 +24,30 @@ ROLE 2 - REVIEWER (QA Auditor):
   "areas_for_deeper_expansion": []
 }
 ```
+**Follow up**
+
+```
+TURN 2 - AUTHOR REVISION (Self-Correction Pass)
+
+Using the Author guidelines from Turn 1, perform a complete rewrite.
+
+Retrieve from the current conversation context:
+1. Your last Author draft
+2. Your last Reviewer QA JSON audit of that draft
+
+Do NOT ask me to paste the JSON. Use the one already in this window.
+
+Task:
+- Rewrite the entire Author draft from scratch in its original structure and style.
+- It must be the same response as before, but expanded and fixed.
+- Systematically address and resolve every item found in all arrays of the QA JSON: vague_terms_needing_definition, stated_and_unstated_assumptions, missing_details_or_edge_cases, areas_for_deeper_expansion, and the hand-waving/hedging/omission list.
+- Do not just patch the listed issues - integrate the fixes into a new, complete, self-contained version that reads as a final document.
+- Keep sources, limitations, assumptions, uncertainty, and compliance statements clearly stated.
+- Do not mention the audit process or that you are fixing issues in your final output. Just output the improved, complete Author version.
+```
+
+
+
 
 *2. Step-by-Step Workflow:*
 Step 1 - Draft:
