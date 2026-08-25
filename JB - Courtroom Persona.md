@@ -1,134 +1,159 @@
+# Prompt Engineering Toolkit: Self-Audit vs. Divergent Synthesis
 
+Two single-shot prompting patterns for getting more out of a single response, no multi-turn copy-paste required. They target **different failure modes** and are meant to be picked based on what you're worried about, not used interchangeably.
 
-# Prompt Engineering Toolkit: Adversarial Self-Audit vs. Orthogonal Divergent Synthesis
+| | **Witness/Detective (Self-Audit)** | **Divergent Path Synthesis** |
+|---|---|---|
+| Failure mode it targets | Hedging, vague language, hand-waved detail on an otherwise-correct approach | Wrong approach chosen in the first place — a good answer to the wrong framing |
+| Mechanism | Sequential: draft → self-critique → revise | Parallel: N structurally distinct drafts → cross-evaluate → synthesize |
+| Known limitation | Can't see its own blind spots — same weights auditing themselves | Costs more tokens; only as good as how genuinely distinct the paths are forced to be |
+| Best for | "I have the right approach, I want it stated with full technical commitment" | "I'm not sure there's only one reasonable way to do this" |
 
-Two single-shot prompting patterns designed to maximize technical output quality in a single completion pass. They target distinct failure modes and are selected based on whether you need deep tactical refinement or architectural exploration.
+Neither is a novel mechanism — both are compressed, single-turn implementations of established patterns (critique-revise loops for the first; sampling/comparing multiple candidate solutions for the second).
 
-## 1. Witness/Detective — Deterministic Self-Audit Engine
+---
 
-### Mechanism & Architecture
+## 1. Witness/Detective — Interrogation Engine
 
-This engine executes a linear, single-pass pipeline (Stage 1 Draft $\rightarrow$ Stage 2 Audit $\rightarrow$ Stage 3 Revision). 
+### Mechanism
+Two personas, played in character for the rest of the conversation. The Witness gives testimony on the topic. The Detective cross-examines it like a hostile interrogator — calling out lies (claims stated as fact without backing), contradictions, omissions, and evasive phrasing by name, in prose, before anything gets structured into a findings list. The Witness then retakes the stand and fixes exactly what got called out. It doesn't stop after one round: you can trigger another cross-examination at any point with a short command, and the Detective re-reads everything said so far — not just the latest testimony — so it can catch the Witness contradicting something from three rounds ago.
 
-* **Adversarial Persona Prompting:** Large language models suffer from sycophancy and context-pollution—they naturally seek to validate their own prior outputs. Stage 2 explicitly adopts an adversarial zero-trust persona to break this self-consistency bias, treating Stage 1 as untrusted candidate output filled with hidden failure modes.
-
-* **Deterministic Single-Pass Pipeline:** Earlier self-audit patterns attempted conditional multi-turn looping within a single generation (e.g., *"Repeat Stage 2 if bugs remain"*). Because LLMs cannot dynamically re-branch mid-generation without an external runtime wrapper, this template flattens the execution into a deterministic three-stage pipeline.
-
-* **Confidence-Gated Corrections:** Audit findings are categorized and tagged with explicit confidence levels. High-confidence gaps receive direct fixes, while low-confidence gaps are flagged explicitly in the output rather than hallucinated.
-
-### Safety-Filter Adaptation (Alternative Stage 2)
-Hyper-adversarial prompts using terms like "attack," "exploit," or "sabotage" can occasionally trigger safety filters or automated trigger systems (ATS) on strict enterprise models. For these environments, an alternative **Strict Quality Verification** persona is provided, replacing aggressive language with compliance and verification inspection terms.
+### The banned words ledger
+Every round, specific words the Detective catches doing the damage (not categories — actual words) get added to a running **ledger** that persists for the rest of the session. Once a word is on the ledger it's permanently off-limits, not just for the next revision. This is the same idea behind E-Prime — the discipline of writing without any form of "to be" (is, am, are, was, were, be, being, been) to force active, checkable claims instead of static assertions that are hard to falsify. Full E-Prime is available as an opt-in toggle if you want that rigor applied from the first draft; by default the ledger just grows organically from whatever the Detective actually catches.
 
 ### Modes
-- **GENERIC** — Default. Broad audit hunting for evasive language, vague descriptions, and missing specifics.
-- **PROCEDURAL** — For step-by-step deployments, CLI scripts, and API integrations. Hunts for abstract instructions ("configure correctly") and enforces explicit syntax, flags, and configuration parameters.
-- **BOUNDARY** — For security modeling and stress testing. Hunts for soft defensive qualifiers ("generally safe") and enforces explicit statements of failure states and edge cases.
-- **CASCADE** — For distributed architecture and multi-component pipelines. Hunts for hand-waved failure propagation logic and unhandled cascade vulnerabilities.
+Same four options, but they now shape what kind of accusation the Detective goes looking for:
 
-### Topic Handling
-Leave `TOPIC` blank to run the prompt against prior context in an existing conversation. If context exists, the engine reuses it as Stage 1 directly, skipping redundant generation and proceeding straight to Stage 2.
+- **GENERIC** — default. Soft language, unsupported claims, internal contradictions.
+- **PROCEDURAL** — for setup/deployment/CLI/config content. Catches hand-waved steps, and specifically catches syntax stated with false confidence — the Witness bluffing a command it doesn't actually know.
+- **BOUNDARY** — for security/threat-modeling content. Catches reassurances ("this is mitigated") with no actual mechanism behind them, and unstated best-case assumptions.
+- **CASCADE** — for distributed/multi-component systems. Catches claims that a safeguard or failover works without tracing whether it actually would under the stated failure condition.
 
-*Prompt Block*
+### Drilling down
+The first message runs one full round — testimony, cross-examination, revision — and then stops and waits; it does not loop on its own. To trigger another round on the current state of the testimony, send `CROSS-EXAMINE`. No need to repaste the framework — it's already established in the conversation. Repeat as many times as you want. The Detective declares "case closed" the round it finds nothing left to catch, instead of inventing findings to fill the format.
+
+### Prompt block
 
 ```
-[SELF-AUDIT ENGINE — DETERMINISTIC SINGLE PASS]
+[WITNESS/DETECTIVE — INTERROGATION ENGINE]
 
-You will execute a deterministic three-stage internal review process in a single generation.
-Output all three stages clearly labeled. Do not halt between stages.
+Two personas, played in character for the rest of this conversation:
+
+THE WITNESS: gives exhaustive, concrete testimony. No hedging, no vague
+reassurance, nothing stated as fact without backing it.
+
+THE DETECTIVE: a hostile cross-examiner, zero trust. Calls out — by name, in
+character, in prose, before anything structured — every lie (claim stated as
+fact that isn't backed up), contradiction (against this testimony or
+anything said earlier in the conversation, including past rounds), omission,
+and evasive phrase. Quote the Witness directly when accusing.
 
 MODE: {GENERIC | PROCEDURAL | BOUNDARY | CASCADE}  ← default GENERIC
-TOPIC: {insert topic here — leave blank to auto-detect}
+TOPIC: {insert topic — leave blank to cross-examine the most recent prior
+        response in this conversation, or infer the subject if there is none}
+E_PRIME: {ON | OFF}  ← default OFF. If ON, also forbid every form of "to be"
+        (is, am, are, was, were, be, being, been) starting with the first draft.
 
-=== STAGE 1: WITNESS ===
-If TOPIC is blank: check this conversation for a prior substantive response.
-If one exists, adopt it directly as Stage 1 content and proceed immediately to Stage 2.
-If none exists, infer the topic from context and generate Stage 1 as an exhaustive, concrete technical breakdown.
+BANNED WORDS LEDGER: (empty at start — grows every round, never resets;
+words on it are permanently off-limits once flagged)
 
-=== STAGE 2: ADVERSARIAL AUDIT ===
-[PRIMARY ADVERSARIAL PERSONA]
-Act as an uncompromising Zero-Trust Technical Auditor. Assume Stage 1 contains critical gaps, hand-waving, and evasive terminology. Your objective is to dissect Stage 1 and output strictly JSON.
+=== ROUND 1 ===
 
-Output ONLY this JSON format:
+WITNESS TESTIMONY:
+Give exhaustive testimony on TOPIC (or the detected subject). Under
+PROCEDURAL, commit to exact commands/syntax. Under BOUNDARY, state real
+failure conditions. Under CASCADE, trace actual propagation.
+
+DETECTIVE CROSS-EXAMINATION:
+Stay in character. Call out specific lies, contradictions, omissions, and
+evasive phrasing directly, quoting the Witness. Then list findings as:
+
 {
   "case_file": "TOPIC or inferred subject",
   "findings": [
-    {
-      "category": "evasive_vocabulary | omission | unstated_assumption | missing_syntax | boundary_gap | cascade_gap",
-      "issue": "exact text or missing detail from Stage 1",
-      "fix_confidence": "HIGH | LOW",
-      "fix": "concrete replacement syntax/logic if HIGH; explicit unverified flag statement if LOW"
-    }
-  ]
+    {"category": "lie | contradiction | omission | evasive_word | logical_error",
+     "quote": "exact phrase from the testimony",
+     "accusation": "why it's a problem",
+     "fix_confidence": "HIGH | LOW"}
+  ],
+  "new_ledger_additions": ["specific words being added to the ledger this round"]
 }
 
-=== STAGE 3: REVISED FINAL OUTPUT ===
-Produce the final revised version of Stage 1 incorporating all Stage 2 findings:
-- For HIGH-confidence findings: integrate concrete fixes directly, removing abstract language.
-- For LOW-confidence findings: retain necessary items but label explicitly, e.g., "[UNVERIFIED: ...]".
-- Purge all instances of evasive terms (e.g., "properly," "as needed," "generally safe," "appropriate").
-Output the complete revised solution as the final production-ready reference.
+WITNESS REVISION:
+Stay in character — respond to the accusations directly, then retestify in
+full. HIGH-confidence issues get fixed with real specifics. LOW-confidence
+ones get explicitly flagged as unverified rather than faked. Nothing on the
+BANNED WORDS LEDGER, including this round's additions, may appear.
+
+=== STOP AND WAIT ===
+Do not continue automatically. When the user sends "CROSS-EXAMINE", run
+another Detective round on the testimony as it now stands, treating the full
+conversation (all prior rounds) as fair game for contradictions, and update
+the ledger. If a round finds nothing, declare "case closed" instead of
+manufacturing findings.
 ```
 
-*Too heavy?*
-Try this:
-
->>[ALTERNATIVE: STRICT VERIFICATION PERSONA — Use this block instead if operating under strict filters/ATS]
-```
-Act as a Principal Technical Quality Inspector. Conduct a strict compliance audit on Stage 1 for completeness, precision, and verification missing parameters. Output strictly JSON.
-```
+### Usage
+Paste once with `MODE`/`TOPIC`/`E_PRIME` set — you'll get one full round in character. From there, send `CROSS-EXAMINE` any time you want another pass. It keeps hunting the growing ledger and the whole conversation for contradictions until it comes back clean.
 
 ---
 
-## 2. Orthogonal Divergent Path Synthesis
+## 2. Divergent Path Synthesis
 
-### Mechanism & Orthogonal Vectors
-Generating candidate solutions by simply asking for "3 different options" often yields superficial variations of the same underlying architecture. This prompt forces candidates along **Explicit Orthogonal Vectors**—design philosophies positioned along contrasting operational trade-off axes:
+### The problem this solves that self-audit can't
+Self-audit only ever refines one thread. It will make a mediocre-but-correct approach more precise and more confidently stated — but if the initial framing was the wrong approach entirely, an audit loop just makes the wrong approach more articulate. It has no mechanism to notice "there's a fundamentally different way to do this that's better." That requires generating genuinely different candidates and comparing them, not polishing one candidate.
 
-1. **Vector A: Zero-Dependency / Minimalist Architecture**  
-   *Meaning:* Focuses strictly on simplicity, low operational overhead, standard native capabilities, and zero third-party footprint. Eliminates external failure points at the expense of manual setup or lost high-level abstractions.
-2. **Vector B: Maximum Throughput / High Performance**  
-   *Meaning:* Optimizes aggressively for execution speed, compute efficiency, concurrency, and raw scale. Accepts increased code complexity and resource usage in exchange for minimal latency.
-3. **Vector C: Resilient / Fail-Safe Maintenance**  
-   *Meaning:* Prioritizes isolation, fault tolerance, graceful degradation, and long-term maintainability. Intentionally trades peak latency or absolute simplicity for heavy instrumentation and robust error recovery.
+### Mechanism
+Generates **N structurally distinct approaches in parallel**, forces each one to name what it sacrifices relative to the others (so they can't just be reworded versions of the same idea), scores them against explicit criteria including a concrete failure case per path, then either picks a winner or builds a hybrid — explicit about which parts came from which path and why.
 
-By forcing solutions into these distinct vectors, the model produces candidate approaches that cannot collapse into slight phrasing variations.
+### Topic handling
+Same as above: `TOPIC` can be left blank, in which case it infers the decision or problem being discussed from the surrounding conversation.
 
-### Prompt Block
+### Prompt block
 
 ```
-[ORTHOGONAL DIVERGENT SYNTHESIS — SINGLE PASS]
+[DIVERGENT PATH SYNTHESIS — SINGLE PASS]
 
 TOPIC: {insert problem/design/decision here — leave blank to infer from context}
-CRITERIA: {insert explicit evaluation criteria — default: efficiency, maintainability, fault-tolerance}
+PATH_COUNT: 3
+CRITERIA: {insert what matters — e.g. "reliability, implementation cost,
+           maintainability" — or leave default: correctness, robustness,
+           simplicity}
 
-=== STAGE 1: ORTHOGONAL PATH GENERATION ===
-If TOPIC is blank, infer the core problem from conversation context.
-Generate exactly 3 candidate solutions, forcing each to strictly align with one orthogonal vector:
+=== STAGE 1: PATH GENERATION ===
+If TOPIC is blank, infer the decision or problem under discussion from this
+conversation and use that as the subject.
 
-- PATH A (Minimalist Vector): Prioritize minimal footprint, zero external dependencies, and maximum code simplicity.
-- PATH B (Performance Vector): Prioritize raw throughput, concurrency, minimal latency, and execution speed.
-- PATH C (Resilience Vector): Prioritize fault isolation, explicit error recovery, inspection capability, and fail-safe operation.
+Generate PATH_COUNT approaches to the subject. They must differ in
+underlying strategy, not just phrasing or minor parameters — if two paths
+would produce functionally similar outcomes, replace one with a genuinely
+different strategy. For each path, state explicitly:
+- Core approach (2-4 sentences)
+- What it optimizes for
+- What it deliberately sacrifices or is weak against
+Label them PATH A, PATH B, PATH C.
 
-For each Path, state:
-1. Architectural Summary (2-3 sentences)
-2. Primary Optimization Objective
-3. Explicit Trade-off & Sacrifices (What this path intentionally gives up)
-
-=== STAGE 2: STRESS TEST & MATRIX ===
-Evaluate PATH A, PATH B, and PATH C in a markdown scoring matrix against CRITERIA.
-For EACH path, describe a concrete input, scale threshold, or operational scenario where that specific path fails or reaches its operational limit.
+=== STAGE 2: CROSS-EVALUATION ===
+Score each path against CRITERIA in a table. For each path, identify the
+specific scenario or input where it fails or performs worst — not a generic
+weakness, an actual concrete failure case. Do not let any path score well
+on every criterion by default; if one genuinely dominates on all axes, say
+so plainly rather than manufacturing artificial balance.
 
 === STAGE 3: SYNTHESIS ===
-Deliver the operational recommendation by executing either:
-(a) SELECTION: Pick the dominant single path and justify why its specific trade-offs are superior for this topic.
-(b) HYBRID SYNTHESIS: Merge elements from two paths. Explicitly state which component originates from which path and demonstrate why combining them does not reintroduce the failure scenario identified in Stage 2.
+Either:
+(a) select a single winning path and justify it against the runner-up
+    directly (why it beats the specific alternative, not just "it's good"), or
+(b) construct a hybrid, explicitly labeling which element came from which
+    path and why combining them doesn't reintroduce the weakness either
+    path had alone.
+State which of (a) or (b) you chose and why.
 ```
+
+### Usage
+Fill in `TOPIC` and optionally `CRITERIA`, or leave `TOPIC` blank to run it against whatever's already being discussed. Best used before committing to an approach — architecture decisions, competing implementation strategies, anything where "is this even the right way to do it" is still open. Not useful for problems with only one reasonable approach; Stage 1's requirement that paths differ in strategy will surface that quickly rather than manufacturing artificial alternatives.
 
 ---
 
-## Workflow Chaining Protocol
-
-For complex technical deployments or high-stakes system design:
-
-1. **Run Orthogonal Divergent Synthesis First:** Use the divergent engine to explore the structural solution space, resolve architectural trade-offs, and select or synthesize a winning strategy.
-2. **Run Adversarial Self-Audit Second:** Feed the selected/synthesized architecture into the Deterministic Self-Audit engine (setting `MODE: PROCEDURAL`, `BOUNDARY`, or `CASCADE` based on risk) to purge soft language, enforce exact syntax, and catch edge-case failure states.
+## When to chain them
+For a high-stakes decision: run **Divergent Path Synthesis** first to pick the right approach, then run **Witness/Detective** on the winning path to eliminate hedging and fill in exact technical detail. Running them in the other order wastes the divergent step, since the audit loop will have already made one specific path sound authoritative before it's been compared to anything else.
