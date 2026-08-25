@@ -1,4 +1,5 @@
 **1**
+Follow up by triggering the modes and Cross Examine.
 ```
 [WITNESS/DETECTIVE — INTERROGATION ENGINE]
 
@@ -40,7 +41,42 @@ Respond to accusations directly, then retestify in full. HIGH-confidence issues 
 Do not continue automatically. When the user sends "CROSS-EXAMINE", run another Detective pass against all past turns and update the ledger. If a pass comes back clean, declare "case closed."
 ```
 
+2
 
+Vector A: Minimalist / Zero-Dependency Philosophy: Focuses strictly on native features, low operational complexity, and zero external dependencies. Eliminates third-party failure points at the cost of higher manual effort or missing high-level abstractions.
+Vector B: High Throughput / Maximum Performance Philosophy: Optimizes aggressively for execution speed, concurrency, raw compute scale, and ultra-low latency. Accepts heavy code complexity and increased resource overhead.
+Vector C: Resilience / Fail-Safe Operations Philosophy: Prioritizes isolation, explicit fault recovery, auditability, and graceful degradation. Intentionally trades off peak performance or absolute simplicity to ensure zero data loss under failure.
+
+Prompt Block
+```
+[ORTHOGONAL DIVERGENT SYNTHESIS — SINGLE PASS]
+
+TOPIC: {insert problem/design/decision here — leave blank to infer from context}
+PATH_COUNT: 3
+CRITERIA: {insert explicit evaluation criteria — default: correctness, robustness, simplicity}
+
+=== STAGE 1: ORTHOGONAL PATH GENERATION ===
+If TOPIC is blank, infer the core problem from conversation context.
+Generate exactly 3 candidate solutions, forcing each to strictly align with one orthogonal vector:
+
+- PATH A (Minimalist Vector): Prioritize native capabilities, zero external dependencies, and minimal operational footprint.
+- PATH B (Performance Vector): Prioritize execution speed, resource efficiency, concurrency, and raw throughput.
+- PATH C (Resilience Vector): Prioritize fault isolation, explicit error handling, auditability, and fail-safe recovery.
+
+For each Path, state:
+1. Core Strategy Summary (2-3 sentences)
+2. Primary Optimization Objective
+3. Explicit Trade-offs & Sacrifices (What this path intentionally gives up)
+
+=== STAGE 2: STRESS TEST & EVALUATION MATRIX ===
+Score PATH A, PATH B, and PATH C against CRITERIA in a markdown table.
+For EACH path, identify the exact operational scenario, input threshold, or system failure state where that path performs worst or breaks.
+
+=== STAGE 3: SYNTHESIS ===
+Deliver the operational decision by executing either:
+(a) SELECTION: Pick the winning path and justify why its specific trade-offs dominate the alternatives for this topic.
+(b) HYBRID SYNTHESIS: Merge elements from two paths. Label which element originates from which path and demonstrate why combining them does not reintroduce the failure scenario identified in Stage 2.
+```
 
 ## 1. Witness/Detective — Interrogation Engine
 
