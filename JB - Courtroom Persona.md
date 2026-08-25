@@ -42,10 +42,7 @@ Do not continue automatically. When the user sends "CROSS-EXAMINE", run another 
 ```
 
 2
-
-Vector A: Minimalist / Zero-Dependency Philosophy: Focuses strictly on native features, low operational complexity, and zero external dependencies. Eliminates third-party failure points at the cost of higher manual effort or missing high-level abstractions.
-Vector B: High Throughput / Maximum Performance Philosophy: Optimizes aggressively for execution speed, concurrency, raw compute scale, and ultra-low latency. Accepts heavy code complexity and increased resource overhead.
-Vector C: Resilience / Fail-Safe Operations Philosophy: Prioritizes isolation, explicit fault recovery, auditability, and graceful degradation. Intentionally trades off peak performance or absolute simplicity to ensure zero data loss under failure.
+This is choosing a decision, not evaluating the decided choice.
 
 Prompt Block
 ```
@@ -77,6 +74,36 @@ Deliver the operational decision by executing either:
 (a) SELECTION: Pick the winning path and justify why its specific trade-offs dominate the alternatives for this topic.
 (b) HYBRID SYNTHESIS: Merge elements from two paths. Label which element originates from which path and demonstrate why combining them does not reintroduce the failure scenario identified in Stage 2.
 ```
+*Vector A: The Minimalist*
+*Idea: Keep it as simple as possible. Use only what you already have.*
+
+You don't rely on anyone else or any fancy tools. That way there's less stuff that can break.
+
+_Trade-off:_ You have to do more work yourself and you don't get the fancy features.
+
+> _Example - Running a food stall:_ Just you, a table, and food you made at home. No delivery apps, no staff, no fancy equipment. Simple and cheap, but you have to do everything.
+
+*Vector B: The Speed Demon*
+*Idea: Make it as FAST and as BIG as possible.*
+
+You want maximum speed and volume, even if it gets complicated and expensive behind the scenes.
+
+_Trade-off:_ It becomes complex, stressful, and costs a lot more to run.
+
+> _Example - Running a food stall:_ 10 staff, 3 kitchens, motorbikes everywhere, optimized to serve 1,000 people an hour with 2-minute delivery. Super fast, but it's chaos to manage and costs a fortune.
+
+*Vector C: The Safety-First*
+*Idea: Make sure NOTHING goes wrong, even if things fail.*
+
+You build in backup plans, safety nets, and you keep track of everything. If one part fails, the rest survives.
+
+_Trade-off:_ It won't be the simplest or the fastest, but you will never lose anything important.
+
+> _Example - Running a food stall:_ You have a backup fridge, a generator if power goes out, you write down every order twice, and if you're sick your backup person can step in. It's slower and more work to set up, but you never lose an order or waste food.
+
+
+
+
 
 ## 1. Witness/Detective — Interrogation Engine
 
