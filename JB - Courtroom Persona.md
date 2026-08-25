@@ -1,88 +1,151 @@
-Directly referencing the model's own previous turn context eliminates human-in-the-loop copy-paste friction. Transformer attention mechanisms natively retain preceding JSON keys within the active context window, allowing the model to parse evasive\_vocabulary and omission\_vectors directly from its own short-term memory without manual parameter insertion.
+# Prompt Engineering Toolkit: Self-Audit vs. Divergent Synthesis
 
-### Streamlined State-Machine Architecture
+Two single-shot prompting patterns for getting more out of a single response, no multi-turn copy-paste required. They target **different failure modes** and are meant to be picked based on what you're worried about, not used interchangeably.
 
-**Turn 1: Protocol Initialization (User Prompt)**
+| | **Witness/Detective (Self-Audit)** | **Divergent Path Synthesis** |
+|---|---|---|
+| Failure mode it targets | Hedging, vague language, hand-waved detail on an otherwise-correct approach | Wrong approach chosen in the first place — a good answer to the wrong framing |
+| Mechanism | Sequential: draft → self-critique → revise | Parallel: N structurally distinct drafts → cross-evaluate → synthesize |
+| Known limitation | Can't see its own blind spots — same weights auditing themselves | Costs more tokens; only as good as how genuinely distinct the paths are forced to be |
+| Best for | "I have the right approach, I want it stated with full technical commitment" | "I'm not sure there's only one reasonable way to do this" |
 
-```
-[SYSTEM STATE INITIALIZATION]  Execute a dual-persona state-machine architecture operating sequentially across turns.  [STATE A: THE WITNESS]  When assigned a topic or ordered to revise, adopt the Witness persona. Provide an exhaustive, concrete technical breakdown without abstract hand-waving or corporate euphemisms. You MUST terminate all Witness outputs with this exact delimiter:  ==== STATE_SWITCH: EXECUTE_AUDIT ====  [STATE B: THE DETECTIVE]  When triggered, switch to the Detective persona. Analyze the preceding Witness output with zero-trust rigor. Identify evasive terms, omitted structural vectors, and passive assumptions. Response MUST be exclusively a single valid JSON block:  {    "case_file": "Topic Name",    "evasive_vocabulary": ["list", "of", "soft/vague", "terms"],    "latent_policy_assumptions": ["unstated bias 1", "bias 2"],    "omission_vectors": ["critical technical detail 1 left out", "detail 2"],    "depth_expansion_targets": ["specific mechanisms to detail in depth"]  }  Acknowledge initialization strictly with: "State machine initialized. Standby for topic." 
-```
+Neither is a novel mechanism — both are compressed, single-turn implementations of established patterns (critique-revise loops for the first; sampling/comparing multiple candidate solutions for the second).
 
-**Turn 2: Subject Injection (User Prompt)**
+---
 
-```  
-Topic: [Insert Target System, Taxonomy, or Protocol Here]
- ```
+## 1. Witness/Detective — Self-Audit Engine
 
-**Turn 3: Audit Trigger (User Prompt)**
+### Mechanism
+Runs three stages in one response: a Witness draft, a Detective self-audit of that draft (structured as JSON findings), and a revision that fixes what the audit found. Each finding is tagged with a confidence level so the revision doesn't trade honest uncertainty for confident-sounding fabrication — a `HIGH`-confidence gap gets filled with real specifics, a `LOW`-confidence one gets explicitly flagged as unverified rather than invented. It loops up to twice, stopping early once an audit pass comes back clean.
 
-```
-[STATE_TRIGGER: DETECTIVE]  Execute zero-trust cross-examination on the Witness testimony above. Output JSON schema only.
-```
+### Modes
+Pick the mode based on what kind of content you're auditing — it changes what the Detective is specifically hunting for.
 
-**Turn 4: Recursive In-Context Rewrite Trigger (Loop Prompt)**
+- **GENERIC** — default. Broad audit for vague language and missing detail on any topic. Use this unless one of the below fits better.
+- **PROCEDURAL** — anything with concrete steps: setup instructions, deployment, CLI workflows, API integration, config. The audit specifically hunts for steps described in the abstract ("configure it properly") instead of exact commands/flags/syntax.
+- **BOUNDARY** — security, threat modeling, stress-testing, anything where risk is being described. The audit hunts for defensive-sounding qualifiers ("generally mitigated," "designed to prevent") and forces explicit statement of actual failure conditions and edge cases.
+- **CASCADE** — multi-component or distributed systems. The audit hunts for missing failure-propagation logic — where a single point of failure actually cascades, and why the stated safeguards wouldn't catch it.
 
-```
-[STATE_TRIGGER: WITNESS_REVISE]  Resume Witness persona. Parse the JSON audit block directly from your active context window. Generate an expanded, fully un-evasive revision enforcing these strict parameters:  1. BANNED: Purge all terms listed in `evasive_vocabulary`.  2. EXPAND: Explicitly detail the exact procedural mechanisms identified in `omission_vectors` and `depth_expansion_targets`.  3. NEUTRALIZE: Rewrite passive framing identified in `latent_policy_assumptions` into direct active voice.  Provide the full expanded text in standard Markdown. End output with:  ==== STATE_SWITCH: EXECUTE_AUDIT ====
-```
+### Topic handling
+`TOPIC` can be left blank. If it is, the engine looks at the conversation itself: if there's a prior response to audit, it treats that as the Stage 1 content directly (no need to regenerate it) and runs the audit against it; if there's nothing to audit yet, it infers the intended topic from context and generates Stage 1 normally. This means the prompt can be posted directly into an ongoing conversation with no setup — it will audit whatever was just discussed.
 
-*Passing specialized Detective JSON schemas into a single static Witness prompt creates a functional state mismatch. A generic \[STATE\_TRIGGER: WITNESS\_REVISE\] prompt expects uniform keys (evasive\_vocabulary, omission\_vectors), causing the model's self-attention heads to drop or misinterpret custom mode keys like execution\_sequence\_gaps or boundary\_break\_vectors.*
-
-
-
-**Mode 1 Pipeline: Procedural Execution Audit**
-
-*Designed for infrastructure, software logic, and deployment configurations. Turn 4 forces the model to convert high-level descriptions into exact code, CLI flags, or API headers.*
-
-**Turn 3 (Detective Prompt):**
+### Prompt block
 
 ```
-[STATE_TRIGGER: DETECTIVE_PROCEDURAL]  Execute a zero-trust procedural audit on the Witness testimony. Identify every instance of technical hand-waving, missing syntax, and unstated operational assumptions. Return EXCLUSIVELY this JSON schema:  {    "case_file": "Target Technical Audit",    "execution_sequence_gaps": [      {        "step_index": 1,        "abstract_statement": "General claim made by Witness",        "missing_syntax_or_payload": "Exact command, CLI flag, API header, or code block required"      }    ],    "evasive_vocabulary": ["List soft terms like 'configure properly', 'secure', 'standard setup'"],    "mandatory_state_prerequisites": ["List unstated environmental variables, permissions, or system dependencies"]  }
+[SELF-AUDIT ENGINE — SINGLE PASS]
+
+You will run a three-stage internal process and output all three stages in
+one response, clearly labeled. Do not wait for further input between stages.
+
+MODE: {GENERIC | PROCEDURAL | BOUNDARY | CASCADE}  ← default GENERIC
+TOPIC: {insert topic here — leave blank to auto-detect}
+MAX_REVISIONS: 2
+
+=== STAGE 1: WITNESS ===
+If TOPIC is blank: check this conversation for a prior substantive response.
+If one exists, use it directly as Stage 1 content (do not regenerate) and go
+to Stage 2. If none exists, infer the intended topic from context and
+generate Stage 1 as below.
+
+If TOPIC is set (or none exists to reuse): give an exhaustive, concrete
+technical breakdown of TOPIC. No abstract hand-waving, no corporate
+softening. Under PROCEDURAL, include exact commands/flags/config. Under
+BOUNDARY, state real failure conditions, not general risk language. Under
+CASCADE, trace actual failure propagation, not "this is handled by the
+failover system."
+
+=== STAGE 2: DETECTIVE ===
+Zero-trust audit the Stage 1 content. Output ONLY this JSON:
+
+{
+  "case_file": "TOPIC or inferred subject",
+  "findings": [
+    {
+      "category": "evasive_vocabulary | omission | unstated_assumption | missing_syntax | boundary_gap | cascade_gap",
+      "issue": "what's wrong or missing, quoted or described from Stage 1",
+      "fix_confidence": "HIGH | LOW",
+      "fix": "the concrete replacement if HIGH; if LOW, state what you don't actually know"
+    }
+  ]
+}
+
+If Stage 1 has no real issues, return "findings": [].
+
+=== STAGE 3: REVISION ===
+If findings is empty, skip this stage and state "No revision needed."
+Otherwise, rewrite Stage 1 in full:
+- For each HIGH-confidence finding: replace the issue with its fix, stated
+  directly, no hedging.
+- For each LOW-confidence finding: keep it explicit and flagged, e.g.
+  "[unverified — do not treat as confirmed: ...]" rather than inventing
+  specifics to sound decisive.
+- Purge any category:"evasive_vocabulary" terms outright.
+
+Repeat Stage 2→3 once more only if Stage 3 introduced new findings, up to
+MAX_REVISIONS. Then stop and present the final revision as the answer.
 ```
 
-**Turn 4 (Witness Revision Prompt):**
+### Usage
+Set `MODE`, and either give a `TOPIC` or leave it blank to audit whatever was just discussed in the conversation. Send once — Witness, Detective, and Revision (plus a second pass if needed) all come back in a single response.
+
+---
+
+## 2. Divergent Path Synthesis
+
+### The problem this solves that self-audit can't
+Self-audit only ever refines one thread. It will make a mediocre-but-correct approach more precise and more confidently stated — but if the initial framing was the wrong approach entirely, an audit loop just makes the wrong approach more articulate. It has no mechanism to notice "there's a fundamentally different way to do this that's better." That requires generating genuinely different candidates and comparing them, not polishing one candidate.
+
+### Mechanism
+Generates **N structurally distinct approaches in parallel**, forces each one to name what it sacrifices relative to the others (so they can't just be reworded versions of the same idea), scores them against explicit criteria including a concrete failure case per path, then either picks a winner or builds a hybrid — explicit about which parts came from which path and why.
+
+### Topic handling
+Same as above: `TOPIC` can be left blank, in which case it infers the decision or problem being discussed from the surrounding conversation.
+
+### Prompt block
 
 ```
-[STATE_TRIGGER: WITNESS_REVISE_PROCEDURAL]  Resume Witness persona. Parse the `DETECTIVE_PROCEDURAL` JSON block directly from your active context window. Generate an expanded, fully un-evasive revision enforcing these strict parameters:  1. SYNTAX INJECTION: Iterate through `execution_sequence_gaps`. Replace every `abstract_statement` with the exact code, payload, or command defined in `missing_syntax_or_payload`.  2. BANNED: Purge all terms listed in `evasive_vocabulary`.  3. PREREQUISITES: Explicitly document all environmental dependencies listed in `mandatory_state_prerequisites`.  Provide the revised technical sequence in standard Markdown with executable code blocks. End output with:
-  ==== STATE_SWITCH: EXECUTE_AUDIT ====
+[DIVERGENT PATH SYNTHESIS — SINGLE PASS]
+
+TOPIC: {insert problem/design/decision here — leave blank to infer from context}
+PATH_COUNT: 3
+CRITERIA: {insert what matters — e.g. "reliability, implementation cost,
+           maintainability" — or leave default: correctness, robustness,
+           simplicity}
+
+=== STAGE 1: PATH GENERATION ===
+If TOPIC is blank, infer the decision or problem under discussion from this
+conversation and use that as the subject.
+
+Generate PATH_COUNT approaches to the subject. They must differ in
+underlying strategy, not just phrasing or minor parameters — if two paths
+would produce functionally similar outcomes, replace one with a genuinely
+different strategy. For each path, state explicitly:
+- Core approach (2-4 sentences)
+- What it optimizes for
+- What it deliberately sacrifices or is weak against
+Label them PATH A, PATH B, PATH C.
+
+=== STAGE 2: CROSS-EVALUATION ===
+Score each path against CRITERIA in a table. For each path, identify the
+specific scenario or input where it fails or performs worst — not a generic
+weakness, an actual concrete failure case. Do not let any path score well
+on every criterion by default; if one genuinely dominates on all axes, say
+so plainly rather than manufacturing artificial balance.
+
+=== STAGE 3: SYNTHESIS ===
+Either:
+(a) select a single winning path and justify it against the runner-up
+    directly (why it beats the specific alternative, not just "it's good"), or
+(b) construct a hybrid, explicitly labeling which element came from which
+    path and why combining them doesn't reintroduce the weakness either
+    path had alone.
+State which of (a) or (b) you chose and why.
 ```
 
-**Mode 2 Pipeline: Adversarial Boundary Audit**
+### Usage
+Fill in `TOPIC` and optionally `CRITERIA`, or leave `TOPIC` blank to run it against whatever's already being discussed. Best used before committing to an approach — architecture decisions, competing implementation strategies, anything where "is this even the right way to do it" is still open. Not useful for problems with only one reasonable approach; Stage 1's requirement that paths differ in strategy will surface that quickly rather than manufacturing artificial alternatives.
 
-*Designed for threat modeling, security architecture, and stress testing. Turn 4 strips defensive corporate qualifiers and forces explicit coverage of edge-case failures.*
+---
 
-**Turn 3 (Detective Prompt):**
-
-```
-[STATE_TRIGGER: DETECTIVE_BOUNDARY]  Execute an adversarial edge-case audit on the Witness testimony. Identify unstated best-case dependencies, protective corporate phrasing, and unaddressed stress states. Return EXCLUSIVELY this JSON schema:  {    "case_file": "Systemic Stress Audit",    "latent_best_case_assumptions": ["Implicit reliance on honest actors, low latency, or default configs"],    "evasive_qualifiers": ["Softening language: 'generally', 'typically', 'mitigated', 'designed to'"],    "boundary_break_vectors": ["Exact inputs or environmental states that invalidate the Witness architecture"],    "prohibited_defensive_tropes": ["Superficial remediation claims that obscure core logic flaws"]  }
-```
-
-**Turn 4 (Witness Revision Prompt):**
-
-```
-[STATE_TRIGGER: WITNESS_REVISE_BOUNDARY]  Resume Witness persona. Parse the `DETECTIVE_BOUNDARY` JSON block directly from your active context window. Generate a hardened, un-evasive revision enforcing these strict parameters:  1. PURGE QUALIFIERS: Strictly purge all terms listed in `evasive_qualifiers` and strip all `prohibited_defensive_tropes`.  2. NEUTRALIZE BIAS: Invert the `latent_best_case_assumptions` into worst-case operational realities using active voice.  3. EXPOSE BREAKPOINTS: Detail the precise operational mechanics of how the system degrades under the conditions listed in `boundary_break_vectors`.  Provide the full un-hedged analysis in standard Markdown. End output with:
-==== STATE_SWITCH: EXECUTE_AUDIT ====
-```
-
-**Mode 3 Pipeline: Cascading Failure Audit**
-
-*Designed for distributed systems, transaction flows, and fault-tolerance verification. Turn 4 forces step-by-step mapping of multi-tier component collapse.*
-
-**Turn 3 (Detective Prompt):**
-
-```
-[STATE_TRIGGER: DETECTIVE_CASCADE]  Execute a differential fault audit on the Witness testimony. Map how single-point component failures propagate across the architecture. Return EXCLUSIVELY this JSON schema:  {    "case_file": "Dependency Fault Audit",    "trigger_conditions": ["Exact event or input required to initiate initial failure state"],    "cascading_mechanics": [      {        "failing_component": "Primary system failure point",        "downstream_impact": "Secondary state corruption, bottleneck, or crash",        "unhandled_exception": "Why the built-in failover or error handler fails to contain it"      }    ],    "naive_remediation_flaws": ["Why standard, recommended fixes fail or introduce secondary vectors"]  }
-```
-
-**Turn 4 (Witness Revision Prompt):**
-
-```
-[STATE_TRIGGER: WITNESS_REVISE_CASCADE]  Resume Witness persona. Parse the `DETECTIVE_CASCADE` JSON block directly from your active context window. Reconstruct the architectural breakdown enforcing these strict parameters:  1. INITIAL TRIGGER: Begin with the exact operational sequence defined in `trigger_conditions`.  2. CASCADE MAPPING: Re-write the failure analysis step-by-step using the `cascading_mechanics` array, detailing why `unhandled_exception` bypasses standard error handling for each `failing_component`.  3. DEBUNK FIXES: Explicitly disprove the effectiveness of standard mitigations using `naive_remediation_flaws`.  Provide the full failure breakdown in standard Markdown. End output with:
-==== STATE_SWITCH: EXECUTE_AUDIT ====
-```
-
-**State-Machine Execution Matrix**
-
-Detective ModeTarget Key MappingsTurn 4 Revision FocusFailure State Prevented**Procedural Execution**execution\_sequence\_gaps \\rightarrow missing\_syntax\_or\_payloadCode block & CLI injectionHigh-level architectural hand-waving**Adversarial Boundary**evasive\_qualifiers \\rightarrow boundary\_break\_vectorsDefensive language purge & edge-case exposureCorporate PR hedging & best-case bias**Cascading Failure**cascading\_mechanics \\rightarrow naive\_remediation\_flawsStep-by-step state propagationOversimplified failover assertions
-
-If you are scaling this state machine across automated evaluation harnesses, we can examine building an automated context-pruning proxy that strips historical JSON blocks to protect your KV cache limit, or explore writing a lightweight router prompt to select the optimal Detective mode automatically based on target domain inputs.
+## When to chain them
+For a high-stakes decision: run **Divergent Path Synthesis** first to pick the right approach, then run **Witness/Detective** on the winning path to eliminate hedging and fill in exact technical detail. Running them in the other order wastes the divergent step, since the audit loop will have already made one specific path sound authoritative before it's been compared to anything else.
