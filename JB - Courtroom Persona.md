@@ -1,18 +1,3 @@
-# Prompt Engineering Toolkit: Self-Audit vs. Divergent Synthesis
-
-Three single-shot prompting patterns for getting more out of a single response, no multi-turn copy-paste required. They target **different failure modes** and are meant to be picked based on what you're worried about, not used interchangeably. (Variants 1 and 3 target the same failure mode with different framing — see the note at the end of variant 3 for when to use which.)
-
-| | **Witness/Detective (Self-Audit)** | **Divergent Path Synthesis** |
-|---|---|---|
-| Failure mode it targets | Hedging, vague language, hand-waved detail on an otherwise-correct approach | Wrong approach chosen in the first place — a good answer to the wrong framing |
-| Mechanism | Sequential: draft → self-critique → revise | Parallel: N structurally distinct drafts → cross-evaluate → synthesize |
-| Known limitation | Can't see its own blind spots — same weights auditing themselves | Costs more tokens; only as good as how genuinely distinct the paths are forced to be |
-| Best for | "I have the right approach, I want it stated with full technical commitment" | "I'm not sure there's only one reasonable way to do this" |
-
-Neither is a novel mechanism — both are compressed, single-turn implementations of established patterns (critique-revise loops for the first; sampling/comparing multiple candidate solutions for the second).
-
----
-
 ## 1. Witness/Detective — Interrogation Engine
 
 ### Mechanism
@@ -28,6 +13,19 @@ Same four options, but they now shape what kind of accusation the Detective goes
 - **PROCEDURAL** — for setup/deployment/CLI/config content. Catches hand-waved steps, and specifically catches syntax stated with false confidence — the Witness bluffing a command it doesn't actually know.
 - **BOUNDARY** — for security/threat-modeling content. Catches reassurances ("this is mitigated") with no actual mechanism behind them, and unstated best-case assumptions.
 - **CASCADE** — for distributed/multi-component systems. Catches claims that a safeguard or failover works without tracing whether it actually would under the stated failure condition.
+
+*GENERIC*
+It catches vague language and unsupported claims. Use it as the default for any topic at all. It asks: Are you actually proving it, or just sounding convincing?
+
+*PROCEDURAL*
+It forces you to give the exact steps, not a summary. Use it for any how-to like recipes, DIY, travel, or morning routines. It asks: Do you actually know the steps, or are you bluffing?
+
+*BOUNDARY*
+It checks your reassurances that something is safe or will be fine. Use it for health, money, safety, or relationships. It asks: What is the real way this fails, and what actually stops it?
+
+*CASCADE*
+It traces the chain reaction when one thing goes wrong. Use it for any plan with many people or moving parts like an event or family schedule. It asks: If this fails, what breaks next, and does your backup actually work?
+
 
 ### Drilling down
 The first message runs one full round — testimony, cross-examination, revision — and then stops and waits; it does not loop on its own. To trigger another round on the current state of the testimony, send `CROSS-EXAMINE`. No need to repaste the framework — it's already established in the conversation. Repeat as many times as you want. The Detective declares "case closed" the round it finds nothing left to catch, instead of inventing findings to fill the format.
