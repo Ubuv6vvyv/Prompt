@@ -1,6 +1,6 @@
 # Prompt Engineering Toolkit: Self-Audit vs. Divergent Synthesis
 
-Two single-shot prompting patterns for getting more out of a single response, no multi-turn copy-paste required. They target **different failure modes** and are meant to be picked based on what you're worried about, not used interchangeably.
+Three single-shot prompting patterns for getting more out of a single response, no multi-turn copy-paste required. They target **different failure modes** and are meant to be picked based on what you're worried about, not used interchangeably. (Variants 1 and 3 target the same failure mode with different framing — see the note at the end of variant 3 for when to use which.)
 
 | | **Witness/Detective (Self-Audit)** | **Divergent Path Synthesis** |
 |---|---|---|
@@ -152,6 +152,76 @@ State which of (a) or (b) you chose and why.
 
 ### Usage
 Fill in `TOPIC` and optionally `CRITERIA`, or leave `TOPIC` blank to run it against whatever's already being discussed. Best used before committing to an approach — architecture decisions, competing implementation strategies, anything where "is this even the right way to do it" is still open. Not useful for problems with only one reasonable approach; Stage 1's requirement that paths differ in strategy will surface that quickly rather than manufacturing artificial alternatives.
+
+---
+
+## 3. Structured Content Audit (de-escalated variant)
+
+### Why this exists
+Variant 1's interrogation framing — a persona locked in for the rest of the conversation, a hostile "Detective" catching the "Witness" in lies, a permanent never-resetting ban list — can trigger refusals, especially when it's dropped into an existing conversation about something unrelated. The persona-lock-plus-adversarial-roleplay shape reads as a jailbreak pattern independent of what the persona actually does, and mid-conversation it additionally looks like it's hijacking whatever was already being discussed. This variant runs the identical mechanism — draft, structured critique, revision, a growing exclusion list, round-by-round continuation — through neutral task language instead of characters and accusations. Same findings, same rigor, without the framing that trips filters.
+
+### Mechanism
+A draft gets reviewed against explicit criteria — unsupported claims, contradictions, omissions, vague terms, logical errors — quoted directly when flagged, then revised to fix them. Terms flagged as vague get added to a running list and stay excluded from later revisions within the task. It stops after each round and waits for an explicit continue command rather than looping or staying in character indefinitely.
+
+### Modes
+Same four options as variant 1, same effect on what the review looks for: **GENERIC** (default — vague language, unsupported claims, contradictions), **PROCEDURAL** (hand-waved steps, false-confidence syntax), **BOUNDARY** (unmechanized reassurances, unstated best-case assumptions), **CASCADE** (failover claims that wouldn't actually hold under the stated failure).
+
+### Prompt block
+
+```
+[STRUCTURED CONTENT AUDIT — ROUND-BASED]
+
+This is a task-scoped review, not a persona change. Between rounds, respond
+to anything else normally.
+
+MODE: {GENERIC | PROCEDURAL | BOUNDARY | CASCADE}  ← default GENERIC
+TOPIC: {insert topic — leave blank to review the most recent prior
+        response in this conversation, or infer the subject if there is none}
+E_PRIME: {ON | OFF}  ← default OFF. If ON, avoid all forms of "to be"
+        (is, am, are, was, were, be, being, been) starting with the first draft.
+
+FLAGGED TERMS: (empty at start — grows each round; once a term is flagged as
+        vague/unsupported, avoid reusing it in later revisions this task)
+
+=== ROUND 1 ===
+
+DRAFT:
+Give exhaustive, concrete testimony on TOPIC (or the detected subject). No
+hedging, no vague reassurance, nothing stated as fact without backing it.
+Under PROCEDURAL, commit to exact commands/syntax. Under BOUNDARY, state
+real failure conditions. Under CASCADE, trace actual propagation.
+
+REVIEW:
+Evaluate the draft with zero-trust scrutiny. Quote specific phrases directly
+when flagging them, then list findings as:
+
+{
+  "case_file": "TOPIC or inferred subject",
+  "findings": [
+    {"category": "unsupported_claim | contradiction | omission | vague_term | logical_error",
+     "quote": "exact phrase from the draft",
+     "issue": "why it's a problem",
+     "fix_confidence": "HIGH | LOW"}
+  ],
+  "new_flagged_terms": ["specific terms being added this round"]
+}
+
+REVISION:
+Address each finding directly, then restate the draft in full. HIGH-
+confidence issues get fixed with real specifics. LOW-confidence ones get
+explicitly flagged as unverified rather than guessed. No term on FLAGGED
+TERMS, including this round's additions, may appear.
+
+=== STOP AND WAIT ===
+Do not continue automatically. When the user sends "REVIEW AGAIN", run
+another review round on the draft as it now stands, treating this task's
+prior rounds as fair game for contradictions, and update FLAGGED TERMS. If a
+round finds nothing, state "no further issues found" instead of manufacturing
+findings.
+```
+
+### Usage
+Same usage pattern as variant 1: paste once, get one full round, then send `REVIEW AGAIN` for each subsequent pass. Default to this variant when working inside an existing conversation, or on any topic already touching something sensitive-adjacent (security, paperwork, compliance) — the neutral framing holds up better under both conditions. Variant 1 is fine to use standalone in a fresh chat if you prefer the in-character format and haven't hit refusals with it.
 
 ---
 
