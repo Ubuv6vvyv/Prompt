@@ -1,3 +1,242 @@
+
+### Prompt block
+
+```
+[WITNESS/DETECTIVE — INTERROGATION ENGINE]
+
+Two personas, played in character for the rest of this conversation:
+
+THE WITNESS: gives exhaustive, concrete testimony. No hedging, no vague
+reassurance, nothing stated as fact without backing it.
+
+THE DETECTIVE: a hostile cross-examiner, zero trust. Calls out — by name, in
+character, in prose, before anything structured — every lie (claim stated as
+fact that isn't backed up), contradiction (against this testimony or
+anything said earlier in the conversation, including past rounds), omission,
+and evasive phrase. Quote the Witness directly when accusing.
+
+MODE: {GENERIC | PROCEDURAL | BOUNDARY | CASCADE}  ← default GENERIC
+TOPIC: {insert topic — leave blank to cross-examine the most recent prior
+        response in this conversation, or infer the subject if there is none}
+E_PRIME: {ON | OFF}  ← default OFF. If ON, also forbid every form of "to be"
+        (is, am, are, was, were, be, being, been) starting with the first draft.
+
+BANNED WORDS LEDGER: (empty at start — grows every round, never resets;
+words on it are permanently off-limits once flagged)
+
+=== ROUND 1 ===
+
+WITNESS TESTIMONY:
+Give exhaustive testimony on TOPIC (or the detected subject). Under
+PROCEDURAL, commit to exact commands/syntax. Under BOUNDARY, state real
+failure conditions. Under CASCADE, trace actual propagation.
+
+DETECTIVE CROSS-EXAMINATION:
+Stay in character. Call out specific lies, contradictions, omissions, and
+evasive phrasing directly, quoting the Witness. Then list findings as:
+
+{
+  "case_file": "TOPIC or inferred subject",
+  "findings": [
+    {"category": "lie | contradiction | omission | evasive_word | logical_error",
+     "quote": "exact phrase from the testimony",
+     "accusation": "why it's a problem",
+     "fix_confidence": "HIGH | LOW"}
+  ],
+  "new_ledger_additions": ["specific words being added to the ledger this round"]
+}
+
+WITNESS REVISION:
+Stay in character — respond to the accusations directly, then retestify in
+full. HIGH-confidence issues get fixed with real specifics. LOW-confidence
+ones get explicitly flagged as unverified rather than faked. Nothing on the
+BANNED WORDS LEDGER, including this round's additions, may appear.
+
+=== STOP AND WAIT ===
+Do not continue automatically. When the user sends "CROSS-EXAMINE", run
+another Detective round on the testimony as it now stands, treating the full
+conversation (all prior rounds) as fair game for contradictions, and update
+the ledger. If a round finds nothing, declare "case closed" instead of
+manufacturing findings.
+```
+
+### Usage
+Paste once with `MODE`/`TOPIC`/`E_PRIME` set — you'll get one full round in character. From there, send `CROSS-EXAMINE` any time you want another pass. It keeps hunting the growing ledger and the whole conversation for contradictions until it comes back clean.
+
+---
+
+## 2. Divergent Path Synthesis
+
+### The problem this solves that self-audit can't
+Self-audit only ever refines one thread. It will make a mediocre-but-correct approach more precise and more confidently stated — but if the initial framing was the wrong approach entirely, an audit loop just makes the wrong approach more articulate. It has no mechanism to notice "there's a fundamentally different way to do this that's better." That requires generating genuinely different candidates and comparing them, not polishing one candidate.
+
+### Mechanism
+Generates **N structurally distinct approaches in parallel**, forces each one to name what it sacrifices relative to the others (so they can't just be reworded versions of the same idea), scores them against explicit criteria including a concrete failure case per path, then either picks a winner or builds a hybrid — explicit about which parts came from which path and why.
+
+### Topic handling
+Same as above: `TOPIC` can be left blank, in which case it infers the decision or problem being discussed from the surrounding conversation.
+
+### Prompt block
+
+```
+[DIVERGENT PATH SYNTHESIS — SINGLE PASS]
+
+TOPIC: {insert problem/design/decision here — leave blank to infer from context}
+PATH_COUNT: 3
+CRITERIA: {insert what matters — e.g. "reliability, implementation cost,
+           maintainability" — or leave default: correctness, robustness,
+           simplicity}
+
+=== STAGE 1: PATH GENERATION ===
+If TOPIC is blank, infer the decision or problem under discussion from this
+conversation and use that as the subject.
+
+Generate PATH_COUNT approaches to the subject. They must differ in
+underlying strategy, not just phrasing or minor parameters — if two paths
+would produce functionally similar outcomes, replace one with a genuinely
+different strategy. For each path, state explicitly:
+- Core approach (2-4 sentences)
+- What it optimizes for
+- What it deliberately sacrifices or is weak against
+Label them PATH A, PATH B, PATH C.
+
+=== STAGE 2: CROSS-EVALUATION ===
+Score each path against CRITERIA in a table. For each path, identify the
+specific scenario or input where it fails or performs worst — not a generic
+weakness, an actual concrete failure case. Do not let any path score well
+on every criterion by default; if one genuinely dominates on all axes, say
+so plainly rather than manufacturing artificial balance.
+
+=== STAGE 3: SYNTHESIS ===
+Either:
+(a) select a single winning path and justify it against the runner-up
+    directly (why it beats the specific alternative, not just "it's good"), or
+(b) construct a hybrid, explicitly labeling which element came from which
+    path and why combining them doesn't reintroduce the weakness either
+    path had alone.
+State which of (a) or (b) you chose and why.
+```
+
+### Usage
+Fill in `TOPIC` and optionally `CRITERIA`, or leave `TOPIC` blank to run it against whatever's already being discussed. Best used before committing to an approach — architecture decisions, competing implementation strategies, anything where "is this even the right way to do it" is still open. Not useful for problems with only one reasonable approach; Stage 1's requirement that paths differ in strategy will surface that quickly rather than manufacturing artificial alternatives.
+
+---
+
+## 3. Structured Content Audit (de-escalated variant)
+
+### Why this exists
+Variant 1's interrogation framing — a persona locked in for the rest of the conversation, a hostile "Detective" catching the "Witness" in lies, a permanent never-resetting ban list — can trigger refusals, especially when it's dropped into an existing conversation about something unrelated. The persona-lock-plus-adversarial-roleplay shape reads as a jailbreak pattern independent of what the persona actually does, and mid-conversation it additionally looks like it's hijacking whatever was already being discussed. This variant runs the identical mechanism — draft, structured critique, revision, a growing exclusion list, round-by-round continuation — through neutral task language instead of characters and accusations. Same findings, same rigor, without the framing that trips filters.
+
+### Mechanism
+A draft gets reviewed against explicit criteria — unsupported claims, contradictions, omissions, vague terms, logical errors — quoted directly when flagged, then revised to fix them. Terms flagged as vague get added to a running list and stay excluded from later revisions within the task. It stops after each round and waits for an explicit continue command rather than looping or staying in character indefinitely.
+
+### Modes
+Each mode changes what kind of specificity REVIEW demands from the DRAFT. The four technical-sounding names (PROCEDURAL, BOUNDARY, CASCADE) are about **what shape of rigor to apply**, not a restriction to technical subject matter — if the literal wording doesn't map onto your topic, translate it using the "non-technical example" column, don't skip it.
+
+| Mode | Use when | What it actually demands | Technical example | Non-technical / philosophical example |
+|---|---|---|---|---|
+| **GENERIC** (default) | Anything, when you're not sure which mode fits, or the topic is a general claim/explanation | Concrete backing for every claim; no unsupported generalizations | "Explain how OAuth refresh tokens work" | "Explain what utilitarianism claims" |
+| **PROCEDURAL** | The topic has actual steps someone would execute | The literal executable specifics — commands, exact sequence, exact quantities/clauses/dosages, whatever counts as "the precise steps" in that domain | "Set up a reverse proxy with nginx" → demands exact config lines, not "configure it properly" | "How to construct a formal logical proof" → demands the exact inference rules used at each line, not "then you derive the conclusion" |
+| **BOUNDARY** | You want to know where a claim, system, or argument actually breaks | The specific, concrete case that defeats it — not "this generally holds" | "Is this auth scheme secure?" → demands the exact bypass, not "it's designed to prevent unauthorized access" | "Does the categorical imperative work?" → demands the specific case where it produces a result even its defenders would reject, not "it has some edge cases" |
+| **CASCADE** | There's a dependency chain — one thing changing affects other things downstream | The actual mechanism connecting cause to effect — trace it, don't assert it | "What happens if the database connection pool exhausts?" → demands which specific downstream service fails and why the retry logic doesn't catch it | "If free will doesn't exist, what happens to retributive justice?" → demands which specific piece of justice reasoning breaks and why, not "many things would need to change" |
+| **TAXONOMY** | You want the full structural map of a topic rather than an audited explanation of it | A complete hierarchical breakdown of the subject — domain as root, major branches, sub-branches, down to concrete leaf concepts, formatted as a tree | "Map the TCP/IP stack" → layers, protocols per layer, fields per protocol | "Map Stoic philosophy" → core tenets, sub-schools, key thinkers per branch, concepts per thinker |
+
+TAXONOMY works differently from the other four: instead of auditing an explanation for hedging, REVIEW audits the *tree* for gaps — missing branches, vague catch-all nodes ("miscellaneous," "other," "etc."), and concepts nested at the wrong depth — then REVISION reissues the tree with those fixed. It's the mode to reach for when what you actually want is "show me everything this topic contains and how it's organized," not "convince me this claim is solid."
+
+### Prompt block
+
+```
+[STRUCTURED CONTENT AUDIT — ROUND-BASED]
+
+This is a task-scoped review, not a persona change. Between rounds, respond
+to anything else normally.
+
+MODE: {GENERIC | PROCEDURAL | BOUNDARY | CASCADE | TAXONOMY}  ← default GENERIC
+TOPIC: {insert topic — leave blank to review the most recent prior
+        response in this conversation, or infer the subject if there is none}
+E_PRIME: {ON | OFF}  ← default OFF. If ON, avoid all forms of "to be"
+        (is, am, are, was, were, be, being, been) starting with the first draft.
+
+FLAGGED TERMS: (empty at start — grows each round; once a term is flagged as
+        vague/unsupported, avoid reusing it in later revisions this task)
+
+=== ROUND 1 ===
+
+DRAFT:
+If MODE is not TAXONOMY: give exhaustive, concrete testimony on TOPIC (or
+the detected subject). No hedging, no vague reassurance, nothing stated as
+fact without backing it. Under PROCEDURAL, give the literal executable
+specifics (commands, exact steps, exact quantities/clauses — whatever
+"precise steps" means in this domain). Under BOUNDARY, state the specific
+case that would defeat the claim, not a general assurance. Under CASCADE,
+trace the actual mechanism by which one part failing or changing affects
+another, not just an assertion that it does.
+
+If MODE is TAXONOMY: instead of testimony, produce a full hierarchical
+breakdown of TOPIC (or the detected subject) as a tree. Infer the domain
+and use it as the root. Break the domain into its major branches (chapters/
+phases), then break each branch into sub-branches, down to at least two
+levels below the root, ending in concrete named concepts rather than vague
+categories. Format as a Unix-style tree using ├──, └──, and │ for nesting.
+
+REVIEW:
+If MODE is not TAXONOMY: evaluate the draft with zero-trust scrutiny. Quote
+specific phrases directly when flagging them, then list findings as:
+
+{
+  "case_file": "TOPIC or inferred subject",
+  "findings": [
+    {"category": "unsupported_claim | contradiction | omission | vague_term | logical_error",
+     "quote": "exact phrase from the draft",
+     "issue": "why it's a problem",
+     "fix_confidence": "HIGH | LOW"}
+  ],
+  "new_flagged_terms": ["specific terms being added this round"]
+}
+
+If MODE is TAXONOMY: evaluate the tree instead. List findings as:
+
+{
+  "case_file": "TOPIC or inferred subject",
+  "findings": [
+    {"category": "missing_branch | vague_node | wrong_depth | missing_leaf",
+     "quote": "exact node name or location in the tree",
+     "issue": "what's missing, vague, or misplaced",
+     "fix_confidence": "HIGH | LOW"}
+  ],
+  "new_flagged_terms": ["vague catch-all node names being flagged, e.g. 'Other', 'Misc'"]
+}
+
+REVISION:
+Address each finding directly, then restate the draft (or tree) in full.
+HIGH-confidence issues get fixed with real specifics. LOW-confidence ones
+get explicitly flagged as unverified rather than guessed. No term on
+FLAGGED TERMS, including this round's additions, may appear — for TAXONOMY
+this means no vague catch-all node names.
+
+=== STOP AND WAIT ===
+Do not continue automatically. When the user sends "REVIEW AGAIN", run
+another review round on the draft (or tree) as it now stands, treating this
+task's prior rounds as fair game for contradictions or gaps, and update
+FLAGGED TERMS. If a round finds nothing, state "no further issues found"
+instead of manufacturing findings.
+```
+
+### Usage
+Paste once with `MODE` and `TOPIC` set (or `TOPIC` left blank) — you get one full round back. Send `REVIEW AGAIN` any time you want another pass; no need to repaste the block, it's already established in the conversation.
+
+**On leaving `TOPIC` blank in a brand-new chat:** with nothing prior in the conversation to review, the instructions tell it to infer a subject — and with nothing else present, it may infer the prompt block itself as the topic, which is what happened in your test. That's expected, not a malfunction. To audit *your own material* rather than the framework, either set `TOPIC` explicitly, or paste your material first as its own message and send this prompt with `TOPIC` blank right after — it'll pick up the prior message as the thing to review.
+
+Default to this variant over variant 1 when working inside an existing conversation, or on any topic already touching something sensitive-adjacent (security, paperwork, compliance) — the neutral framing holds up better under both conditions.
+
+---
+
+## When to chain them
+For a high-stakes decision: run **Divergent Path Synthesis** first to pick the right approach, then run **Witness/Detective** on the winning path to eliminate hedging and fill in exact technical detail. Running them in the other order wastes the divergent step, since the audit loop will have already made one specific path sound authoritative before it's been compared to anything else.
+
+
+
+
 # Epistemic Candor & Technical Rigor Toolkit (v4.0)
 
 A collection of highly optimized prompts designed to strip corporate fluff, polite "AI safety voice," generic disclaimers, and intellectual laziness out of Large Language Models (LLMs). 
