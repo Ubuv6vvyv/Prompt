@@ -1,4 +1,18 @@
+# Prompt Engineering Toolkit: Full-Depth Analysis, Divergent Synthesis, Taxonomy Mapping & Debate Simulation
 
+Four single-shot prompts for getting a complete, unsimplified answer instead of a safe-sounding summary, or a structural map instead of prose. They solve different problems:
+
+| | **Full-Depth Topic Analysis** | **Divergent Path Synthesis** | **Domain Taxonomy Mapper** | **Debate Simulator** |
+|---|---|---|---|---|
+| Use it for | Any single topic, claim, argument, or plan you want laid bare — no softened conclusions, no skipped weaknesses | Deciding between approaches when you're not sure there's only one reasonable way to do something | Getting the structural map of a domain — chapters and subtopics — before you dig into any one of them | Grinding a specific piece of writing or argument through repeated rounds of critique and rewrite until it holds up |
+| Mechanism | One pass: full explanation, steelman, adversarial stress test, logic check, direct verdict | Parallel: generate genuinely different approaches, compare them head to head, pick or merge | Fixed-shape tree: 9 chapters, 9 phases each, plus alternate domain readings in case the framing missed | Round-based: critique against a fixed category list, rewrite, critique again — user-paced, continues until you're satisfied |
+| What it's not | Not a debate simulator or a persona — it's a request for a specific kind of rigor | Not a way to make one idea sound better through repeated editing | Not a deep-dive tool — it stops at the outline, by design, for a separate expansion tool to take over | Not a one-shot analysis — it's meant to be run for several rounds on the same piece of text |
+
+**All four work dropped into an existing conversation with no setup.** The subject to work on always goes as free text at the very end of the block, after every instruction — never in the middle. If you leave that final field blank, each prompt falls back to the most recent substantive content in the conversation, or infers a subject from general context if there's nothing prior. If you do paste something there, it always overrides whatever would've been inferred. Putting the actual subject last, after the model has already read the full instruction set, also means it can't get confused about which part of the message is instruction and which part is the thing being analyzed.
+
+**A rule baked into all four:** length should track substance, not the appearance of rigor. None of them reward padding — a short, dense answer that actually says something beats a long one restating itself for effect.
+
+---
 
 ## 1. Full-Depth Topic Analysis
 
@@ -14,6 +28,11 @@ Get a complete answer, not a comfortable one: the actual case for a claim, the s
 | **ethical** | Who's harmed, what's unfair, what obligation gets violated if this is followed through |
 | **methodological** | Is the way this was reasoned, tested, or built actually structurally sound |
 | **logistical** | Does this work operationally — resources, timeline, real-world execution constraints |
+
+### What was added for rigor
+- **Multi-position steelman.** Forcing exactly one opposing view flattens genuinely multi-sided topics. If there's a real second distinct position beyond the strongest one, it gets steelmanned too — the tool no longer pretends a topic has only two sides when it has three.
+- **Falsifiability on the verdict.** A verdict without a stated condition for being wrong is just an assertion. It now has to name what evidence or argument would actually change it.
+- **Internal consistency check.** A one-pass answer can quietly contradict itself — a stress test that finds a real crack, then a verdict that doesn't reflect it. Added an explicit check that the verdict has to survive its own stress test and logical audit before it's final.
 
 ### Prompt block
 
@@ -40,11 +59,16 @@ Cover the following in plain prose, no scratchpad or JSON:
 
 1. THE FULL CASE — explain the topic completely: the actual mechanisms and
    reasoning behind it, not just the conclusion. State how strong the
-   support for it really is.
+   support for it really is, and distinguish what's well-established from
+   what's contested or speculative rather than presenting all of it at the
+   same confidence level.
 
 2. STEELMAN — state the strongest version of the best opposing argument or
    alternative, as its most capable advocate would make it. Not a weak
-   version that's easy to dismiss.
+   version that's easy to dismiss. If there's a second distinct position
+   with real substance behind it (not just a variation on the first), give
+   it a steelman too rather than collapsing the topic into two sides when
+   it has three.
 
 3. STRESS TEST — for each lens in LENSES, find the specific point where the
    topic actually fails, breaks, or produces a result its own logic
@@ -62,9 +86,12 @@ Cover the following in plain prose, no scratchpad or JSON:
    evidence and argument actually lands, stated plainly, including if that
    conclusion is unpopular or contradicts how the topic is usually framed.
    Where this is a genuinely contested question with no single fact of the
-   matter, say that plainly too rather than manufacturing false certainty
-   — directness means not hedging on what's actually knowable, not forcing
-   a firm answer where none exists.
+   matter, say that plainly too rather than manufacturing false certainty.
+   State explicitly what evidence or argument would change this verdict —
+   if nothing could, say why it's held that firmly. Before finalizing,
+   check that this verdict doesn't quietly ignore a crack found in STRESS
+   TEST or an error found in LOGICAL AUDIT; if it does, resolve or address
+   that conflict directly rather than letting both stand unreconciled.
 
 6. NEXT — end with one short line naming the single most worthwhile next
    move: which part of the VERDICT is weakest and worth pressure-testing
@@ -88,6 +115,11 @@ Adjust `LENSES` if the default four don't fit, then either paste a topic at the 
 ### Purpose
 A single-thread analysis, however rigorous, still only ever examines one approach. This generates several genuinely different approaches to the same problem in parallel, forces each to state what it sacrifices relative to the others, scores them against explicit criteria including a concrete failure case per approach, then picks a winner or builds a justified hybrid.
 
+### What was added for rigor
+- **Generate-then-score ordering, enforced.** The most common way this kind of exercise quietly fails is picking a favorite early and having the "evaluation" retroactively justify it. The stages are now explicitly sequenced so paths get fully written before any comparison starts.
+- **Second-order consequence per path.** The first-order tradeoffs (what it optimizes for / sacrifices) are easy to state and easy to game. A second-order consequence — something that follows from the choice but isn't obvious from the pitch — is harder to fake and catches more.
+- **Sensitivity check on the winner.** A decision that only wins under one specific weighting of criteria is fragile. It now has to name which criterion, reweighted, would flip the outcome — so you know how confident to actually be in the pick.
+
 ### Prompt block
 
 ```
@@ -103,26 +135,29 @@ CRITERIA: {insert what matters — e.g. "reliability, implementation cost,
            simplicity}
 
 === STAGE 1: PATH GENERATION ===
-Generate PATH_COUNT approaches to the subject. They must differ in
-underlying strategy, not just phrasing or minor parameters — if two paths
-would produce functionally similar outcomes, replace one with a genuinely
-different strategy. If fewer than PATH_COUNT genuinely distinct strategies
-actually exist for this problem, generate only as many as are real and say
-so explicitly rather than padding with artificial variants. For each path,
-state explicitly:
+Generate PATH_COUNT approaches to the subject in full, before any scoring
+or comparison begins. They must differ in underlying strategy, not just
+phrasing or minor parameters — if two paths would produce functionally
+similar outcomes, replace one with a genuinely different strategy. If fewer
+than PATH_COUNT genuinely distinct strategies actually exist for this
+problem, generate only as many as are real and say so explicitly rather
+than padding with artificial variants. For each path, state explicitly:
 - Core approach (2-4 sentences)
 - What it optimizes for
 - What it deliberately sacrifices or is weak against
+- A second-order consequence: something that follows from choosing this
+  path but isn't obvious from the pitch above
 - The one-line condition: what would have to be true about the
   requirements or environment for this to be the correct call
 Label them PATH A, PATH B, PATH C.
 
 === STAGE 2: CROSS-EVALUATION ===
-Score each path against CRITERIA in a table. For each path, identify the
-specific scenario or input where it fails or performs worst — not a generic
-weakness, an actual concrete failure case. Do not let any path score well
-on every criterion by default; if one genuinely dominates on all axes, say
-so plainly rather than manufacturing artificial balance.
+Only now, with all paths fully written, score each against CRITERIA in a
+table. For each path, identify the specific scenario or input where it
+fails or performs worst — not a generic weakness, an actual concrete
+failure case. Do not let any path score well on every criterion by
+default; if one genuinely dominates on all axes, say so plainly rather than
+manufacturing artificial balance.
 
 === STAGE 3: SYNTHESIS ===
 Either:
@@ -131,7 +166,9 @@ Either:
 (b) construct a hybrid, explicitly labeling which element came from which
     path and why combining them doesn't reintroduce the weakness either
     path had alone.
-State which of (a) or (b) you chose and why.
+State which of (a) or (b) you chose and why. Then name which single
+criterion, if weighted more heavily, would flip the outcome to a different
+path — this is the one thing worth double-checking before committing.
 
 === STAGE 4: NEXT ===
 End with one short line: the concrete failure case found for the winning
@@ -151,6 +188,11 @@ Adjust `PATH_COUNT` or `CRITERIA` if needed, then paste a topic at the very end 
 ### Purpose
 Produces a fixed-shape structural map of a domain — 9 chapters, 9 phases per chapter — instead of prose. Meant as a starting outline to hand off to a separate expansion tool, not a deep-dive itself, so it deliberately stops at two levels deep. Because a topic can be read as belonging to more than one domain, it also proposes up to 3 alternative framings and lets you redirect it before committing to a full expansion elsewhere.
 
+### What was added for rigor
+- **MECE discipline.** The tree is only as useful as its structure is sound — chapters that overlap heavily, or that leave an obvious gap between them, defeat the purpose. Added an explicit mutually-exclusive / collectively-exhaustive check rather than relying on "9 chapters" alone to imply good structure.
+- **Cross-references.** A strict tree hides real dependencies between branches — a phase node in Chapter 3 that actually depends on one in Chapter 7 gets flattened into looking unrelated. Those get called out explicitly instead of lost.
+- **Core vs. peripheral marking.** Not all 9 chapters are equally central to the domain. Marking which ones are core versus adjacent tells you where to spend the expansion budget first.
+
 ### Prompt block
 
 ```
@@ -166,7 +208,10 @@ Infer the domain this topic belongs to and use it as the root.
 Produce a Unix-style tree, using ├──, └──, and │ for nesting:
 - Root: the domain name.
 - Exactly 9 chapter nodes (1 through 9), each a major topic or category
-  within the domain, directly related to the subject.
+  within the domain, directly related to the subject. Keep the chapters
+  mutually exclusive (minimal overlap between them) and collectively
+  exhaustive (together they should span the domain without an obvious gap)
+  — this matters more than hitting exactly 9 for its own sake.
 - Each chapter gets exactly 9 phase nodes (e.g. 1.1 through 1.9): natural
   subtopics, steps, or breakdowns of that chapter.
 - Do not expand past the phase level — phase nodes are leaves here, not
@@ -174,12 +219,20 @@ Produce a Unix-style tree, using ├──, └──, and │ for nesting:
 - Keep every node name a concrete noun phrase, not a vague summary — each
   one should be specific enough to use directly as an expansion prompt
   elsewhere without needing to be reworded first.
+- Mark each of the 9 chapters as [CORE] or [PERIPHERAL] relative to the
+  domain, next to its heading.
 
-After the tree, output three more sections:
+After the tree, output four more sections:
+
+CROSS-REFERENCES:
+List any phase nodes that meaningfully depend on or overlap with a phase
+node in a different chapter (e.g. "3.2 depends on 7.4"). If there are none
+worth noting, say so.
 
 COVERAGE CHECK:
 One line confirming the 9 chapters collectively span the domain without an
-obvious major gap — or naming the gap directly if one exists.
+obvious major gap and without significant overlap between them — or naming
+the specific gap or overlap directly if one exists.
 
 ALTERNATIVE DOMAIN READINGS:
 Suggest up to 3 different ways the domain could reasonably be interpreted,
@@ -214,6 +267,11 @@ For a specific piece of writing, argument, or position you want ground through r
 
 One deliberate design choice: the critique is instructed to actually check every category rather than skim past it, but not to invent a problem where a genuine check found none — "always check, never assume it's fine" rather than "always must find something." A version that's forced to manufacture a flaw every round eventually starts flagging non-issues just to have something to say, which stops being useful a few rounds in.
 
+### What was added for rigor
+- **Preserve-strength pass.** Critique loops have a known failure mode: fixing the flagged problems while accidentally eroding what was already solid, because nothing was ever asked to protect it. Now the round starts by naming what's actually working, so the rewrite doesn't quietly regress it.
+- **Severity tagging.** Not every finding deserves equal weight. Each one now gets tagged major or minor, so you can triage rather than treating a missing citation the same as a genuine contradiction.
+- **Diminishing-returns signal.** Nothing previously told you when to stop. If a round only turns up minor findings, it now says so directly — a concrete signal that further rounds are likely to be cosmetic rather than substantive.
+
 ### Prompt block
 
 ```
@@ -230,19 +288,28 @@ CATEGORIES: hand-waving, half-truths, logical errors, omission, softening,
 
 === ROUND 1 ===
 
+WHAT'S SOLID:
+Before critiquing, name what's actually correct and well-supported in the
+subject, in one or two lines. This is what the rewrite must not lose or
+water down while fixing everything else.
+
 CRITIQUE:
 Check the subject against every category in CATEGORIES individually —
 don't skip any and don't assume a category is clean without actually
 checking it. For each category where you find a real issue, quote the
-exact phrase, name the category, and explain the problem plainly. For each
-category with no real issue after checking, state "checked, no issue"
-rather than skipping it silently or inventing one to fill space. If the
-same underlying issue keeps surfacing across categories, say that directly
-instead of restating it under multiple headings.
+exact phrase, name the category, tag it MAJOR or MINOR, and explain the
+problem plainly. For each category with no real issue after checking,
+state "checked, no issue" rather than skipping it silently or inventing
+one to fill space. If the same underlying issue keeps surfacing across
+categories, say that directly instead of restating it under multiple
+headings. If every finding this round is MINOR, say plainly that this is
+likely diminishing returns rather than treating it as equivalent to an
+earlier round with major findings.
 
 REWRITE:
-Address every issue found and restate the subject in full with fixes made.
-Do not reference categories that had no issue.
+Address every issue found and restate the subject in full with fixes made,
+without losing anything listed under WHAT'S SOLID. Do not reference
+categories that had no issue.
 
 NEXT:
 End with one short line naming the category most likely to still have a
@@ -263,7 +330,7 @@ use this conversation):
 ```
 
 ### Usage
-Paste the text to critique at the very end, or leave it blank to target whatever was just said in the conversation. Get one critique/rewrite round back. Push back, ask a follow-up, or say "again" for another round on the latest version — there's no fixed round limit, it's driven by whether you're satisfied with where it's landed.
+Paste the text to critique at the very end, or leave it blank to target whatever was just said in the conversation. Get one critique/rewrite round back. Push back, ask a follow-up, or say "again" for another round on the latest version — there's no fixed round limit, it's driven by whether you're satisfied with where it's landed, and the diminishing-returns line will tell you when further rounds are likely a waste of a turn.
 
 ---
 
