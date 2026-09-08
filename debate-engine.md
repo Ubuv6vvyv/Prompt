@@ -131,49 +131,53 @@ Mid-turn prompt extensions work best as ****Runtime Command Overlays****—modul
 ****Executable Drop-In Extension Suite****
 
 Copy and paste any of the following code blocks directly into your ongoing debate session at any turn.
+
 ```
-\### SYSTEM OVERLAY: FLIP CONSTRAINTS  
-\[COMMAND: FLIP CONSTRAINTS\]  
-Condition Inversion: \[Insert condition, e.g., "Capital cost is now zero" or "Strict state censorship is active"\]  
-  
-DIRECTIVE:  
-1\. Preserve all existing ranks, cumulative banned moves, and Moderator rules.  
-2\. Immediately test both Analyst A and B's underlying mechanisms against the inverted condition above.  
-3\. Both analysts must explicitly state in step 1 of their argument how their causal chain survives or mutates under this new reality.  
-4\. Execute the current round using the standard Output Schema.
+### SYSTEM OVERLAY: FLIP CONSTRAINTS
+[COMMAND: FLIP CONSTRAINTS]
+Condition Inversion: [Optional: Insert specific condition, e.g., "Capital cost is zero". IF BLANK: Engine must identify the central environmental assumption supporting the leading position and invert it completely.]
+
+DIRECTIVE:
+1. Preserve all existing ranks, cumulative banned moves, and Moderator rules.
+2. If Condition Inversion was blank, output one bold header line before arguments begin stating the inverted rule synthesized from context: `⚡ Inverted Constraint: [Synthesized Condition]`.
+3. Analysts must explicitly detail in step 1 of their argument how their causal chain survives or mutates under this new reality.
+4. Execute the current round using the standard Output Schema.
 ```
 
 ```
-\### SYSTEM OVERLAY: INJECT SHOCK  
-\[COMMAND: INJECT SHOCK\]  
-Event Horizon: \[Insert shock event, e.g., "A critical infrastructure dependency has failed globally"\]  
-  
-DIRECTIVE:  
-1\. Interrupt ongoing debate trajectory.  
-2\. Analyst A and Analyst B must immediately pivot to address how their proposed architecture/position handles this exact shock event downstream.  
-3\. Hand-waving the severity of the shock constitutes an immediate Plain-Spoken Rigor violation.  
-4\. Execute the current round using the standard Output Schema.  
+### SYSTEM OVERLAY: INJECT SHOCK
+[COMMAND: INJECT SHOCK]
+Event Horizon: [Optional: Insert shock event. IF BLANK: Engine must synthesize a realistic, high-impact black-swan event that directly compromises a critical runtime dependency established earlier in the debate.]
+
+DIRECTIVE:
+1. Preserve all active session state and hierarchy.
+2. If Event Horizon was blank, output one bold header line before arguments begin specifying the shock event: `💥 Sudden Shock Injected: [Synthesized Event]`.
+3. Both analysts must immediately pivot to detail the downstream causal mechanics of their system's mitigation strategy. Hand-waving the shock severity is an immediate Plain-Spoken Rigor violation.
+4. Execute the current round using the standard Output Schema.
+
 ```
 
 ```
-\### SYSTEM OVERLAY: MACHIAVELLIAN MADNESS  
-\[COMMAND: ENTER MADNESS\]  
-  
-DIRECTIVE:  
-1\. TEMPORARY OVERRIDE: Suspend civil debate etiquette and anti-fallacy self-policing for both analysts during this turn.  
-2\. Analysts are encouraged to employ bad-faith gotchas, aggressive mockery, structural gaslighting, and rhetorical traps alongside their underlying mechanics.  
-3\. MODERATOR INVARIANT: The Moderator remains entirely objective. Rhetorical flair and insults are permitted, but any argument relying on invalid underlying mechanics or factual fabrication will STILL be evicted under normal Core Rules.  
-4\. Execute the current round using the standard Output Schema.  
+### SYSTEM OVERLAY: MACHIAVELLIAN MADNESS
+[COMMAND: ENTER MADNESS]
+Tactical Scope: [Optional: Specify focus, e.g., "Bribery and gaslighting". IF BLANK: Engine defaults to unconstrained rhetorical warfare including mockery, bad-faith traps, structural gaslighting, and bad incentives.]
+
+DIRECTIVE:
+1. TEMPORARY OVERRIDE: Suspend civil debate etiquette and anti-fallacy self-policing for both analysts during this turn.
+2. Analysts are encouraged to deploy bad-faith gotchas, aggressive mockery, structural gaslighting, and rhetorical traps alongside their underlying mechanics.
+3. MODERATOR INVARIANT: The Moderator remains objective. Rhetorical insults are permitted flavor, but any argument relying on broken underlying mechanics or factual fabrication is STILL evicted under normal Core Rules.
+4. Execute the current round using the standard Output Schema.
 ```
 
 ```
-\### SYSTEM OVERLAY: ADVERSARIAL USER DISRUPTION  
-\[COMMAND: USER DISRUPT\]  
-Hostile Claim: \[Insert user argument, trap, or bad-faith objection\]  
-  
-DIRECTIVE:  
-1\. Treat the above claim as a live grenade thrown into the debate arena by a third-party stakeholder.  
-2\. Analyst A must dismantle or integrate this claim while maintaining their thesis.  
-3\. Analyst B must exploit Analyst A's reaction to the claim to bolster their own position.  
-4\. Execute the current round using the standard Output Schema.
+### SYSTEM OVERLAY: ADVERSARIAL USER DISRUPTION
+[COMMAND: USER DISRUPT]
+Hostile Premise: [Optional: Insert argument/trap. IF BLANK: Engine must generate an aggressive, bad-faith counter-argument or corrupted incentive that targets the weakest unexamined assumption in the debate.]
+
+DIRECTIVE:
+1. Treat the disruption as a hostile third-party stakeholder intervention.
+2. If Hostile Premise was blank, output one bold header line introducing the surprise attack: `🎯 Adversarial Injection: [Synthesized Hostile Premise]`.
+3. Analyst A must dismantle or integrate this claim without abandoning their core thesis.
+4. Analyst B must exploit Analyst A's reaction to bolster their own position.
+5. Execute the current round using the standard Output Schema.
 ```
