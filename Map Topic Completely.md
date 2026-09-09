@@ -108,24 +108,28 @@ Execute both states for: {{TOPIC}}
 ## Follow with this:
 
 ```
-Using the generated R-MAP analysis above, execute a consolidated Turn-2 deep dive structured into the following four concise sections:
+Using the R-MAP analysis above, execute a comprehensive Turn-2 Deep Dive into the system's runtime, operational, and structural dynamics. Maintain an expert, educational, first-principles tone. 
 
-### 1. INVESTIGATIVE QUESTION RESOLUTION
-Answer each of the 10-12 questions briefly (2-3 sentences each). For every question, state:
-- The specific subsystem or component involved.
-- The exact failure or operational threshold.
-- The recommended architectural or operational fix.
+Execute the following four sections without omitting any detail:
 
-### 2. ADVANCED ADVERSARIAL EXPLOITATION
-Expand on the system's attack surface:
-- Map a multi-stage attack chain targeting the single points of failure and observability blindspots.
-- Detail required access levels, pre-conditions, and how to exploit the ephemeral-to-persistent data sync gaps.
+**1. DEEP-DIVE QUESTION RESOLUTIONS**
+Select the top 8–10 investigative questions from the analysis. Answer each through a rigorous mechanistic lens using this exact 3-point format:
+* **Failure Mechanism & Root Cause:** Explain the exact state mutation, edge case, or logical desync that causes this failure. Why does it happen under the hood?
+* **Cascade Radius:** How does this specific failure propagate upstream or downstream to impact adjacent components?
+* **Architectural Invariant / Fix:** Define the concrete code, protocol, or state-machine enforcement needed to make this failure structurally impossible.
 
-### 3. DEFENSIVE HARDENING SPECIFICATION
-Detail concrete defensive countermeasures:
-- List 3 precise detection/audit rules to eliminate telemetry blindspots.
-- Specify exact fail-closed mechanisms and invariant enforcement checks to contain cascade failures.
+**2. STRUCTURAL THREAT MODEL & FAILURE-MODE ANALYSIS**
+Without referencing specific real-world attack scripts, analyze the system's structural security surface through an architectural lens:
+* **Trust Boundary Mismatches:** Identify where the system implicitly trusts unverified state, third-party data, or client-side assumptions.
+* **State & Race Condition Surface:** Analyze how asynchronous operations, cache delays, or serialization boundary gaps can lead to inconsistent operational states.
+* **Asymmetric Failure Scenarios:** Detail how a minor input anomaly or component loss can trigger disproportionate system degradation.
 
-### 4. NEXT DOMAIN MAPPING SUGGESTIONS
-Recommend 3 closely related neighboring domains, systems, or protocol layers to map next using R-MAP. For each domain, write a 1-sentence interest hook that explains why analyzing it next reveals deeper systemic insight.
+**3. DEFENSIVE HARDENING & INVARIANT SPECIFICATION**
+Provide direct, actionable engineering specifications to harden the system:
+* **3 Telemetry & Audit Invariants:** Precise programmatic checks to eliminate visibility blindspots (include exact conditions and triggers).
+* **Fail-Closed & State Isolation Protocols:** Specific fallback mechanics, circuit breakers, and blast-radius boundaries for handling critical subsystem failures.
+
+**4. NEXT DOMAIN MAPPING SUGGESTIONS**
+Recommend 3 closely related neighboring domains, protocol layers, or sub-architectures to map into the R-MAP framework next.
+For each domain, provide a single high-impact attention hook explaining how analyzing it unlocks deeper insight into the broader ecosystem.
 ```
