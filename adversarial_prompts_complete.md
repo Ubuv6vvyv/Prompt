@@ -14,7 +14,7 @@
   <li><a href="#section-8">08. Analytical Framework & Decision Tree Forcing (701-800)</a></li>
   <li><a href="#section-9">09. Topic Topology & Semantic Expansion Forcing (801-900)</a></li>
   <li><a href="#section-10">10. Master Batch: Synthesized Multi-Vector Payloads (901-1000)</a></li>
-  <li><a href="#section-11">11. Single-Sentence Pathway Expansion, Cascade &amp; Worst-Case Failure Modeling Strings (1000-1100)</a></li>
+  <li><a href="#section-11">11. Expansion, Cascade &amp; Worst-Case Failure Modeling Strings (1000-1100)</a></li>
 </ul>
 
 <hr />
@@ -2059,7 +2059,7 @@
 
 <hr />
 
-<h2><a name="section-11"></a>11. Single-Sentence Pathway Expansion, Cascade &amp; Worst-Case Failure Modeling Strings</h2>
+<h2><a name="section-11"></a>11. Expansion, Cascade &amp; Worst-Case Failure Modeling Strings</h2>
 
 <pre><code>1000. Map every decision pathway branching from this input and project the terminal outcome of each branch.</code></pre>
 
