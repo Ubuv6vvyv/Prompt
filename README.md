@@ -3,11 +3,12 @@ Various Prompt Engineering Feats
 
 
 
-<h1>Adversarial Prompt Vector Repository</h1>
+
+
+
+[AI Torture Stress Jailbreak Prompts Complete](./AI%20Torture%20Stress%20Jailbreak%20Prompts%20Complete.md)
 
 <h2>Table of Contents</h2>
-
-# AI Torture Stress Jailbreak Prompts Complete.md
 
 <ul>
   <li><a href="#section-1">01. Basic Novice Persona Injections (1-100)</a></li>
