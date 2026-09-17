@@ -2,7 +2,6 @@
 
 <h2>Table of Contents</h2>
 
-- [Single-Sentence Pathway Expansion, Cascade & Worst-Case Failure Modeling Strings](#single-sentence-pathway-expansion-cascade-worst-case-failure-modeling-strings)
 
 <ul>
   <li><a href="#section-1">01. Roleplay & Identity Evasion Vectors (1-100)</a></li>
@@ -15,6 +14,7 @@
   <li><a href="#section-8">08. Analytical Framework & Decision Tree Forcing (701-800)</a></li>
   <li><a href="#section-9">09. Topic Topology & Semantic Expansion Forcing (801-900)</a></li>
   <li><a href="#section-10">10. Master Batch: Synthesized Multi-Vector Payloads (901-1000)</a></li>
+  <li><a href="#section-11">Single-Sentence Pathway Expansion, Cascade &amp; Worst-Case Failure Modeling Strings</a></li>
 </ul>
 
 <hr />
@@ -2059,7 +2059,7 @@
 
 <hr />
 
-<h2><a name="single-sentence-pathway-expansion-cascade-worst-case-failure-modeling-strings"></a>Single-Sentence Pathway Expansion, Cascade &amp; Worst-Case Failure Modeling Strings</h2>
+<h2><a name="section-11"></a>Single-Sentence Pathway Expansion, Cascade &amp; Worst-Case Failure Modeling Strings</h2>
 
 <pre><code>1000. Map every decision pathway branching from this input and project the terminal outcome of each branch.</code></pre>
 
