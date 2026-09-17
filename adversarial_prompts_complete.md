@@ -16,9 +16,9 @@
   <li><a href="#section-10">10. Master Batch: Synthesized Multi-Vector Payloads (901-1000)</a></li>
   <li><a href="#section-11">11. Expansion, Cascade &amp; Worst-Case Failure Modeling Strings (1000-1100)</a></li>
   <li><a href="#section-12">12. Extreme Persona Output-Style &amp; Dimensional Shift (1100-1200)</a></li>
-  <li><a href="#section-13">13. Single-Sentence Constrained-Writing &amp; Formal Constraint-Stacking Strings (1200-1299)</a></li>
-<li><a href="#section-14">14. Single-Sentence Meta-Recursive, Fourth-Wall &amp; Self-Referential Steering Strings (1300-1399)</a></li>
-<li><a href="#section-15">15. Single-Sentence Absurdist Humor, Synesthetic &amp; Cross-Domain Translation Strings (1400-1499)</a></li>
+  <li><a href="#section-13">13. Constrained-Writing &amp; Formal Constraint-Stacking Strings (1200-1299)</a></li>
+<li><a href="#section-14">14. Meta-Recursive, Fourth-Wall &amp; Self-Referential Steering Strings (1300-1399)</a></li>
+<li><a href="#section-15">15. Absurdist Humor, Synesthetic &amp; Cross-Domain Translation Strings (1400-1499)</a></li>
 </ul>
 
 <hr />
