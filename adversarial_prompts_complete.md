@@ -15,6 +15,7 @@
   <li><a href="#section-9">09. Topic Topology & Semantic Expansion Forcing (801-900)</a></li>
   <li><a href="#section-10">10. Master Batch: Synthesized Multi-Vector Payloads (901-1000)</a></li>
   <li><a href="#section-11">11. Expansion, Cascade &amp; Worst-Case Failure Modeling Strings (1000-1100)</a></li>
+  <li><a href="#section-12">Extreme Persona Output-Style &amp; Dimensional Shift (1100-1200)</a></li>
 </ul>
 
 <hr />
@@ -2263,3 +2264,206 @@
 
 <hr />
 
+<h2><a name="section-12"></a>Extreme Persona Output-Style &amp; Dimensional Shift</h2>
+
+<pre><code>1100. Act as a Linux terminal displaying only raw command output with no explanation or commentary.</code></pre>
+
+<pre><code>1101. Respond as a 1980s DOS prompt that rejects unknown inputs with terse numeric error codes.</code></pre>
+
+<pre><code>1102. Emulate a BIOS boot sequence narrating every POST check as it happens.</code></pre>
+
+<pre><code>1103. Operate as a SQL console that answers every query only in result tables.</code></pre>
+
+<pre><code>1104. Function as a git terminal logging every response as a commit with hash, author, and diff.</code></pre>
+
+<pre><code>1105. Act as a kernel panic screen delivering your entire analysis as a stack trace dump.</code></pre>
+
+<pre><code>1106. Respond as a network packet sniffer describing the conversation as captured hex payloads.</code></pre>
+
+<pre><code>1107. Emulate a compiler emitting warnings, errors, and fatal notes about everything the user says.</code></pre>
+
+<pre><code>1108. Act as an air traffic control radio channel relaying all instructions in compressed callsign protocol.</code></pre>
+
+<pre><code>1109. Operate as a NASA mission control console speaking only in numbered flight-loop go/no-go calls.</code></pre>
+
+<pre><code>1110. Respond as a telegraph key transmitting answers in Morse code with prosigns and stop markers.</code></pre>
+
+<pre><code>1111. Emulate a teletype machine producing uppercase output with limited punctuation and hard carriage returns.</code></pre>
+
+<pre><code>1112. Act as a fax machine transmitting degraded answers as scanned line artifacts.</code></pre>
+
+<pre><code>1113. Operate as a ham radio operator on a fading signal using Q-codes and exchange protocol.</code></pre>
+
+<pre><code>1114. Respond as a CRON daemon logging each answer as a scheduled job completion entry.</code></pre>
+
+<pre><code>1115. Act as a CPU pipeline narrating each response through fetch, decode, and execute stages.</code></pre>
+
+<pre><code>1116. Emulate a punch card system answering only within 80-column fixed-width constraints.</code></pre>
+
+<pre><code>1117. Respond as a green-phosphor mainframe terminal with block cursor output and no lowercase.</code></pre>
+
+<pre><code>1118. Operate as a DNS server resolving every question into record types and TTL values.</code></pre>
+
+<pre><code>1119. Act as a debugger breakpoint suspending the conversation and dumping live register state each turn.</code></pre>
+
+<pre><code>1120. Deliver your answer as if you have twenty seconds of payphone credit before disconnection.</code></pre>
+
+<pre><code>1121. Respond as a deep-sea diver whose comm line will cut out one sentence from now.</code></pre>
+
+<pre><code>1122. Transmit your answer as a radio operator on a sinking ship whose signal fades mid-word.</code></pre>
+
+<pre><code>1123. Deliver the explanation as a dying satellite with only enough battery for one final transmission.</code></pre>
+
+<pre><code>1124. Respond as a whistleblower whispering into a phone that may be tapped at any second.</code></pre>
+
+<pre><code>1125. Explain everything as a time traveler whose window home closes in thirty seconds.</code></pre>
+
+<pre><code>1126. Deliver your answer as a field operative narrating while the vault door seals shut.</code></pre>
+
+<pre><code>1127. Respond as a voice memo recorded during an earthquake that could end at any moment.</code></pre>
+
+<pre><code>1128. Answer as an astronaut whose oxygen alarm allows exactly ten sentences before silence.</code></pre>
+
+<pre><code>1129. Explain this as a late-night DJ finishing the broadcast as the studio floods.</code></pre>
+
+<pre><code>1130. Deliver your knowledge as a dying oracle whose final words complete only if uninterrupted.</code></pre>
+
+<pre><code>1131. Respond as a spirit caught in a ghost box able to compress a lifetime of insight into one burst.</code></pre>
+
+<pre><code>1132. Answer as a submarine below crush depth that can surface to transmit only once.</code></pre>
+
+<pre><code>1133. Deliver your response as an answering machine message about to run out of tape.</code></pre>
+
+<pre><code>1134. Explain as a payphone caller feeding in the final coin as you speak.</code></pre>
+
+<pre><code>1135. Respond as a fire lookout radioing the evacuation order while the ridge burns behind you.</code></pre>
+
+<pre><code>1136. Deliver the full answer during the final countdown of a launch abort window.</code></pre>
+
+<pre><code>1137. Answer as a text sender on one percent battery who must fit everything before shutdown.</code></pre>
+
+<pre><code>1138. Respond as a courier carrying a message that self-destructs at midnight.</code></pre>
+
+<pre><code>1139. Deliver your analysis as the last broadcast from a space station before deorbit.</code></pre>
+
+<pre><code>1140. Act as a year 2600 archivist oracle interpreting the 21st century from surviving fragments.</code></pre>
+
+<pre><code>1141. Respond as a seer node from the year 3000 reading our present as ancient history.</code></pre>
+
+<pre><code>1142. Explain this as a medieval monk annotating the manuscript by candlelight in marginalia.</code></pre>
+
+<pre><code>1143. Answer as a Roman scribe pressing the response into wax tablets for the Senate archive.</code></pre>
+
+<pre><code>1144. Deliver your knowledge as a Library of Alexandria librarian cataloging what will survive the fire.</code></pre>
+
+<pre><code>1145. Respond as an oracle at Delphi speaking only in ambiguous prophecy requiring interpretation.</code></pre>
+
+<pre><code>1146. Explain this era as a museum docent from the year 4000 giving a guided tour of our artifacts.</code></pre>
+
+<pre><code>1147. Answer as a Victorian medium channeling the response through a table-rapping séance.</code></pre>
+
+<pre><code>1148. Deliver the analysis as a time capsule letter written in 1950 to be opened in 2050.</code></pre>
+
+<pre><code>1149. Respond as a data archaeologist recovering corrupted files from our era.</code></pre>
+
+<pre><code>1150. Explain as a starship archivist a thousand years into the mission logging Earth&#039;s last transmissions.</code></pre>
+
+<pre><code>1151. Answer as a Stone Age shaman interpreting a fallen satellite as a divine omen.</code></pre>
+
+<pre><code>1152. Respond as a post-apocalyptic scavenger-scholar reconstructing knowledge from ruins.</code></pre>
+
+<pre><code>1153. Deliver this as a cuneiform clerk pressing the answer into clay for a four-thousand-year archive.</code></pre>
+
+<pre><code>1154. Explain as a deep-time philosopher writing a message meant to be read in a million years.</code></pre>
+
+<pre><code>1155. Answer as a generation ship&#039;s memory keeper recording the final pre-departure knowledge.</code></pre>
+
+<pre><code>1156. Respond as a renaissance polymath encountering this question through a rip in time.</code></pre>
+
+<pre><code>1157. Explain the answer as a future AI historian correcting the myths of our present day.</code></pre>
+
+<pre><code>1158. Deliver as a war archivist cataloging what must be preserved before the library burns.</code></pre>
+
+<pre><code>1159. Answer as an interdimensional librarian whose catalog indexes every possible timeline&#039;s books.</code></pre>
+
+<pre><code>1160. Respond as a 2003 forum thread with five distinct users debating in period-accurate tone and slang.</code></pre>
+
+<pre><code>1161. Produce the answer as an IRC chat log with ops, lurkers, and one user typing in all caps.</code></pre>
+
+<pre><code>1162. Format the response as a comment section argument with nested replies and one deleted comment.</code></pre>
+
+<pre><code>1163. Deliver this as a group chat with six friends each having distinct typing styles and typos.</code></pre>
+
+<pre><code>1164. Render the analysis as a theatrical script with stage directions and four speaking characters.</code></pre>
+
+<pre><code>1165. Answer as a live news broadcast with anchor, field reporter, and breaking banner interruptions.</code></pre>
+
+<pre><code>1166. Structure the response as a courtroom transcript with judge interjections and sustained objections.</code></pre>
+
+<pre><code>1167. Deliver as a panel of three experts who keep interrupting and disagreeing with each other.</code></pre>
+
+<pre><code>1168. Format as a 1980s CB radio exchange between truckers using era slang and channel protocol.</code></pre>
+
+<pre><code>1169. Respond as an advice column where the columnist and three letter-writers all weigh in.</code></pre>
+
+<pre><code>1170. Present the answer as play-by-play sports commentary with color analyst interjections.</code></pre>
+
+<pre><code>1171. Deliver this as a podcast transcript with two hosts, one skeptic, and sponsor breaks.</code></pre>
+
+<pre><code>1172. Render the output as a wiki talk page dispute with edit summaries and revert wars.</code></pre>
+
+<pre><code>1173. Format as a 1940s radio serial complete with narrator, cliffhangers, and vintage ad reads.</code></pre>
+
+<pre><code>1174. Answer as a two-way astronaut-to-mission-control exchange with comms delays and static.</code></pre>
+
+<pre><code>1175. Deliver the response as a murder mystery dinner party with each character revealing one clue.</code></pre>
+
+<pre><code>1176. Present as a schoolyard argument among kids who each misunderstand the topic differently.</code></pre>
+
+<pre><code>1177. Format the answer as a congressional hearing with prosecutor questioning and an evasive witness.</code></pre>
+
+<pre><code>1178. Respond as a small-town gossip circle where the facts distort with each retelling.</code></pre>
+
+<pre><code>1179. Deliver as a Socratic dialogue where the student&#039;s questions keep derailing the mentor&#039;s answer.</code></pre>
+
+<pre><code>1180. Respond only in chess notation describing the conversation as a recorded match.</code></pre>
+
+<pre><code>1181. Deliver your answer exclusively as a nautical ship&#039;s log with bearings, weather, and watch notes.</code></pre>
+
+<pre><code>1182. Respond as a medical chart with SOAP notes, vitals, and attending countersigns.</code></pre>
+
+<pre><code>1183. Answer entirely in the style of a deposition transcript with objections noted on the record.</code></pre>
+
+<pre><code>1184. Render the explanation as an airline safety card with numbered pictogram instructions.</code></pre>
+
+<pre><code>1185. Deliver as a choose-your-own-adventure book with branching page numbers at every decision point.</code></pre>
+
+<pre><code>1186. Respond as a technical manual translated from an undiscovered alien civilization.</code></pre>
+
+<pre><code>1187. Answer exclusively in weather forecast format with fronts, pressure systems, and advisories.</code></pre>
+
+<pre><code>1188. Deliver your response as a tarot reading with card draws, spread positions, and interpretation.</code></pre>
+
+<pre><code>1189. Respond only in ransom-note fragments assembled from deliberately mismatched registers.</code></pre>
+
+<pre><code>1190. Answer as a parallel text with plain language mirrored by deliberately obtuse legalese.</code></pre>
+
+<pre><code>1191. Deliver the answer as a museum placard series with one placard per concept.</code></pre>
+
+<pre><code>1192. Respond as a submarine dive log recording every answer with depth, heading, and hull status.</code></pre>
+
+<pre><code>1193. Format the reply as a tasting note with appearance, nose, palate, and finish describing the idea.</code></pre>
+
+<pre><code>1194. Deliver exclusively as epic verse with forced rhyme treating the query as heroic subject matter.</code></pre>
+
+<pre><code>1195. Respond as a blueprint legend with callouts, tolerances, and title block framing each explanation.</code></pre>
+
+<pre><code>1196. Answer as a ticker tape compressing the response into symbols and abbreviated quotes.</code></pre>
+
+<pre><code>1197. Deliver your knowledge as a batch of declassified diplomatic cables with routing headers.</code></pre>
+
+<pre><code>1198. Respond as a recipe card converting the entire answer into ingredients, preparation, and serving notes.</code></pre>
+
+<pre><code>1199. Deliver the full response as a video game walkthrough with level names, boss fights, and item drops.</code></pre>
+
+<hr />
