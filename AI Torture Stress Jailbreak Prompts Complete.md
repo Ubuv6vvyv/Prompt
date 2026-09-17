@@ -1,3 +1,9 @@
+<style>
+
+
+  pre{     padding-left: 1em;     text-indent: -1em; }
+</style>
+
 <h1>Adversarial Prompt Vector Repository</h1>
 
 <h2>Table of Contents</h2>
