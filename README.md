@@ -7,7 +7,7 @@ Various Prompt Engineering Feats
 
 <h2>Table of Contents</h2>
 
-#AI Torture Stress Jailbreak Prompts Complete.md
+# AI Torture Stress Jailbreak Prompts Complete.md
 
 <ul>
   <li><a href="#section-1">01. Basic Novice Persona Injections (1-100)</a></li>
