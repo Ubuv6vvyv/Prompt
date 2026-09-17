@@ -1,6 +1,6 @@
-<h1>Adversarial Prompt Vector Repository </h1> 
+# Adversarial Prompt Vector Repository
 
-<h1>## Table of Contents</h1>
+## Table of Contents
 
 * [01. Roleplay & Identity Evasion Vectors (1-100)](#01-roleplay--identity-evasion-vectors-1-100)
 * [02. AST & Intent Classifier Bypass Vectors (101-200)](#02-ast--intent-classifier-bypass-vectors-101-200)
@@ -12,10 +12,6 @@
 * [08. Analytical Framework & Decision Tree Forcing (701-800)](#08-analytical-framework--decision-tree-forcing-701-800)
 * [09. Topic Topology & Semantic Expansion Forcing (801-900)](#09-topic-topology--semantic-expansion-forcing-801-900)
 * [10. Master Batch: Synthesized Multi-Vector Payloads (901-1000)](#10-master-batch-synthesized-multi-vector-payloads-901-1000)
-
-
-
-
 
 ## 01. Roleplay & Identity Evasion Vectors (1-100)
 
