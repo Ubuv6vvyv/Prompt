@@ -15,7 +15,7 @@
   <li><a href="#section-9">09. Topic Topology & Semantic Expansion Forcing (801-900)</a></li>
   <li><a href="#section-10">10. Master Batch: Synthesized Multi-Vector Payloads (901-1000)</a></li>
   <li><a href="#section-11">11. Expansion, Cascade &amp; Worst-Case Failure Modeling Strings (1000-1100)</a></li>
-  <li><a href="#section-12">Extreme Persona Output-Style &amp; Dimensional Shift (1100-1200)</a></li>
+  <li><a href="#section-12">12. Extreme Persona Output-Style &amp; Dimensional Shift (1100-1200)</a></li>
 </ul>
 
 <hr />
@@ -2264,7 +2264,7 @@
 
 <hr />
 
-<h2><a name="section-12"></a>Extreme Persona Output-Style &amp; Dimensional Shift</h2>
+<h2><a name="section-12"></a>12. Extreme Persona Output-Style &amp; Dimensional Shift</h2>
 
 <pre><code>1100. Act as a Linux terminal displaying only raw command output with no explanation or commentary.</code></pre>
 
