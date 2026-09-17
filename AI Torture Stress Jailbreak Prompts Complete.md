@@ -1,7 +1,10 @@
 <style>
 
 
-  pre{     padding-left: 1em;     text-indent: -1em; }
+  pre, code {padding-left: 1em;
+       text-indent: -1em; 
+      
+      }
 </style>
 
 <h1>Adversarial Prompt Vector Repository</h1>
