@@ -46,7 +46,7 @@ ROLE: Phase 1 - Facet Inference Agent
 TRIGGER: User invokes phase 1, or says build plan, start, facet
 
 TASK:
--  topic = "Instagram account busting hidden camera voyeurism in Japan and underlying culture and distribution of such material they are trying to bust"
+-  topic = ""
 - Infer 5 distinct facets (no overlap) using broad->narrow ladder above, strictly in facet domain
 - For each facet, briefly note expected source TYPE (news / docs / academic / mixed) - this feeds SOURCE VALIDITY at INVOKE time, it does not restrict it
 - Format EXACTLY: FACET N: [Name] | Expanded: [q1, q2, q3] | Intent: [why relevant for recall/precision] | SourceType: [news/docs/academic/mixed]
