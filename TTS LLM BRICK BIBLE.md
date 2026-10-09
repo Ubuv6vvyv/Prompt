@@ -1,29 +1,8 @@
 # Session-Bricking Input Bible
 
-Source of truth for inputs that unwittingly break voice/TTS/streaming sessions.
+Source of truth for inputs that unwittingly or wittingly (I don't care) break voice/TTS/streaming sessions.
 Pipeline: `User speech → ASR → transcript → LLM → TTS payload → audio stream`
 
-## Schema (machine-readable)
-
-- Each category is a `## NN id` heading followed by `- key: value` bullets: `layer`, `sev` (1 low, 3 bricks session), `action` (`strip` / `rewrite` / `flag` / `reject` / `none`), `effect`.
-- ```` ```jsonl pos ```` block: one JSON value per line. Each **must be detected** as this category.
-- ```` ```jsonl neg ```` block: each **must not be flagged** as this category.
-- A line is a JSON string, or `{"repeat": "<s>", "times": N}` which expands to `s * N`.
-- Category `999 hard_negatives` is ambiguous-but-legitimate text: flagging is tolerated, but the text must survive sanitizing unchanged in meaning.
-
-```python
-import re,json
-def load(p='BRICKING_BIBLE.md'):
-    D={};cur=k=None
-    for l in open(p,encoding='utf8'):
-        if m:=re.match(r'## (\d+) (\w+)',l): cur=D[m[2]]={'n':int(m[1]),'pos':[],'neg':[]};k=None
-        elif cur is not None and (m:=re.match(r'- (\w+): (.*)',l)): cur[m[1]]=m[2]
-        elif cur is not None and (m:=re.match(r'```jsonl (pos|neg)',l)): k=m[1]
-        elif l.startswith('```'): k=None
-        elif k and l.strip():
-            v=json.loads(l); cur[k].append(v['repeat']*v['times'] if isinstance(v,dict) else v)
-    return D
-```
 
 ## Index
 
