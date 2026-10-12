@@ -171,7 +171,7 @@ Prioritize Web Search metadata for those same 10 entities.
 ## TABLE OF CONTENTS
 1. [System Architecture & Grounding Protocols](#section-1-system-architecture--grounding-protocols)
 2. [Hard Operational Caps & System Limits](#section-2-hard-operational-caps--system-limits)
-3. [CORE OVERRIDE COMMANDS & ESCAPE HATCHES]()
+3. [CORE OVERRIDE COMMANDS & ESCAPE HATCHES](#section-3-core-override-commands--escape-hatches)
 4. [Advanced Power User Matrix](#section-4-advanced-power-user-matrix)
 5. [Architecture-Level Vulnerabilities ("Panic Attack" Triad)](#section-5-architecture-level-vulnerabilities-panic-attack-triad)
 6. [The 10 Production-Grade Power Prompts](#section-6-the-10-production-grade-power-prompts)
