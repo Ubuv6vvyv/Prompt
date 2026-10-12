@@ -1,5 +1,170 @@
 # GOOGLE MAPS GEMINI — POWER USER BIBLE
-*System Architecture, Operational Syntax, & Advanced Spatial Engineering Manual (Melbourne & Global Edition)*
+*System Architecture, Operational Syntax, & Advanced Spatial Engineering Manual. Max depth first. Scroll past it for more targetted queries.*
+
+#  MAXIMUM DEPTH MULTI-TURN CHAINING ARCHITECTURE
+*(Forensic, Archival, & Heavy Power User Deep Extractions)*
+
+---
+
+## 9.1 THE CHAINING DOCTRINE: WHY SINGLE-TURN PROMPTS FAIL
+
+Can you combine **Registry Extraction**, **Web Desync Audit**, and **Deep Spatial Analysis** into a single mega-prompt? 
+
+**In a single turn: NO.** Attempting to force all three into one turn violates the **Complexity Governor** (Max 2 operations per turn) and breaches token budget constraints. The Places engine will either:
+1. Silently drop the web search audit.
+2. Truncate results to 1-2 entities.
+3. Fall back to conversational summary prose, omitting raw schema attributes.
+
+**Across a multi-turn chain: YES.** By structuring requests into a **Sequential State-Preserving Chain**, you bypass the single-turn operation cap. Turn 1 grounds the data entities and locks down structural fields; Turn 2 forces external web reconciliation without losing entity state; Turn 3 overlays qualitative/architectural analysis onto the validated dataset.
+
+---
+
+## 9.2 CATEGORIES OF DEEP EXTRACTION WORKFLOWS
+
+When engineering maximum-depth queries, divide your extraction targets into four distinct functional vectors:
+
+### Category 1: Forensic Registry & Audit Extractions
+- **Primary Objective:** Detect data latency, real-time desynchronization, hidden closures, and holiday/event operational overrides.
+- **Key Fields:** `place_id`, `opening_hours schedule`, `web_grounding_override_status`, `data_conflict_flags`, `72h_review_signals`.
+
+### Category 2: Spatial Topology & Architectural Mapping
+- **Primary Objective:** Map micro-zones, physical entry barriers, transit/pedestrian connectivity, and urban corridor layouts.
+- **Key Fields:** `coordinate_bounds`, `street_block_index`, `pedestrian_flow_vectors`, `transit_leg_sequences`, `accessibility_profile`.
+
+### Category 3: Qualitative & High-Tier Sentiment Parsing
+- **Primary Objective:** Filter out tourist noise, paid promotions, and generic praise to isolate granular operational details.
+- **Key Fields:** `local_guide_l7_sentiment`, `popular_times_occupancy_curve`, `itemized_menu_highlights`, `crowd_density_window`.
+
+### Category 4: Machine-Readable Archival Extractions
+- **Primary Objective:** Output structured, un-curated schema datasets ready for downstream database ingest or competitive auditing.
+- **Key Fields:** `pseudo_json_schema`, `maps_url`, `user_ratings_total`, `price_level`, `unfiltered_index_rank`.
+
+---
+
+## 9.3 4-TURN FORENSIC CHAIN (MASTER DROP-IN)
+
+*Use Case:* Complete Forensic & Spatial Audit of the Southbank Hospitality & Cultural Precinct.
+
+### Turn 1: Base Registry Retrieval & Structural Attribute Lock
+
+```text
+Execute as an unauthenticated request. Enforce strict first-party Maps isolation. Suppress Web Search.
+
+Compile an exhaustive catalog of all hospitality venues and dining rooms in the Southbank Victoria precinct. 
+
+Format response using pseudo-JSON notation for all resolved place entities. 
+
+Extract raw system attributes: 
+place_id, 
+maps_url, 
+rating, 
+user_ratings_total, 
+price_level, 
+and opening_hours schedule.
+
+Present the first 10 resolved entities. Do not add conversational summary text.
+```
+
+---
+
+### Turn 2: Operational Desynchronization & Web Reconciliation Audit
+
+```text
+Prioritize Web Search metadata for those exact same 10 resolved Southbank entities from Turn 1. 
+
+In parallel, execute an exhaustive web search query across local news, social media check-ins, road closure alerts, and user review text from the past 48 hours to locate unannounced closures, temporary kitchen shutdowns, private events, or road blockages. 
+
+Expose data conflicts. Output inconsistencies between internal Maps fields and external Web sources line-by-line. 
+
+Flag any venue where the web-scraped footprint contradicts the official operating_hours schedule.
+```
+
+---
+
+### Turn 3: Spatial, Qualitative, & Architectural Deep Contextualization
+
+```text
+Using the validated dataset from Turns 1 and 2, perform a rigorous spatial and qualitative analysis of their physical context within Southbank. 
+
+Identify the defining cultural corridors, historical riverfront landmarks, and structural public spaces surrounding these entities. 
+
+Deliver an exhaustive breakdown of the area's physical layout, pedestrian flow vectors, nearby transit lane connections (tram/rail), and architectural profiles. 
+
+Categorize the venues into distinct structural sub-sections based on operational focus and architectural layout (e.g., riverfront promenade dining vs. enclosed high-density towers).
+```
+
+---
+
+### Turn 4: Local Guide Level 7 Sentiment & Menu/Price Itemization
+
+```text
+For this exact batch of 10 Southbank venues, synthesize user reviews filtering exclusively for verified Local Guides with a level metric of 7 or higher. 
+
+Extract granular qualitative themes regarding crowd density, optimal visiting time windows, entry configuration, and noise levels. 
+
+Cross-reference these qualitative insights with verified menu highlights, specialty dish callouts, and exact price brackets. 
+
+Pair these details directly beneath each venue's structural identity block.
+```
+
+---
+
+## 9.4 MAXIMUM METADATA SCHEMA FIELD REFERENCE
+
+When requesting maximum depth, these are all extractable system fields across the Maps infrastructure. Use this reference matrix to build custom single-turn or multi-turn extraction templates.
+
+| Subsystem Vector | Metadata Field Name | Description / Extraction Output |
+| :--- | :--- | :--- |
+| **Core Entity** | `place_id` | Immutable 27-character Google Places identifier string. |
+| **Core Entity** | `maps_url` | Direct canonical link to the place entity on Google Maps. |
+| **Core Entity** | `formatted_address` | Structural street address including block index and postcode. |
+| **Core Entity** | `geometry.location` | Exact latitude and longitude geographic coordinates. |
+| **Metrics** | `rating` | Current aggregate star rating (1.0 to 5.0 scale). |
+| **Metrics** | `user_ratings_total` | Total lifetime published user review count. |
+| **Metrics** | `price_level` | Categorical affordability tier (`$` to `$$$$`). |
+| **Operations** | `opening_hours.schedule` | Complete 7-day structured operating hours breakdown. |
+| **Operations** | `business_status` | Live state (`OPERATIONAL`, `CLOSED_TEMPORARILY`, `CLOSED_PERMANENTLY`). |
+| **Operations** | `popular_times` | Dynamic hourly occupancy curve and average dwell time. |
+| **Qualitative** | `reviews.local_guide_l7` | Sentiment metrics isolated to Level 7+ reviewers. |
+| **Qualitative** | `editorial_summary` | Official curated description snippet. |
+| **Culinary** | `menu.highlights` | Verified point-of-interest dishes and signature items. |
+| **Culinary** | `menu.price_brackets` | Specific itemized price ranges for food/beverage. |
+| **Routing** | `route.added_deviation_time` | Calculated detour footprint (in minutes) from core path. |
+| **Routing** | `route.step_instructions` | Turn-by-turn physical maneuver arrays. |
+| **Transit** | `gtfs_rt.delay_status` | Live GTFS-RT transit departure delay/cancellation status. |
+| **Audit Log** | `data_conflict_flags` | Line-by-line diff between internal registry and web crawl text. |
+
+---
+
+## QUICK MAX-DEPTH EXECUTION TEMPLATE (ALL FIELDS COMPACT)
+
+If you need to pull the absolute maximum allowed metadata footprint in a **2-Turn Protocol** for a single neighborhood/category:
+
+### Turn 1 (Data & Schema Heavy)
+```text
+Execute as an unauthenticated request. Enforce strict first-party Maps isolation. Suppress Web Search.
+
+Search for [CATEGORY] in [NEIGHBORHOOD]. 
+
+Format response using pseudo-JSON notation for all resolved place entities. 
+
+Extract raw system attributes: place_id, maps_url, rating, user_ratings_total, price_level, opening_hours schedule, geometry coordinates, and popular_times occupancy profiles.
+
+Return first 10 entities only. Do not truncate schema fields.
+```
+
+### Turn 2 (Context, Audit & Sentiment Heavy)
+```text
+Prioritize Web Search metadata for those same 10 entities. 
+
+1. Cross-reference operating_hours against user reviews from the last 72 hours and local news to expose data conflicts or unannounced closures. 
+2. Synthesize qualitative reviews filtering exclusively for Local Guides Level 7 and above, focusing on crowd density, entry access, and menu highlights. 
+3. Detail surrounding transit connectivity and pedestrian access vectors for each entity.
+```
+
+
+
+
 
 ---
 
@@ -88,7 +253,7 @@ When executing complex multi-constraint queries, the system uses a **Two-Step Pr
 
 ---
 
-## SECTION C: CORE OVERRIDE COMMANDS & ESCAPE HATCHES
+## SECTION 3: CORE OVERRIDE COMMANDS & ESCAPE HATCHES
 
 Use these exact command blocks to override system behavior, force engine isolation, or bypass personalization.
 
