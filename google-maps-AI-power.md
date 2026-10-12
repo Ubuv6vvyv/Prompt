@@ -1,6 +1,18 @@
 # GOOGLE MAPS GEMINI — POWER USER BIBLE
 *System Architecture, Operational Syntax, & Advanced Spatial Engineering Manual. Max depth first. Scroll past it for more targetted queries.*
 
+## TABLE OF CONTENTS
+1. [System Architecture & Grounding Protocols](#section-1-system-architecture--grounding-protocols)
+2. [Hard Operational Caps & System Limits](#section-2-hard-operational-caps--system-limits)
+3. [CORE OVERRIDE COMMANDS & ESCAPE HATCHES](#section-3-core-override-commands--escape-hatches)
+4. [Advanced Power User Matrix](#section-4-advanced-power-user-matrix)
+5. [Architecture-Level Vulnerabilities ("Panic Attack" Triad)](#section-5-architecture-level-vulnerabilities-panic-attack-triad)
+6. [The 10 Production-Grade Power Prompts](#section-6-the-10-production-grade-power-prompts)
+7. [Melbourne Executable Templates & Multi-Turn Chains](#section-7-melbourne-executable-templates--multi-turn-chains)
+8. [Assistant Execution, Diagnostics & Daily Driver Stack](#section-8-assistant-execution-diagnostics--daily-driver-stack)
+
+---
+
 #  MAXIMUM DEPTH MULTI-TURN CHAINING ARCHITECTURE
 *(Forensic, Archival, & Heavy Power User Deep Extractions)*
 
@@ -161,24 +173,6 @@ Prioritize Web Search metadata for those same 10 entities.
 2. Synthesize qualitative reviews filtering exclusively for Local Guides Level 7 and above, focusing on crowd density, entry access, and menu highlights. 
 3. Detail surrounding transit connectivity and pedestrian access vectors for each entity.
 ```
-
-
-
-
-
----
-
-## TABLE OF CONTENTS
-1. [System Architecture & Grounding Protocols](#section-1-system-architecture--grounding-protocols)
-2. [Hard Operational Caps & System Limits](#section-2-hard-operational-caps--system-limits)
-3. [CORE OVERRIDE COMMANDS & ESCAPE HATCHES](#section-3-core-override-commands--escape-hatches)
-4. [Advanced Power User Matrix](#section-4-advanced-power-user-matrix)
-5. [Architecture-Level Vulnerabilities ("Panic Attack" Triad)](#section-5-architecture-level-vulnerabilities-panic-attack-triad)
-6. [The 10 Production-Grade Power Prompts](#section-6-the-10-production-grade-power-prompts)
-7. [Melbourne Executable Templates & Multi-Turn Chains](#section-7-melbourne-executable-templates--multi-turn-chains)
-8. [Assistant Execution, Diagnostics & Daily Driver Stack](#section-8-assistant-execution-diagnostics--daily-driver-stack)
-
----
 
 ## SECTION 1: SYSTEM ARCHITECTURE & GROUNDING PROTOCOLS
 
