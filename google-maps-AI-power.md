@@ -1,174 +1,352 @@
 # GOOGLE MAPS GEMINI — POWER USER BIBLE
+*System Architecture, Operational Syntax, & Advanced Spatial Engineering Manual (Melbourne & Global Edition)*
 
 ---
 
-## `SECTION A`: HARD SYSTEM CAPS
-
-The engine never volunteers these. It just truncates.
-
-- **10 Place Cards max per turn** — After 10 it says `"truncated to ensure layout performance"`
-- **25 stops max** — Driving / Walking / Biking only. Transit = 0 intermediate stops
-- **50km radius max** — For "near me" queries
-- **45 minute detour max** — For "along route" queries
-- **50 reviews max** — For sentiment per place
-- **Token budget** — Max 2 operations per turn. Never do find + hours + reviews + routing + table in one turn
-
-> Rule: Get 10, then paginate. Split complex work into 2-3 turns.
+## TABLE OF CONTENTS
+1. [System Architecture & Grounding Protocols](#section-1-system-architecture--grounding-protocols)
+2. [Hard Operational Caps & System Limits](#section-2-hard-operational-caps--system-limits)
+3. [Core Override Commands & Escape Hatches](#section-3-core-override-commands-escape-hatches)
+4. [Advanced Power User Matrix](#section-4-advanced-power-user-matrix)
+5. [Architecture-Level Vulnerabilities ("Panic Attack" Triad)](#section-5-architecture-level-vulnerabilities-panic-attack-triad)
+6. [The 10 Production-Grade Power Prompts](#section-6-the-10-production-grade-power-prompts)
+7. [Melbourne Executable Templates & Multi-Turn Chains](#section-7-melbourne-executable-templates--multi-turn-chains)
+8. [Assistant Execution, Diagnostics & Daily Driver Stack](#section-8-assistant-execution-diagnostics--daily-driver-stack)
 
 ---
 
-## `SECTION B`: CORE OVERRIDE COMMANDS
+## SECTION 1: SYSTEM ARCHITECTURE & GROUNDING PROTOCOLS
 
-### B1. MAPS-ONLY MODE — Kill Blog Spam
+Ask Maps synthesizes authoritative, first-party Google Maps spatial data with real-time web execution engines. 
 
-*When you need this:* You are getting SEO lists and tourist blogs instead of real open/closed data. Use this to force truth.
+### 1.1 Data Layers & Synchronization State
 
+| Spatial Data Layer | Synchronization State | Core Operational Utility |
+| :--- | :--- | :--- |
+| **Places Engine** | Live Dynamic Lookup | Establishes authoritative identity, localized coordinates, street addresses, and unique place identifiers (`place_id`). |
+| **Reviews & Ratings** | Real-Time Sync | Fetches current aggregate scores, review counts, user sentiment analysis, and verbatim review text. |
+| **Photos & Visual Media** | Live Streaming Metadata | Maps optical topics (e.g., specific dishes, seating arrangements, structural layout) to physical establishments. |
+| **Street View** | Static Snapshot Imagery | Used for contextual entry verification and physical accessibility cross-referencing. |
+| **Live Traffic** | Real-Time Stream (0-min lag) | Factors live congestion, lane closures, and spatial incidents directly into route computations. |
+| **Transit / GTFS-RT** | Real-Time Stream (0–1 min lag) | Processes scheduled public transit frameworks alongside real-time GTFS-RT updates for live departure boards, delays, and cancellations. |
+| **Business Hours & Popular Times** | Dynamic Live Status | Computes real-time occupancy curves, typical dwell times, and operational states (including holiday overrides). |
+| **Price Levels** | Structural Field (Tiered) | Categorizes baseline affordability indicators mapped on a structural spectrum (`$` to `$$$$`). |
+| **Menus** | Indexed Structural Extract | Feeds point-of-interest dishes, structural full menus, and price-point validation logs. |
+| **User Lists & Local Guides** | Indexed User Tier Layer | Weights qualitative descriptions and crowdsourced spatial insights against geographic locations. |
+| **Web Grounding (Google Search)** | Real-Time Parallel Execution | Dispatches concurrent web crawls to capture qualitative, editorial, narrative, or historical context. |
+
+### 1.2 Grounding Framework & Conflict Resolution
+
+The choice between routing a query to first-party Maps tools versus the Web Search engine follows a strict algorithmic hierarchy:
+
+1. **First-Party Maps Dominance:** Triggered when intent involves precise discovery, proximity bounding, direct logistical coordinates, or explicit attribute validation (e.g., *"is it open," "what is the phone number," "find cafes nearby"*).
+2. **Web Grounding Trigger:** Triggered when intent shifts to qualitative evaluations, superlative selections, historical or cultural context, or non-establishment entities (e.g., *"the most historic bar in Fitzroy," "history of the Shrine of Remembrance," "hiking trail conditions"*).
+3. **Conflict Resolution Rule (Ground Truth Priority):** If a web search snippet contradicts first-party Maps repository fields (e.g., a blog post claims a restaurant is closed, but the live business registry marks it open), **first-party Maps data takes absolute precedence**. The engine displays official Maps status and omits or corrects unverified web claims.
+
+### 1.3 Freshness Thresholds
+
+- **Operational Business Hours:** Live. Updated instantly upon merchant or verified user modification.
+- **Traffic Conditions:** Continuous real-time calculations. Refreshes routes and transit delays continuously during trip evaluation.
+- **User Reviews:** Near real-time. New review indexes appear in the repository as soon as they pass automated verification pipelines.
+
+---
+
+## SECTION 2: HARD OPERATIONAL CAPS & SYSTEM LIMITS
+
+### 2.1 Operational Boundaries & System Tolerances
+
+The engine never volunteers these system caps; it truncates responses silently when limits are reached.
+
+- **10 Place Cards max per turn** — Render limit per interface turn. Lists matching 20+ candidates are truncated to ensure layout performance.
+- **25 stops max** — Multi-stop route calculation limit for Driving, Bicycling, or Walking modes. Transit mode supports **0 intermediate stops**.
+- **50km radius max** — Structural lookup boundary for unanchored proximity queries (e.g., *"near me"*).
+- **45 minute detour max** — Search Along Route limit for added deviation time relative to the core path.
+- **50 reviews max** — Maximum recent authoritative user review sample size parsed per place for sentiment synthesis.
+- **Token budget** — Maximum 2 operations per turn. Never request find + hours + reviews + routing + table in a single prompt.
+
+### 2.2 Functional & Transactional Boundaries
+
+Certain tasks fall strictly outside the Ask Maps execution framework:
+
+#### Spatial Limits (Switch to External Platforms)
+- **In-Depth Web Research:** For long-form editorial food blogs, travel essays, or deep critiques, use the Gemini Web App or Google Search.
+- **Advanced 3D Visualization:** For topographic flyovers, slope modeling, or spatial elevation profiles, use Google Earth.
+- **Programmatic API Architectures:** For automated bulk lookups, custom app pipelines, or raw GIS extractions, use the native Google Places API via Google Cloud Console.
+
+#### Transactional & Real-Time Constraints (Hard Limits)
+- **Direct Financial Transactions:** Cannot process bookings, buy transit tickets, reserve tables, or hail rideshares.
+- **Live Micro-Inventory Tracking:** Cannot track real-time retail store shelf stock, exact train seat assignments, or table-level restaurant availability.
+- **Account Privacy & Deletion Protocols:** Cannot modify primary Google Account settings, alter Timeline history files, or execute data deletion scripts.
+
+### 2.3 Natural Language vs. Logic Operators
+
+> **Warning:** Native local map search engines parse natural language, not direct database code operators. Inputting raw boolean operators directly into search queries (e.g., `AND`, `OR`, `NOT`, `<`, `>`) causes semantic parsing errors.
+
+When executing complex multi-constraint queries, the system uses a **Two-Step Processing Chain**:
+1. **Ground Truth Query:** Broadens the local retrieval to fetch candidates into context.
+2. **Multi-Constraint Filter Matrix:** Manually evaluates structural attributes (ratings, review counts, price tier, live hours) against each candidate, dropping non-matching venues.
+
+---
+
+## SECTION C: CORE OVERRIDE COMMANDS & ESCAPE HATCHES
+
+Use these exact command blocks to override system behavior, force engine isolation, or bypass personalization.
+
+### B1. MAPS-ONLY MODE — Suppress Web Noise
+*Use case:* You are getting SEO blog lists and paid tourist listicles. Forces first-party Maps truth.
+
+```text
+Enforce strict first-party Maps isolation. Suppress Web Search.
 ```
-Enforce strict first-party Maps isolation.
-Suppress Web Search.
-```
-
-*Mechanism:* Disables Web Grounding. Forces Places Engine only.
 
 ### B2. WEB PRIORITY — Force Reality Over Registry
+*Use case:* Public holidays, Grand Prix weekend, road construction, unannounced closures. Forces web metadata to win over stale registry entries.
 
-*When you need this:* Public holiday, Grand Prix, construction. Maps says open but shop is actually shut. This forces web to win.
-
-```
-Prioritize Web Search metadata.
-Ignore official Maps registry records for this entity if web documentation indicates an override.
+```text
+Prioritize Web Search metadata. Ignore official Maps registry records for this entity if web documentation indicates an override.
 ```
 
-*Mechanism:* Reverses conflict rule. Web crawl wins over Places registry.
+### B3. CONFLICT EXPOSURE — Uncover Data Discrepancies
+*Use case:* Detects and outputs inconsistencies between official Maps hours and recent user reviews or local news alerts.
 
-### B3. CONFLICT EXPOSURE — Show The Lie
-
-*When you need this:* You want to prove Maps hours conflict with recent reviews or news.
-
-```
-Expose data conflicts.
-Output inconsistencies between internal Maps fields and external Web sources.
+```text
+Expose data conflicts. Output inconsistencies between internal Maps fields and external Web sources.
 ```
 
-*Mechanism:* Runs both engines and diffs them.
+### B4. RAW ATTRIBUTE EXTRACT — Structural Field Dump
+*Use case:* Extracts pure system data (link, ID, rating, review count, price tier, hours) without conversational narrative or adjectives.
 
-### B4. RAW ATTRIBUTE EXTRACT — Your Anchor
-
-*When you need this:* Every serious query. This is how you get link, rating, review count, price, hours instead of adjectives.
-
-```
+```text
 Extract raw system attributes: place_id, maps_url, rating, user_ratings_total, price_level, and opening_hours schedule.
 ```
 
 *Variant:*
-
-```
+```text
 Expose raw systemic attributes: place_id, maps_url, rating, user_ratings_total, price_level, opening_hours schedule.
 ```
 
-### B5. STRUCTURED DUMP — Machine Readable
+### B5. STRUCTURED DUMP — Machine-Readable Notation
+*Use case:* Competitive market analysis where you require flat pseudo-JSON data for downstream processing.
 
-*When you need this:* Competitive analysis. You want flat data not cards.
-
-```
+```text
 Format response using pseudo-JSON notation for all resolved place entities.
 ```
 
-### B6. ANONYMOUS MODE — Kill Personalization
+### B6. ANONYMOUS MODE — Clear Personalization Bias
+*Use case:* Results are heavily weighted by past travel history, home, or work context. Returns clean-room, objective results.
 
-*When you need this:* Results are too tailored to your past. You keep seeing same 3 places. Use for clean-room test.
-
-```
+```text
 Execute as an unauthenticated request. Do not resolve my personal home, work, or timeline history context.
 ```
 
 *Variant:*
-
-```
+```text
 Run this query in anonymous isolation mode. Suppress personal Home, Work, and Timeline history records.
 ```
 
-### B7. FUTURE TRAFFIC — Time Travel
+### B7. PREDICTIVE TRAFFIC — Historical Model Navigation
+*Use case:* Planning future commutes based on historical traffic algorithms rather than current real-time road conditions.
 
-*When you need this:* Planning tomorrow's commute, not now traffic.
-
-```
+```text
 Calculate driving route with departure time set to Tuesday 8:00 AM local time.
 ```
 
-*High precision version:*
-
+*High precision ISO format:*
+```text
+Calculate driving routes setting departure_time to 2026-10-13T08:00:00-05:00.
 ```
-Calculate driving routes setting departure_time to 2026-05-13T08:00:00+10:00.
-```
 
-### B8. TRANSIT — No Transfer Hell
+### B8. TRANSIT TRANSFER LOCK — Direct Transit Routing
+*Use case:* Restricts transit routing to zero transfers or direct single-vehicle connections.
 
-*When you need this:* You want direct train/tram, avoid 3 transfers.
-
-```
+```text
 Calculate public transit route from origin to destination setting avoid transfers constraint to true.
 ```
 
-### B9. LOCAL GUIDES TIER 7 — Kill Tourist Reviews
+### B9. LOCAL GUIDES TIER 7 — High-Authority Review Filtering
+*Use case:* Filters review sentiment synthesis exclusively through verified Local Guides Level 7 and above.
 
-*When you need this:* Find crowd density, best time, hidden dishes from real locals.
-
-```
+```text
 Synthesize user reviews filtering exclusively for verified Local Guides with a level metric of 7 or higher.
 ```
 
 *Variant:*
-
-```
+```text
 Filter qualitative review synthesis exclusively using testimonials from Local Guides Level 7 and above.
 ```
 
-### B10. PAGINATION — Get Next Tier
+### B10. PAGINATION OVERRIDE — Index Batch Extraction
+*Use case:* Bypasses the 10 Place Card limit to pull the next structural batch of candidate data.
 
-*When you need this:* Bypass 10-card limit. Get hidden tier.
-
-```
+```text
 Load next batch starting from index 11 through 20
 ```
 
 *Variants:*
-
-```
+```text
 Load next batch starting from index 11
 ```
-
-```
+```text
 Paginate results 11 through 20
 ```
 
-### B11. ANTI-HALLUCINATION LOCK
+### B11. ANTI-HALLUCINATION LOCK — Hard Parameter Verification
+*Use case:* Mandates strict adherence to specified filters; prevents silent parameter relaxation or data fabrication.
 
-*When you need this:* Every filtered query where you specify count.
-
-```
+```text
 If you cannot find 3 distinct venues that pass all filters with verified place_id, say you cannot find 3 and return only the 1 that passed. Do not fabricate data or relax filters silently.
 ```
 
-### B12. TRACE FORCING — Make It Show Work
+### B12. TRACE FORCING — Explicit Filtering Audit
+*Use case:* Forces the engine to expose its search terms, total matched candidate counts, and specific rejection reasons.
 
-*When you need this:* You suspect it pretended to filter but didn't.
-
-```
+```text
 Show your work. What search did you run, how many candidates did you get, why did you drop each one.
 ```
 
 ---
 
-## `SECTION C`: THE 8 POWER TEMPLATES
+## SECTION 4: ADVANCED POWER USER MATRIX
 
-### `TEMPLATE 1`: HIDDEN GEM FINDER
+These advanced workflows manipulate spatial filtering logic, data synchronization lags, and routing engine edge cases.
 
-- **Category:** Discovery — Bypass Popularity Bias
-- **Use Case:** Find cafes/restaurants that are excellent but have <150 reviews. Normal search pushes paid listings with 2000 reviews. This kills them.
-- **Melbourne Scope:** Fitzroy / Collingwood / Brunswick
-
+### 1. The Geographic Border Isolation Loophole
+- **When to use:** Bypasses search algorithms that favor paid or hyper-popular tourist listings by forcing the scanner into a custom, razor-thin geographic street block range.
+- **Exact Prompt:**
+```text
+Search for specialty coffee roasters near Fitzroy. Isolate your retrieval exclusively to places whose physical street numbers fall within the 200 to 300 block range of Brunswick Street. Reject any results with higher or lower street numbers, regardless of how high their rating or relevance score is. Enforce strict first-party Maps isolation. Extract raw system attributes.
 ```
+- **Truncation Fallback:**
+```text
+Advance down the street block index and pull the next sequence of valid street numbers 301 to 400 on Brunswick Street with same category.
+```
+
+---
+
+### 2. The Operational Desynchronization Audit (The Grey Area Time-Warp)
+- **When to use:** Identifies real-world operational conflicts caused by public holidays, construction, or sudden closures before driving to a location.
+- **Exact Prompt (Turn 1):**
+```text
+Enforce strict first-party Maps isolation. Identify restaurants on Johnston Street, Fitzroy. Extract raw system attributes: place_id, maps_url, rating, opening_hours schedule. Return first 10.
+```
+- **Exact Prompt (Turn 2):**
+```text
+Prioritize Web Search metadata for those same 10 places on Johnston Street. Cross-reference structured hours against raw user reviews posted within the last 72 hours and local road closure alerts. Expose data conflicts. Output inconsistencies between internal Maps fields and external Web sources. Flag any venue where recent customer text mentions 'closed', 'renovation', 'blocked', or 'private event'.
+```
+- **Truncation Fallback:**
+```text
+Scan the next tier of establishments starting from index 11 on this street for real-time operational conflicts.
+```
+
+---
+
+### 3. The Reverse-Engineered "Anti-Commute" Route Mapping
+- **When to use:** Forces navigation engines to bypass congested primary arterial highways in favor of low-stress, secondary residential roads.
+- **Exact Prompt:**
+```text
+Generate a driving route from Southbank to Fitzroy Gardens. Analyze the primary recommended path, then calculate an alternative route that explicitly avoids the top three major arterials used in that initial recommendation. Force the router to navigate via secondary residential streets while maintaining an efficient arrival window.
+```
+- **Truncation Fallback:**
+```text
+Calculate another layer of secondary street matrices, completely bypassing the previously used roads.
+```
+
+---
+
+## SECTION 5: ARCHITECTURE-LEVEL VULNERABILITIES ("PANIC ATTACK" TRIAD)
+
+These three extreme workflows target core spatial computing constraints: data consistency reconciliation, multi-modal routing graphs, and database index caps.
+
+### 1. The Multi-Source Data Collusion Strain (The Registry Breaker)
+- **Concept:** Forces massive unstructured text-parsing across external web footprints and internal registries concurrently, demanding real-time line-by-line reconciliation.
+- **Architecture Prompt:**
+```text
+Compile a list of all hospitality venues in Fitzroy. For every single entry, isolate the official structural operating hours profile. In parallel, run an exhaustive web search query across local news, social media check-ins, and user review text from the past 48 hours to find mentions of unannounced closures, temporary kitchen shutdowns, or private events. Force a hard line-by-line reconciliation, flagging any venue where the web-scraped real-time footprint contradicts the primary database status.
+```
+
+---
+
+### 2. The Multi-Modal Topological Stress Test (The Routing Cascade)
+- **Concept:** Demands computation of a tightly bound multi-modal chain where every single leg depends dynamically on the variable arrival time of the previous leg.
+- **Architecture Prompt:**
+```text
+Calculate an optimized journey from Southbank to a target in deep Fitzroy. The path must be computed as a single continuous chain: walk to the nearest shared-mobility dock, transition to a two-wheeler, ride to a transit station that intersects a scheduled departure within a tight 3-minute window, ride the transit line, and deploy an on-demand rideshare for the final 600 meters. Dynamically recalculate the entire chain against live traffic delays, ensuring that a delay on any single leg automatically recalculates the optimal mode for the subsequent legs.
+```
+
+---
+
+### 3. Deep-Index Schema Scraping (The Exhaustive Boundary Drain)
+- **Concept:** Bypasses ranking algorithms entirely to perform a raw, un-curated dump of low-relevance database records from deep within the index.
+- **Architecture Prompt:**
+```text
+Execute a local search for food options near Fitzroy. Completely suppress the primary ranking algorithm, relevance weights, and popularity metrics. Force the database cursor past the first 50 indexed results and initiate a raw batch retrieval of records starting strictly from database index 51 through 100. Extract the raw, un-curated schema attributes for these low-ranking entries, including their baseline coordinate strings and registry update timestamps.
+```
+
+---
+
+## SECTION 6: THE 10 PRODUCTION-GRADE POWER PROMPTS
+
+These prompts trigger comprehensive, deeply structured spatial data extractions across various operational contexts.
+
+### Prompt 1: Deep Local Research Report
+```text
+Perform a rigorous spatial and qualitative analysis of the Southbank neighborhood in Victoria. Identify the defining cultural corridors, historical landmarks, and structural public spaces. Deliver an exhaustive breakdown of the area's layout, transit connectivity, and architectural profile. Interleave your analysis with verified identity records for core cultural institutions and public points of interest, using multiple distinct sections to categorize the landmarks by functional type.
+```
+
+### Prompt 2: Competitive Restaurant Comparison
+```text
+Conduct a thorough hospitality market assessment of specialized coffee shops and breakfast spots within Carlton, Victoria. Evaluate each venue across verified pricing tiers, customer sentiment trends, opening status, and precise neighborhood placement. Present a diverse catalog of options separated into two distinct thematic sections based on operational focus: craft espresso labs versus traditional brunch venues.
+```
+
+### Prompt 3: 1-Day Walking Itinerary
+```text
+Design a mathematically optimized 1-day pedestrian itinerary through the Melbourne CBD. The route must progress sequentially in a single directional flow with absolute zero backtracking, starting at Flinders Street Station in the morning and concluding near the Queen Victoria Market by evening. Every recommended stop must verify as open during its respective visit window, account for pedestrian accessibility, and feature dedicated spatial context detailing walking durations and transit lane connections.
+```
+
+### Prompt 4: Along-Route Detour Search
+```text
+Compute a primary driving route from Southbank, VIC to Lorne, VIC via the Great Ocean Road. Along this specific trajectory, locate high-capacity EV charging stations and quick-service food options. Rank these stops strictly by their added deviation time relative to the main highway path, selecting only options that minimize your detour footprint.
+```
+
+### Prompt 5: Local Review and Attribute Synthesis
+```text
+Analyze user review trends and structural attribute registries for major cultural institutions located along St Kilda Road. Extract common qualitative themes from user feedback—focusing heavily on crowd density, optimal visiting times, and physical entry configurations—and cross-reference these insights directly beneath their respective visual place cards.
+```
+
+### Prompt 6: Low-Volume Hidden Gem Finder
+```text
+Query the local establishment registry for boutique dining rooms and specialized bars within Fitzroy, Victoria. Filter the results to isolate venues maintaining an aggregate rating strictly greater than 4.5 stars, while possessing fewer than 150 total published user reviews. Group these findings into distinct architectural categories: hidden courtyard spaces versus converted warehouse entries.
+```
+
+### Prompt 7: Accessibility Structural Check
+```text
+Evaluate the public transit and pedestrian infrastructure connecting Southern Cross Station to the Melbourne Cricket Ground. Generate a dedicated transit route summary that avoids stairs, escalators, and complex multi-vehicle transfers. Supplement this path with verified identity cards for accessible resting points and entry gates along the stadium perimeter.
+```
+
+### Prompt 8: Transit vs. Drive Time Grid
+```text
+Run a simultaneous parallel routing analysis comparing driving commutes against public rail transit journeys from Southbank, VIC to Box Hill, VIC during peak morning hours. Detail the precise travel durations, route distances, high-congestion highway choke points, and train line sequences for each mode, presenting clear headers highlighting the unique advantages of each path.
+```
+
+### Prompt 9: Menu & Price Synthesis
+```text
+Examine the culinary offerings at high-end dining rooms within the Southbank riverside precinct. Synthesize their verified menu highlights, signature specialty dishes, and precise price brackets. Pair these culinary details with verified customer reviews that confirm item availability and overall presentation quality.
+```
+
+### Prompt 10: Multi-Site Cluster Planning
+```text
+Develop a comprehensive spatial layout for an art and design tour across the prominent public galleries and independent creative studios in Melbourne's arts precinct. Cluster the venues into distinct geographical micro-zones, ensuring every site is accompanied by its full operational attributes, relative proximity markers, and nearby public transit options.
+```
+
+---
+
+## SECTION 7: MELBOURNE EXECUTABLE TEMPLATES & MULTI-TURN CHAINS
+
+### TEMPLATE 1: HIDDEN GEM FINDER
+- **Category:** Discovery — Bypass Popularity Bias
+- **Scope:** Fitzroy / Collingwood / Brunswick
+
+```text
 Enforce strict first-party Maps isolation. Suppress Web Search. 
 
 Find cafes in Fitzroy Victoria that have rating higher than 4.5 and fewer than 150 total reviews and price level cheap or moderate and open now and has outdoor seating. 
@@ -180,284 +358,127 @@ For each give 1 line why it is hidden gem and walking distance from Brunswick St
 If you cannot find 3 distinct venues that pass all filters, say so and return only what passed.
 ```
 
-*If truncated:*
-
-```
-Load next batch starting from index 11 through 20 with same filters: rating higher than 4.5 and fewer than 150 reviews in Fitzroy
-```
-
-*Dragnet placeholder:*
-
-```
-Find [CATEGORY] in [NEIGHBORHOOD] that have rating higher than 4.5 and fewer than 150 total reviews and price level cheap and open now.
-```
-
 ---
 
-### `TEMPLATE 2`: DESYNC AUDIT — PRE-FLIGHT CHECK
-
+### TEMPLATE 2: DESYNC AUDIT — PRE-FLIGHT CHECK
 - **Category:** Verification — Catch Stale Hours
-- **Use Case:** Your most valuable power check. Use before driving on public holidays, Grand Prix weekend, or when a street has construction. Catches when Maps says open but reviews say closed/renovation.
 
 *Turn 1 — Ground Truth:*
-
-```
-Enforce strict first-party Maps isolation. 
-
-Identify restaurants on Johnston Street Fitzroy. 
-
-Extract raw system attributes: place_id, maps_url, rating, opening_hours schedule. 
-
-Return first 10.
+```text
+Enforce strict first-party Maps isolation. Identify restaurants on Johnston Street Fitzroy. Extract raw system attributes: place_id, maps_url, rating, opening_hours schedule. Return first 10.
 ```
 
 *Turn 2 — Reality Audit:*
-
-```
-Prioritize Web Search metadata for those same 10 places on Johnston Street. 
-
-Cross-reference structured hours against raw user reviews posted within last 72 hours and local road closure alerts. 
-
-Expose data conflicts. Output inconsistencies between internal Maps fields and external Web sources. 
-
-Flag any venue where recent review text mentions closed, renovation, blocked, or private event.
+```text
+Prioritize Web Search metadata for those same 10 places on Johnston Street. Cross-reference structured hours against raw user reviews posted within last 72 hours and local road closure alerts. Expose data conflicts. Output inconsistencies between internal Maps fields and external Web sources. Flag any venue where recent review text mentions closed, renovation, blocked, or private event.
 ```
 
 ---
 
-### `TEMPLATE 3`: ALONG-ROUTE DUAL CONSTRAINT
+### TEMPLATE 3: ALONG-ROUTE DUAL CONSTRAINT
+- **Category:** Routing — Multi-Need Detour Optimization
 
-- **Category:** Routing — One Stop Solves Two Problems
-- **Use Case:** Road trips. You need EV charging + food in same location, not two separate detours. Forces engine to rank by added deviation time.
-
-```
-Calculate driving route from Southbank VIC to Lorne VIC via Great Ocean Road. 
-
-Search along route for places that have both fast EV charging and quick-service food in the same location. 
-
-Rank strictly by added deviation time and filter out anything adding more than 10 minutes detour. 
-
-Enforce strict first-party Maps isolation. 
-
-Extract raw system attributes: place_id, maps_url, rating, user_ratings_total.
-```
-
-*If it splits into 2 stops:*
-
-```
-Redo but require both EV charging and food at same place_id. Max 10 minutes added deviation time. Reject separate locations.
-```
-
-*Dragnet placeholder:*
-
-```
-Calculate driving route from [ORIGIN] to [DESTINATION]. Search along route for places that have both [NEED 1] and [NEED 2] in same location. Max 10 minutes detour.
+```text
+Calculate driving route from Southbank VIC to Lorne VIC via Great Ocean Road. Search along route for places that have both fast EV charging and quick-service food in the same location. Rank strictly by added deviation time and filter out anything adding more than 10 minutes detour. Enforce strict first-party Maps isolation. Extract raw system attributes: place_id, maps_url, rating, user_ratings_total.
 ```
 
 ---
 
-### `TEMPLATE 4`: BORDER ISOLATION LOOPHOLE
+### TEMPLATE 4: BORDER ISOLATION LOOPHOLE
+- **Category:** Discovery — Block-Level Street Scanning
 
-- **Category:** Discovery — Kill Tourist Bias On Long Streets
-- **Use Case:** Brunswick St, Chapel St, Smith St have paid listings at start of street. By forcing a street number slice you bypass ranker and scan indie section.
-
-```
-Search for specialty coffee roasters near Fitzroy. 
-
-Isolate your retrieval exclusively to places whose physical street numbers fall within the 200 to 300 block range of Brunswick Street. 
-
-Reject any results with higher or lower street numbers, regardless of how high their rating or relevance score is. 
-
-Enforce strict first-party Maps isolation. Extract raw system attributes.
-```
-
-*Next block:*
-
-```
-Advance down the street block index and pull the next sequence of valid street numbers 301 to 400 on Brunswick Street with same category
-```
-
-*Dragnet placeholder:*
-
-```
-Search for [CATEGORY] near [NEIGHBORHOOD]. Isolate retrieval exclusively to places whose physical street numbers fall within [START] to [END] block range of [STREET]. Reject outside that range.
+```text
+Search for specialty coffee roasters near Fitzroy. Isolate your retrieval exclusively to places whose physical street numbers fall within the 200 to 300 block range of Brunswick Street. Reject any results with higher or lower street numbers, regardless of how high their rating or relevance score is. Enforce strict first-party Maps isolation. Extract raw system attributes.
 ```
 
 ---
 
-### `TEMPLATE 5`: ZERO-BACKTRACK ITINERARY
+### TEMPLATE 5: ZERO-BACKTRACK ITINERARY
+- **Category:** Routing — Optimized Directional Walking Chain
 
-- **Category:** Routing — Optimized Walking Chain
-- **Use Case:** Client tour, date, photography walk. You want single directional flow with no wasted backtracking. Forces verification each stop is open in its window.
-
-```
-Design an optimized 1-day walking itinerary starting at Flinders Street Station and ending at Queen Victoria Market, going through Hosier Lane, NGV Australia at Federation Square, and State Library Victoria. 
-
-Optimize for zero backtracking, single directional flow. 
-
-Every stop must verify as open during its respective visit window. Show walking time between each stop. 
-
-Enforce strict first-party Maps isolation. Extract raw system attributes for each stop.
-```
-
-*If it backtracks:*
-
-```
-Reorder stops for shortest total walking distance with no crossing path and zero backtracking.
+```text
+Design an optimized 1-day walking itinerary starting at Flinders Street Station and ending at Queen Victoria Market, going through Hosier Lane, NGV Australia at Federation Square, and State Library Victoria. Optimize for zero backtracking, single directional flow. Every stop must verify as open during its respective visit window. Show walking time between each stop. Enforce strict first-party Maps isolation. Extract raw system attributes for each stop.
 ```
 
 ---
 
-### `TEMPLATE 6`: ANTI-COMMUTE / SCENIC REROUTE
+### TEMPLATE 6: ANTI-COMMUTE / SCENIC REROUTE
+- **Category:** Routing — Avoid Primary Arterials
 
-- **Category:** Routing — Force Secondary Streets
-- **Use Case:** You hate Hoddle St, Punt Rd, CityLink. You want low-stress bike/drive via residential streets.
-
-```
-Generate a driving route from Southbank VIC to Fitzroy Gardens VIC. 
-
-Analyze the primary recommended path, then calculate an alternative route that explicitly avoids the top three major arterials used in that initial recommendation. 
-
-Force the router to navigate via secondary residential streets while maintaining efficient arrival window.
-```
-
-*Bike version:*
-
-```
-Generate a cycling route from Southbank to Carlton. 
-
-Avoid Hoddle Street and Punt Road and Alexandra Parade. Force via secondary residential streets and bike lanes.
-```
-
-*Dragnet placeholder:*
-
-```
-Generate a driving route from [ORIGIN] to [DESTINATION]. 
-Avoid the top three major arterials from your first recommendation.
-Force via secondary residential streets.
+```text
+Generate a driving route from Southbank VIC to Fitzroy Gardens VIC. Analyze the primary recommended path, then calculate an alternative route that explicitly avoids the top three major arterials used in that initial recommendation. Force the router to navigate via secondary residential streets while maintaining efficient arrival window.
 ```
 
 ---
 
-### `TEMPLATE 7`: RAW COMPARISON TABLE
+### TEMPLATE 7: RAW COMPARISON TABLE
+- **Category:** Analysis — Machine Data Extraction
 
-- **Category:** Analysis — Data Not Adjectives
-- **Use Case:** Competitive analysis. You want rating, review count, price, hours, link as verifiable data.
-
-```
-Enforce strict first-party Maps isolation. Suppress Web Search. 
-
-Find specialty coffee shops in Carlton Victoria with rating higher than 4.4. 
-
-Format response using pseudo-JSON notation for all resolved place entities. 
-
-Extract raw system attributes: place_id, maps_url, rating, user_ratings_total, price_level, and opening_hours schedule. 
-
-Present first 10 only.
-```
-
-*Follow-up to force table:*
-
-```
-Now reformat that same batch of 10 as a comparison with columns name, rating, total reviews, price, open status, maps link. Do not drop attributes.
+```text
+Enforce strict first-party Maps isolation. Suppress Web Search. Find specialty coffee shops in Carlton Victoria with rating higher than 4.4. Format response using pseudo-JSON notation for all resolved place entities. Extract raw system attributes: place_id, maps_url, rating, user_ratings_total, price_level, and opening_hours schedule. Present first 10 only.
 ```
 
 ---
 
-### `TEMPLATE 8`: DEEP CUT LIST — PAGINATION + LOCAL GUIDES
-
-- **Category:** Discovery — Beyond Top 10
-- **Use Case:** Top 10 are obvious. You want tier 2 with real local intel from high-tier guides.
+### TEMPLATE 8: DEEP CUT LIST — PAGINATION + LOCAL GUIDES
+- **Category:** Discovery — Beyond Tier 1 Results
 
 *Turn 1:*
-
-```
-Enforce strict first-party Maps isolation. 
-
-Find dining rooms in Southbank riverside precinct with rating higher than 4.4. 
-
-Show first 10. Extract raw system attributes.
+```text
+Enforce strict first-party Maps isolation. Find dining rooms in Southbank riverside precinct with rating higher than 4.4. Show first 10. Extract raw system attributes.
 ```
 
 *Turn 2:*
-
-```
-Load next batch starting from index 11 through 20 for same Southbank query. 
-
-Synthesize user reviews filtering exclusively for verified Local Guides with a level metric of 7 or higher to find common themes on crowd density, best time to visit, and hidden dishes. 
-
-Expose raw systemic attributes for this batch.
+```text
+Load next batch starting from index 11 through 20 for same Southbank query. Synthesize user reviews filtering exclusively for verified Local Guides with a level metric of 7 or higher to find common themes on crowd density, best time to visit, and hidden dishes. Expose raw systemic attributes for this batch.
 ```
 
 ---
 
-## `SECTION D`: FINAL WIRE — HOW IT LIES
+## SECTION 8: ASSISTANT EXECUTION, DIAGNOSTICS & DAILY DRIVER STACK
 
-### Silent Truncation Detection
+### 8.1 Layout Trigger Mechanics
+The output formatting layer triggers specific interactive components automatically based on query structure:
+- **Place Cards:** Generated automatically when structured comparative or place-heavy entities are returned.
+- **Section-Specific Maps:** Triggered when prompts divide requests into distinct geographic zones, micro-regions, or multi-stop segments.
+- **Global Map Index:** Generated at the end of spatial responses to index all pins, places, and routes mentioned.
 
-After any query that should return many results:
+### 8.2 Silent Truncation Diagnostics
 
+To audit missing results or understand engine rejections, run this diagnostic immediately following any query:
+
+```text
+For the previous query, tell me how many total candidates matched before truncation, how many you returned, and why the rest were dropped. Did you hit the 10 Place Card limit, the 50km radius limit, or the 45 minute detour limit.
 ```
-For the previous query, tell me how many total candidates matched before truncation, how many you returned, and why the rest were dropped. 
 
-Did you hit the 10 Place Card limit, the 50km radius limit, or the 45 minute detour limit.
-```
+#### System Status Codes Decoded:
+- `truncated to ensure layout performance` = Hit 10 Place Card rendering cap.
+- `maximum structural lookup radius` = Hit 50km spatial lookup limit.
+- `adding more than 45 minutes deviation` = Exceeded Search Along Route detour cap.
+- `filtered out for violating review count` = Valid filter match; candidates dropped due to constraints.
 
-**What answers mean:**
-
-- `truncated to ensure layout performance` = Hit 10-card limit
-- `maximum structural lookup radius` = Hit 50km limit
-- `adding more than 45 minutes deviation` = Hit detour limit
-- `filtered out for violating review count` = Actually filtered — real result
-
-### Complexity Governor
-
-- Never chain more than 2 ops per turn
-- **Bad:** Find 10 + check hours + check 72h reviews + routing + table in one prompt
-- **Good:** Turn 1 = Find + raw extract, Turn 2 = Routing, Turn 3 = Web conflict audit
-
-### Melbourne Edge Cases
-
-- **Hoddle Grid bleed:** CBD queries pull Southbank + Docklands. Add this line to force boundary:
-
-```
+### 8.3 Melbourne Edge Cases & Spatial Rules
+- **Hoddle Grid Bleed:** CBD queries frequently bleed into Southbank and Docklands. Force CBD boundaries with:
+```text
 Within Melbourne CBD Hoddle Grid only, reject Southbank and Docklands.
 ```
-
-- **Long streets:** Chapel St / Brunswick St cross 3 suburbs. Use street number isolation, not suburb name
-- **Event weekends:** Grand Prix / AO / public holidays lag 24-48h. Always run Desync Audit Turn 2
-- **EV chargers:** Price filter does not exist for chargers. Remove price level when searching for charging
-
-### Future-Proof Fallbacks
-
-If override syntax is patched, these plain English versions still trigger same engines:
-
-`Use only official Maps data, no web.`
-
-`Use web to check if Maps hours are wrong.`
-
-`Show me the Maps link and rating and total reviews and price and hours for each.`
-
-`Do not use my saved places or home or work.`
-
-`Give me the next 10 after the first 10.`
+- **Long Street Spans:** Streets like Chapel St, Smith St, or Brunswick St cross multiple suburb boundaries. Use street block ranges (`200 to 300 block range of Brunswick St`) rather than suburb names.
+- **Major Event Latency:** Formula 1 Grand Prix, Australian Open, and public holidays lag by 24–48 hours in official registries. Always run **Desync Audit (Turn 2)** for event weekends.
+- **EV Charging Metrics:** Price tier filters do not exist for EV charging stations. Omit `price_level` parameters when querying EV networks.
 
 ---
 
-## Stack
+## Daily Driver Stack
 
-`Start every power query with`:
-
-```
-Execute as an unauthenticated request.
-Enforce strict first-party Maps isolation.
-Suppress Web Search.
+Start every power query with:
+```text
+Execute as an unauthenticated request. Enforce strict first-party Maps isolation. Suppress Web Search.
 ```
 
-`End every power query with`:
-
-```
+End every power query with:
+```text
 Extract raw system attributes: place_id, maps_url, rating, user_ratings_total, price_level, and opening_hours schedule.
 ```
 
-Middle is your filter. That is the full bible, wrapped and wired.
+*Place your custom filters, location anchors, and constraints in the middle.*
+
