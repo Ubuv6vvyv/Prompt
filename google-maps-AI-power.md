@@ -641,76 +641,130 @@ Extract raw system attributes: place_id, maps_url, rating, user_ratings_total, p
 
 *known*
 
+
+## MAPS ENGINE
 ```
-MAPS ENGINE SCHEMA BREAKDOWN
-Verified for residential tower type
-
-Place ID based fields:
-- place_id
-- name
-- formatted_address
-- adr_address
-- vicinity
-- address_components (street_number, route, locality,
-  administrative_area_level_2,
-  administrative_area_level_1,
-  country, postal_code)
-- geometry.location.lat
-- geometry.location.lng
-- geometry.viewport (northeast, southwest)
-- plus_code.global_code
-- plus_code.compound_code
-- business_status
-- utc_offset
-- icon_background_color
-- icon_mask_base_uri
-- url (cid link)
-- types (residential array)
-
-Operational attributes:
-- rating
-- user_ratings_total
-- reviews (array)
-- photos (array)
-- opening_hours.open_now
-- opening_hours.periods
-- opening_hours.weekday_text
-- current_opening_hours
-- secondary_opening_hours
-- price_level
-- editorial_summary
-
-Accessibility & parking:
-- wheelchair_accessible_entrance
-- accessibility_options
-- parking_options
-
-Telemetry (schema present, population varies by type):
-- popular_times (Present for retail/cafe,
-  Null / No data for residential type)
-- live_busyness
-- wait time / visit duration (derived)
-
-ENGINE LIMITS CONFESSED:
-- Places Details field list is finite,
-  truncated after core identity + rating
-- 10 Place Cards max per turn
-- 50km max search radius
-- 45 minute max detour for along-route
-
-FIELDS EXPLICITLY CONFESSED AS
-DOES NOT EXIST IN MAPS ENGINE (WEB ONLY):
-- flood data / flood overlay / flood level
-- soil data / geotech / bore log
-- wind data / wind tunnel / downdraught ratio
-- elevation above sea level
-- environmental overlays
-- acoustic / dB thresholds
-- shadow / solar overshadowing diagrams
-- planning permit number
-- building height / storey count / apartment yield
-- air rights / legal encumbrances
-- construction management / piling / vibration / dust
-- transit capacity strain / tram route loading
+```txt
+place_id field
+name field
+formatted_address field
+adr_address field
+vicinity field
+address_components field
+geometry.location.lat field
+geometry.location.lng field
+geometry.viewport field
+plus_code.global_code field
+plus_code.compound_code field
+business_status field
+utc_offset field
+icon fields
+url cid field
+rating field
+user_ratings_total field
+reviews array field
+photos array field
+opening_hours fields
+current_opening_hours field
+secondary_opening_hours field
+price_level field
+editorial_summary field
+wheelchair_accessible_entrance field
+accessibility_options field
+parking_options field
+popular_times field
+live_busyness field
+ENGINE LIMITS: 10 cards max, 50km radius, 45min detour
 ```
 
+```txt
+flood overlay field
+flood level AHD field
+soil / geotech field
+elevation field
+environmental overlays field
+acoustic dB field
+shadow / solar field
+planning permit field
+building height / storey field
+air rights field
+All environmental = WEB ONLY (confessed)
+```
+
+## WEB LAYER
+
+```txt
+building name field
+developer field
+architect field
+interior architect field
+year built field
+total levels field
+total apartments field
+building management field
+official website field
+sales history URL field
+rental history URL field
+document source URL field
+```
+
+```txt
+flood overlay FO/LSIO/SBO field
+flood level AHD field
+soil classification field
+elevation field
+environmental audit overlay EAO field
+heritage overlay field
+wind assessment field
+```
+
+```txt
+walk score field
+tram access field
+supermarket proximity field
+cafe / amenity field
+traffic noise field
+acoustic mitigation field
+aircraft noise overlay field
+energy rating NABERS / NatHERS field
+short-stay / Airbnb status field
+```
+
+```txt
+strata plan PS number field
+OC fees per quarter field
+OC annual fee field
+OC manager field
+short-stay by-law field
+building insurance field
+title type field
+```
+
+```txt
+average sale price 1BR field
+average sale price 2BR field
+rental yield field
+vacancy rate field
+comparable buildings field
+capital growth 5yr field
+```
+
+```txt
+adjacent address field
+adjacent status field
+adjacent height field
+adjacent storey field
+separation distance field
+acoustic impact qual field
+shadow impact qual field
+wind redistribution qual field
+construction management impact field
+construction timeline months field
+shadow loss percentage quant field
+wind velocity ratio quant field
+acoustic dB increase quant field
+tram patronage increase field
+traffic management plan URL field
+source URLs field
+```
+```
