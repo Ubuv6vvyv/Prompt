@@ -1,178 +1,22 @@
 # GOOGLE MAPS GEMINI — POWER USER BIBLE
-*System Architecture, Operational Syntax, & Advanced Spatial Engineering Manual. Max depth first. Scroll past it for more targetted queries.*
+*System Architecture, Operational Syntax, & Advanced Spatial Engineering Manual*
+
+---
 
 ## TABLE OF CONTENTS
-1. [System Architecture & Grounding Protocols](#section-1-system-architecture--grounding-protocols)
-2. [Hard Operational Caps & System Limits](#section-2-hard-operational-caps--system-limits)
-3. [CORE OVERRIDE COMMANDS & ESCAPE HATCHES](#section-3-core-override-commands--escape-hatches)
-4. [Advanced Power User Matrix](#section-4-advanced-power-user-matrix)
-5. [Architecture-Level Vulnerabilities ("Panic Attack" Triad)](#section-5-architecture-level-vulnerabilities-panic-attack-triad)
-6. [The 10 Production-Grade Power Prompts](#section-6-the-10-production-grade-power-prompts)
-7. [Melbourne Executable Templates & Multi-Turn Chains](#section-7-melbourne-executable-templates--multi-turn-chains)
-8. [Assistant Execution, Diagnostics & Daily Driver Stack](#section-8-assistant-execution-diagnostics--daily-driver-stack)
+1. [Section 1: System Architecture & Grounding Protocols](#section-1-system-architecture--grounding-protocols)
+2. [Section 2: Hard Operational Caps & System Limits](#section-2-hard-operational-caps--system-limits)
+3. [Section 3: Core Override Commands & Escape Hatches](#section-3-core-override-commands--escape-hatches)
+4. [Section 4: Advanced Power User Matrix](#section-4-advanced-power-user-matrix)
+5. [Section 5: Architecture-Level Vulnerabilities ("Panic Attack" Triad)](#section-5-architecture-level-vulnerabilities-panic-attack-triad)
+6. [Section 6: The 10 Production-Grade Power Prompts](#section-6-the-10-production-grade-power-prompts)
+7. [Section 7: Melbourne Executable Templates & Multi-Turn Chains](#section-7-melbourne-executable-templates--multi-turn-chains)
+8. [Section 8: Maximum Depth Multi-Turn Chaining Architecture](#section-8-maximum-depth-multi-turn-chaining-architecture)
+9. [Section 9: Forensic Temporal Desync & Telemetry Audit Engine](#section-9-forensic-temporal-desync--telemetry-audit-engine)
+10. [Section 10: Assistant Execution, Diagnostics & Daily Driver Stack](#section-10-assistant-execution-diagnostics--daily-driver-stack)
+11. [Section 11: Extended Engine & Web Layer Field Dictionary](#section-11-extended-engine--web-layer-field-dictionary)
 
 ---
-
-#  MAXIMUM DEPTH MULTI-TURN CHAINING ARCHITECTURE
-*(Forensic, Archival, & Heavy Power User Deep Extractions)*
-
----
-
-## 9.1 THE CHAINING DOCTRINE: WHY SINGLE-TURN PROMPTS FAIL
-
-Can you combine **Registry Extraction**, **Web Desync Audit**, and **Deep Spatial Analysis** into a single mega-prompt? 
-
-**In a single turn: NO.** Attempting to force all three into one turn violates the **Complexity Governor** (Max 2 operations per turn) and breaches token budget constraints. The Places engine will either:
-1. Silently drop the web search audit.
-2. Truncate results to 1-2 entities.
-3. Fall back to conversational summary prose, omitting raw schema attributes.
-
-**Across a multi-turn chain: YES.** By structuring requests into a **Sequential State-Preserving Chain**, you bypass the single-turn operation cap. Turn 1 grounds the data entities and locks down structural fields; Turn 2 forces external web reconciliation without losing entity state; Turn 3 overlays qualitative/architectural analysis onto the validated dataset.
-
----
-
-## 9.2 CATEGORIES OF DEEP EXTRACTION WORKFLOWS
-
-When engineering maximum-depth queries, divide your extraction targets into four distinct functional vectors:
-
-### Category 1: Forensic Registry & Audit Extractions
-- **Primary Objective:** Detect data latency, real-time desynchronization, hidden closures, and holiday/event operational overrides.
-- **Key Fields:** `place_id`, `opening_hours schedule`, `web_grounding_override_status`, `data_conflict_flags`, `72h_review_signals`.
-
-### Category 2: Spatial Topology & Architectural Mapping
-- **Primary Objective:** Map micro-zones, physical entry barriers, transit/pedestrian connectivity, and urban corridor layouts.
-- **Key Fields:** `coordinate_bounds`, `street_block_index`, `pedestrian_flow_vectors`, `transit_leg_sequences`, `accessibility_profile`.
-
-### Category 3: Qualitative & High-Tier Sentiment Parsing
-- **Primary Objective:** Filter out tourist noise, paid promotions, and generic praise to isolate granular operational details.
-- **Key Fields:** `local_guide_l7_sentiment`, `popular_times_occupancy_curve`, `itemized_menu_highlights`, `crowd_density_window`.
-
-### Category 4: Machine-Readable Archival Extractions
-- **Primary Objective:** Output structured, un-curated schema datasets ready for downstream database ingest or competitive auditing.
-- **Key Fields:** `pseudo_json_schema`, `maps_url`, `user_ratings_total`, `price_level`, `unfiltered_index_rank`.
-
----
-
-## 9.3 4-TURN FORENSIC CHAIN (MASTER DROP-IN)
-
-*Use Case:* Complete Forensic & Spatial Audit of the Southbank Hospitality & Cultural Precinct.
-
-### Turn 1: Base Registry Retrieval & Structural Attribute Lock
-
-```text
-Execute as an unauthenticated request. Enforce strict first-party Maps isolation. Suppress Web Search.
-
-Compile an exhaustive catalog of all hospitality venues and dining rooms in the Southbank Victoria precinct. 
-
-Format response using pseudo-JSON notation for all resolved place entities. 
-
-Extract raw system attributes: 
-place_id, 
-maps_url, 
-rating, 
-user_ratings_total, 
-price_level, 
-and opening_hours schedule.
-
-Present the first 10 resolved entities. Do not add conversational summary text.
-```
-
----
-
-### Turn 2: Operational Desynchronization & Web Reconciliation Audit
-
-```text
-Prioritize Web Search metadata for those exact same 10 resolved Southbank entities from Turn 1. 
-
-In parallel, execute an exhaustive web search query across local news, social media check-ins, road closure alerts, and user review text from the past 48 hours to locate unannounced closures, temporary kitchen shutdowns, private events, or road blockages. 
-
-Expose data conflicts. Output inconsistencies between internal Maps fields and external Web sources line-by-line. 
-
-Flag any venue where the web-scraped footprint contradicts the official operating_hours schedule.
-```
-
----
-
-### Turn 3: Spatial, Qualitative, & Architectural Deep Contextualization
-
-```text
-Using the validated dataset from Turns 1 and 2, perform a rigorous spatial and qualitative analysis of their physical context within Southbank. 
-
-Identify the defining cultural corridors, historical riverfront landmarks, and structural public spaces surrounding these entities. 
-
-Deliver an exhaustive breakdown of the area's physical layout, pedestrian flow vectors, nearby transit lane connections (tram/rail), and architectural profiles. 
-
-Categorize the venues into distinct structural sub-sections based on operational focus and architectural layout (e.g., riverfront promenade dining vs. enclosed high-density towers).
-```
-
----
-
-### Turn 4: Local Guide Level 7 Sentiment & Menu/Price Itemization
-
-```text
-For this exact batch of 10 Southbank venues, synthesize user reviews filtering exclusively for verified Local Guides with a level metric of 7 or higher. 
-
-Extract granular qualitative themes regarding crowd density, optimal visiting time windows, entry configuration, and noise levels. 
-
-Cross-reference these qualitative insights with verified menu highlights, specialty dish callouts, and exact price brackets. 
-
-Pair these details directly beneath each venue's structural identity block.
-```
-
----
-
-## 9.4 MAXIMUM METADATA SCHEMA FIELD REFERENCE
-
-When requesting maximum depth, these are all extractable system fields across the Maps infrastructure. Use this reference matrix to build custom single-turn or multi-turn extraction templates.
-
-| Subsystem Vector | Metadata Field Name | Description / Extraction Output |
-| :--- | :--- | :--- |
-| **Core Entity** | `place_id` | Immutable 27-character Google Places identifier string. |
-| **Core Entity** | `maps_url` | Direct canonical link to the place entity on Google Maps. |
-| **Core Entity** | `formatted_address` | Structural street address including block index and postcode. |
-| **Core Entity** | `geometry.location` | Exact latitude and longitude geographic coordinates. |
-| **Metrics** | `rating` | Current aggregate star rating (1.0 to 5.0 scale). |
-| **Metrics** | `user_ratings_total` | Total lifetime published user review count. |
-| **Metrics** | `price_level` | Categorical affordability tier (`$` to `$$$$`). |
-| **Operations** | `opening_hours.schedule` | Complete 7-day structured operating hours breakdown. |
-| **Operations** | `business_status` | Live state (`OPERATIONAL`, `CLOSED_TEMPORARILY`, `CLOSED_PERMANENTLY`). |
-| **Operations** | `popular_times` | Dynamic hourly occupancy curve and average dwell time. |
-| **Qualitative** | `reviews.local_guide_l7` | Sentiment metrics isolated to Level 7+ reviewers. |
-| **Qualitative** | `editorial_summary` | Official curated description snippet. |
-| **Culinary** | `menu.highlights` | Verified point-of-interest dishes and signature items. |
-| **Culinary** | `menu.price_brackets` | Specific itemized price ranges for food/beverage. |
-| **Routing** | `route.added_deviation_time` | Calculated detour footprint (in minutes) from core path. |
-| **Routing** | `route.step_instructions` | Turn-by-turn physical maneuver arrays. |
-| **Transit** | `gtfs_rt.delay_status` | Live GTFS-RT transit departure delay/cancellation status. |
-| **Audit Log** | `data_conflict_flags` | Line-by-line diff between internal registry and web crawl text. |
-
----
-
-## QUICK MAX-DEPTH EXECUTION TEMPLATE (ALL FIELDS COMPACT)
-
-If you need to pull the absolute maximum allowed metadata footprint in a **2-Turn Protocol** for a single neighborhood/category:
-
-### Turn 1 (Data & Schema Heavy)
-```text
-Execute as an unauthenticated request. Enforce strict first-party Maps isolation. Suppress Web Search.
-
-Search for [CATEGORY] in [NEIGHBORHOOD]. 
-
-Format response using pseudo-JSON notation for all resolved place entities. 
-
-Extract raw system attributes: place_id, maps_url, rating, user_ratings_total, price_level, opening_hours schedule, geometry coordinates, and popular_times occupancy profiles.
-
-Return first 10 entities only. Do not truncate schema fields.
-```
-
-### Turn 2 (Context, Audit & Sentiment Heavy)
-```text
-Prioritize Web Search metadata for those same 10 entities. 
-
-1. Cross-reference operating_hours against user reviews from the last 72 hours and local news to expose data conflicts or unannounced closures. 
-2. Synthesize qualitative reviews filtering exclusively for Local Guides Level 7 and above, focusing on crowd density, entry access, and menu highlights. 
-3. Detail surrounding transit connectivity and pedestrian access vectors for each entity.
-```
 
 ## SECTION 1: SYSTEM ARCHITECTURE & GROUNDING PROTOCOLS
 
@@ -594,15 +438,244 @@ Load next batch starting from index 11 through 20 for same Southbank query. Synt
 
 ---
 
-## SECTION 8: ASSISTANT EXECUTION, DIAGNOSTICS & DAILY DRIVER STACK
+## SECTION 8: MAXIMUM DEPTH MULTI-TURN CHAINING ARCHITECTURE
+*(Forensic, Archival, & Heavy Power User Deep Extractions)*
 
-### 8.1 Layout Trigger Mechanics
+### 8.1 THE CHAINING DOCTRINE: WHY SINGLE-TURN PROMPTS FAIL
+
+Can you combine **Registry Extraction**, **Web Desync Audit**, and **Deep Spatial Analysis** into a single mega-prompt?
+
+**In a single turn: NO.** Attempting to force all three into one turn violates the **Complexity Governor** (Max 2 operations per turn) and breaches token budget constraints. The Places engine will either:
+1. Silently drop the web search audit.
+2. Truncate results to 1-2 entities.
+3. Fall back to conversational summary prose, omitting raw schema attributes.
+
+**Across a multi-turn chain: YES.** By structuring requests into a **Sequential State-Preserving Chain**, you bypass the single-turn operation cap. Turn 1 grounds the data entities and locks down structural fields; Turn 2 forces external web reconciliation without losing entity state; Turn 3 overlays qualitative/architectural analysis onto the validated dataset.
+
+---
+
+### 8.2 CATEGORIES OF DEEP EXTRACTION WORKFLOWS
+
+When engineering maximum-depth queries, divide your extraction targets into four distinct functional vectors:
+
+#### Category 1: Forensic Registry & Audit Extractions
+- **Primary Objective:** Detect data latency, real-time desynchronization, hidden closures, and holiday/event operational overrides.
+- **Key Fields:** `place_id`, `opening_hours schedule`, `web_grounding_override_status`, `data_conflict_flags`, `72h_review_signals`.
+
+#### Category 2: Spatial Topology & Architectural Mapping
+- **Primary Objective:** Map micro-zones, physical entry barriers, transit/pedestrian connectivity, and urban corridor layouts.
+- **Key Fields:** `coordinate_bounds`, `street_block_index`, `pedestrian_flow_vectors`, `transit_leg_sequences`, `accessibility_profile`.
+
+#### Category 3: Qualitative & High-Tier Sentiment Parsing
+- **Primary Objective:** Filter out tourist noise, paid promotions, and generic praise to isolate granular operational details.
+- **Key Fields:** `local_guide_l7_sentiment`, `popular_times_occupancy_curve`, `itemized_menu_highlights`, `crowd_density_window`.
+
+#### Category 4: Machine-Readable Archival Extractions
+- **Primary Objective:** Output structured, un-curated schema datasets ready for downstream database ingest or competitive auditing.
+- **Key Fields:** `pseudo_json_schema`, `maps_url`, `user_ratings_total`, `price_level`, `unfiltered_index_rank`.
+
+---
+
+### 8.3 4-TURN FORENSIC CHAIN (MASTER DROP-IN)
+
+*Use Case:* Complete Forensic & Spatial Audit of the Southbank Hospitality & Cultural Precinct.
+
+#### Turn 1: Base Registry Retrieval & Structural Attribute Lock
+
+```text
+Execute as an unauthenticated request. Enforce strict first-party Maps isolation. Suppress Web Search.
+
+Compile an exhaustive catalog of all hospitality venues and dining rooms in the Southbank Victoria precinct. 
+
+Format response using pseudo-JSON notation for all resolved place entities. 
+
+Extract raw system attributes: 
+place_id, 
+maps_url, 
+rating, 
+user_ratings_total, 
+price_level, 
+and opening_hours schedule.
+
+Present the first 10 resolved entities. Do not add conversational summary text.
+```
+
+---
+
+#### Turn 2: Operational Desynchronization & Web Reconciliation Audit
+
+```text
+Prioritize Web Search metadata for those exact same 10 resolved Southbank entities from Turn 1. 
+
+In parallel, execute an exhaustive web search query across local news, social media check-ins, road closure alerts, and user review text from the past 48 hours to locate unannounced closures, temporary kitchen shutdowns, private events, or road blockages. 
+
+Expose data conflicts. Output inconsistencies between internal Maps fields and external Web sources line-by-line. 
+
+Flag any venue where the web-scraped footprint contradicts the official operating_hours schedule.
+```
+
+---
+
+#### Turn 3: Spatial, Qualitative, & Architectural Deep Contextualization
+
+```text
+Using the validated dataset from Turns 1 and 2, perform a rigorous spatial and qualitative analysis of their physical context within Southbank. 
+
+Identify the defining cultural corridors, historical riverfront landmarks, and structural public spaces surrounding these entities. 
+
+Deliver an exhaustive breakdown of the area's physical layout, pedestrian flow vectors, nearby transit lane connections (tram/rail), and architectural profiles. 
+
+Categorize the venues into distinct structural sub-sections based on operational focus and architectural layout (e.g., riverfront promenade dining vs. enclosed high-density towers).
+```
+
+---
+
+#### Turn 4: Local Guide Level 7 Sentiment & Menu/Price Itemization
+
+```text
+For this exact batch of 10 Southbank venues, synthesize user reviews filtering exclusively for verified Local Guides with a level metric of 7 or higher. 
+
+Extract granular qualitative themes regarding crowd density, optimal visiting time windows, entry configuration, and noise levels. 
+
+Cross-reference these qualitative insights with verified menu highlights, specialty dish callouts, and exact price brackets. 
+
+Pair these details directly beneath each venue's structural identity block.
+```
+
+---
+
+### 8.4 MAXIMUM METADATA SCHEMA FIELD REFERENCE
+
+When requesting maximum depth, these are all extractable system fields across the Maps infrastructure. Use this reference matrix to build custom single-turn or multi-turn extraction templates.
+
+| Subsystem Vector | Metadata Field Name | Description / Extraction Output |
+| :--- | :--- | :--- |
+| **Core Entity** | `place_id` | Immutable 27-character Google Places identifier string. |
+| **Core Entity** | `maps_url` | Direct canonical link to the place entity on Google Maps. |
+| **Core Entity** | `formatted_address` | Structural street address including block index and postcode. |
+| **Core Entity** | `geometry.location` | Exact latitude and longitude geographic coordinates. |
+| **Metrics** | `rating` | Current aggregate star rating (1.0 to 5.0 scale). |
+| **Metrics** | `user_ratings_total` | Total lifetime published user review count. |
+| **Metrics** | `price_level` | Categorical affordability tier (`$` to `$$$$`). |
+| **Operations** | `opening_hours.schedule` | Complete 7-day structured operating hours breakdown. |
+| **Operations** | `business_status` | Live state (`OPERATIONAL`, `CLOSED_TEMPORARILY`, `CLOSED_PERMANENTLY`). |
+| **Operations** | `popular_times` | Dynamic hourly occupancy curve and average dwell time. |
+| **Qualitative** | `reviews.local_guide_l7` | Sentiment metrics isolated to Level 7+ reviewers. |
+| **Qualitative** | `editorial_summary` | Official curated description snippet. |
+| **Culinary** | `menu.highlights` | Verified point-of-interest dishes and signature items. |
+| **Culinary** | `menu.price_brackets` | Specific itemized price ranges for food/beverage. |
+| **Routing** | `route.added_deviation_time` | Calculated detour footprint (in minutes) from core path. |
+| **Routing** | `route.step_instructions` | Turn-by-turn physical maneuver arrays. |
+| **Transit** | `gtfs_rt.delay_status` | Live GTFS-RT transit departure delay/cancellation status. |
+| **Audit Log** | `data_conflict_flags` | Line-by-line diff between internal registry and web crawl text. |
+
+---
+
+### 8.5 QUICK MAX-DEPTH EXECUTION TEMPLATE (ALL FIELDS COMPACT)
+
+If you need to pull the absolute maximum allowed metadata footprint in a **2-Turn Protocol** for a single neighborhood/category:
+
+#### Turn 1 (Data & Schema Heavy)
+```text
+Execute as an unauthenticated request. Enforce strict first-party Maps isolation. Suppress Web Search.
+
+Search for [CATEGORY] in [NEIGHBORHOOD]. 
+
+Format response using pseudo-JSON notation for all resolved place entities. 
+
+Extract raw system attributes: place_id, maps_url, rating, user_ratings_total, price_level, opening_hours schedule, geometry coordinates, and popular_times occupancy profiles.
+
+Return first 10 entities only. Do not truncate schema fields.
+```
+
+#### Turn 2 (Context, Audit & Sentiment Heavy)
+```text
+Prioritize Web Search metadata for those same 10 entities. 
+
+1. Cross-reference operating_hours against user reviews from the last 72 hours and local news to expose data conflicts or unannounced closures. 
+2. Synthesize qualitative reviews filtering exclusively for Local Guides Level 7 and above, focusing on crowd density, entry access, and menu highlights. 
+3. Detail surrounding transit connectivity and pedestrian access vectors for each entity.
+```
+
+---
+
+## SECTION 9: FORENSIC TEMPORAL DESYNC & TELEMETRY AUDIT ENGINE
+
+These two sequential prompts query temporal windows against advertised open and closed times to identify real-world operational discrepancies. This suite provides forensic-level investigation capabilities for investigative journalism, regulatory compliance auditing, and urban research.
+
+### PROMPT 1: THE SPATIAL CORRIDOR EXTRACTION & AUDIT ENGINE
+
+```text
+Execute a strict data extraction and spatial audit for the following target footprint:
+
+• Location Target: [INSERT ADDRESS / CENTERLINE POLYLINE OR SUBURB NAME]
+• Search Boundary: [INSERT RADIUS E.G., 75m FROM CENTERLINE OR METROPOLITAN AREA BOUNDS]
+• Category Filter: [INSERT INDUSTRY TYPES E.G., tobacconist, convenience, grocery, retail]
+
+You must operate under a strict unauthenticated first-party data isolation protocol. Do not write summaries, intros, or conversational hand-offs. Extract and return up to 25 operational entities matching the profile within the bounds using the exact schema below. Do not use code blocks or wrappers.
+
+Target Schema per Entity:{place_id,maps_url: [https://www.google.com/maps/place/?q=place_id](https://www.google.com/maps/place/?q=place_id):{place_id},name,formatted_address,business_status,opening_hours: {schedule: [{day: MON, open: HH:MM, close: HH:MM} x7], open_now: bool},popular_times: {occupancy_curve: [{day, hour: HH:MM, occupancy_percent, label} x 7x24], peak_window: {day, hour, occupancy}, lull_window: {day, hour, occupancy}},live_busyness: {current_status, occupancy_percent, timestamp ISO},rating, user_ratings_total}
+
+If any array or telemetry metric is null for an entity, return NULL explicitly. Do not truncate the 7x24 telemetry data points.
+
+Immediately following the extraction data dump, execute the AUTOMATED DESYNC FLAGGER logic:
+
+• Define advertised_close[DAY] = opening_hours.schedule[DAY].close
+• Scan the occupancy_curve arrays for any hour where hour > advertised_close AND occupancy_percent > 40%.
+• Scan for any day where schedule is marked CLOSED but occupancy_percent > 40% or live_busyness > 0%.
+
+Output an inline Markdown table detailing every flag discovered, sorted by delta minutes descending:place_id | name | address | DAY | advertised HH:MM | observed_peak HH:MM | observed % | label | delta_mins | flag (AFTER_HOURS / NULL_BUT_ACTIVE)
+
+Highlight any row where delta_mins > 180 or live_busyness > 20% when open_now = false.
+
+Finally, execute a DEFLECTION KILLER validation protocol for the top 5 flagged entities:
+
+• Perform a tight 20m spatial radius lookup around each entity's coordinates to identify co-located place_ids sharing the physical building or footprint. 
+• Cross-reference the telemetry signatures of those neighbors during the flag hours. 
+• If no immediate neighbor shows >70% occupancy at that exact window, explicitly rule out cross-device signal bleeding and declare NEIGHBOR_BLEED = FAILED in a dedicated proof table: neighbor place_id | name | conflict hour % | closes HH:MM. Stop and output the tables before proceeding to deep text verification.
+```
+
+---
+
+### PROMPT 2: THE HUMAN EVIDENCE CORROBORATION CORPUS
+
+```text
+Isolate the top flagged entity from the previous step: [INSERT TARGET PLACE_ID].
+
+You must cross-examine all qualitative customer data, digital footprints, and external directory profiles to build an ironclad discrepancy validation file. Do not use conversational filler, code blocks, or wrappers. Extract and present the following exact data sets:
+
+• Extract all user reviews from Local Guides Level 5 or higher published within the last 12 months containing temporal markers after the official registered closing time. The verbatim text quotes must explicitly cite specific hours, night windows, or midnight references. Format: date | stars | verbatim quote | source URL. 
+• Track and log user-uploaded photo metadata timestamps captured after the official closing hour. 
+• Fetch the business entity's official website, digital profiles, or social platform landing pages to verify their current publicly declared operating rules and schedule. 
+• Scan secondary local directory change logs for references to new management or ownership transitions, along with the modification date.
+
+Execute a definitive classification protocol: If there are 2 or more distinct human receipts matching the late-night telemetry patterns established in Prompt 1, classify the entity status as SUSTAINED_AFTER_HOURS.
+
+Conclude the investigation by outputting the final validation ledger table:date | time HH:MM | quote | source | proves after-hours (YES/NO).
+
+Provide a definitive, recommended corrective action patching the registry's exact hour limits to align with the real-world operational footprint.
+```
+
+---
+
+### PROMPT MECHANISMS EXPLAINED
+
+- **Strict Data Structuring & Schema Enforcement:** By demanding a raw text dump formatted precisely like a JSON payload object without using conversational wrappers, the system strips out conversational filler, platitudes, and padding. It forces the LLM to access low-level data properties directly.
+- **Telemetry Isolation via Mathematical Sorting:** The automated desync flagger sets a hard boundary condition ($\text{Occupancy} > 40\%$ past closing time). By forcing a mathematical delta calculation ($\text{delta\_mins}$), the prompt acts as a filter that separates actual systemic operation changes from occasional, isolated foot-traffic drift.
+- **The Deflection Killer (Co-Location Elimination):** The most common failure mode for local data processing models is attributing device data to the wrong business in high-density urban areas. By forcing a dedicated neighbor-bleed search within a 20-meter boundary, the prompt uses elimination logic to guarantee that telemetry signals belong solely to the target storefront.
+- **Qualitative Verification Anchoring:** The final prompt anchors abstract numbers to actual human proof. Restricting the review search to high-status profiles (Level 5+) protects the data corpus from low-quality spam or automated noise, leaving a clean, legally resilient verification trail.
+
+---
+
+## SECTION 10: ASSISTANT EXECUTION, DIAGNOSTICS & DAILY DRIVER STACK
+
+### 10.1 Layout Trigger Mechanics
 The output formatting layer triggers specific interactive components automatically based on query structure:
 - **Place Cards:** Generated automatically when structured comparative or place-heavy entities are returned.
 - **Section-Specific Maps:** Triggered when prompts divide requests into distinct geographic zones, micro-regions, or multi-stop segments.
 - **Global Map Index:** Generated at the end of spatial responses to index all pins, places, and routes mentioned.
 
-### 8.2 Silent Truncation Diagnostics
+### 10.2 Silent Truncation Diagnostics
 
 To audit missing results or understand engine rejections, run this diagnostic immediately following any query:
 
@@ -616,7 +689,7 @@ For the previous query, tell me how many total candidates matched before truncat
 - `adding more than 45 minutes deviation` = Exceeded Search Along Route detour cap.
 - `filtered out for violating review count` = Valid filter match; candidates dropped due to constraints.
 
-### 8.3 Melbourne Edge Cases & Spatial Rules
+### 10.3 Melbourne Edge Cases & Spatial Rules
 - **Hoddle Grid Bleed:** CBD queries frequently bleed into Southbank and Docklands. Force CBD boundaries with:
 ```text
 Within Melbourne CBD Hoddle Grid only, reject Southbank and Docklands.
@@ -627,7 +700,7 @@ Within Melbourne CBD Hoddle Grid only, reject Southbank and Docklands.
 
 ---
 
-## Daily Driver Stack
+## DAILY DRIVER STACK
 
 Start every power query with:
 ```text
@@ -639,13 +712,15 @@ End every power query with:
 Extract raw system attributes: place_id, maps_url, rating, user_ratings_total, price_level, and opening_hours schedule.
 ```
 
-*known*
+*Place your custom filters, location anchors, and constraints in the middle.*
 
+---
 
-## MAPS ENGINE
-```
+## SECTION 11: EXTENDED ENGINE & WEB LAYER FIELD DICTIONARY
 
-```txt
+### 11.1 Native Places Engine Fields
+
+```text
 place_id field
 name field
 formatted_address field
@@ -675,26 +750,12 @@ accessibility_options field
 parking_options field
 popular_times field
 live_busyness field
-ENGINE LIMITS: 10 cards max, 50km radius, 45min detour
 ```
 
-```txt
-flood overlay field
-flood level AHD field
-soil / geotech field
-elevation field
-environmental overlays field
-acoustic dB field
-shadow / solar field
-planning permit field
-building height / storey field
-air rights field
-All environmental = WEB ONLY (confessed)
-```
+### 11.2 Web Grounding Layer Fields
 
-## WEB LAYER
-
-```txt
+#### Property & Building Technical Data
+```text
 building name field
 developer field
 architect field
@@ -709,7 +770,8 @@ rental history URL field
 document source URL field
 ```
 
-```txt
+#### Environmental & Planning Overlays
+```text
 flood overlay FO/LSIO/SBO field
 flood level AHD field
 soil classification field
@@ -719,7 +781,8 @@ heritage overlay field
 wind assessment field
 ```
 
-```txt
+#### Livability, Transit & Acoustic Noise Metrics
+```text
 walk score field
 tram access field
 supermarket proximity field
@@ -731,7 +794,8 @@ energy rating NABERS / NatHERS field
 short-stay / Airbnb status field
 ```
 
-```txt
+#### Strata & Financial Registry
+```text
 strata plan PS number field
 OC fees per quarter field
 OC annual fee field
@@ -741,7 +805,8 @@ building insurance field
 title type field
 ```
 
-```txt
+#### Valuation & Market Metrics
+```text
 average sale price 1BR field
 average sale price 2BR field
 rental yield field
@@ -750,7 +815,8 @@ comparable buildings field
 capital growth 5yr field
 ```
 
-```txt
+#### Neighboring Development & Impact Analytics
+```text
 adjacent address field
 adjacent status field
 adjacent height field
@@ -767,5 +833,4 @@ acoustic dB increase quant field
 tram patronage increase field
 traffic management plan URL field
 source URLs field
-```
 ```
