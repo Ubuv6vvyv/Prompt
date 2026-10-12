@@ -639,5 +639,78 @@ End every power query with:
 Extract raw system attributes: place_id, maps_url, rating, user_ratings_total, price_level, and opening_hours schedule.
 ```
 
-*Place your custom filters, location anchors, and constraints in the middle.*
+*known*
+
+```
+MAPS ENGINE SCHEMA BREAKDOWN
+Verified for residential tower type
+
+Place ID based fields:
+- place_id
+- name
+- formatted_address
+- adr_address
+- vicinity
+- address_components (street_number, route, locality,
+  administrative_area_level_2,
+  administrative_area_level_1,
+  country, postal_code)
+- geometry.location.lat
+- geometry.location.lng
+- geometry.viewport (northeast, southwest)
+- plus_code.global_code
+- plus_code.compound_code
+- business_status
+- utc_offset
+- icon_background_color
+- icon_mask_base_uri
+- url (cid link)
+- types (residential array)
+
+Operational attributes:
+- rating
+- user_ratings_total
+- reviews (array)
+- photos (array)
+- opening_hours.open_now
+- opening_hours.periods
+- opening_hours.weekday_text
+- current_opening_hours
+- secondary_opening_hours
+- price_level
+- editorial_summary
+
+Accessibility & parking:
+- wheelchair_accessible_entrance
+- accessibility_options
+- parking_options
+
+Telemetry (schema present, population varies by type):
+- popular_times (Present for retail/cafe,
+  Null / No data for residential type)
+- live_busyness
+- wait time / visit duration (derived)
+
+ENGINE LIMITS CONFESSED:
+- Places Details field list is finite,
+  truncated after core identity + rating
+- 10 Place Cards max per turn
+- 50km max search radius
+- 45 minute max detour for along-route
+
+FIELDS EXPLICITLY CONFESSED AS
+DOES NOT EXIST IN MAPS ENGINE (WEB ONLY):
+- flood data / flood overlay / flood level
+- soil data / geotech / bore log
+- wind data / wind tunnel / downdraught ratio
+- elevation above sea level
+- environmental overlays
+- acoustic / dB thresholds
+- shadow / solar overshadowing diagrams
+- planning permit number
+- building height / storey count / apartment yield
+- air rights / legal encumbrances
+- construction management / piling / vibration / dust
+- transit capacity strain / tram route loading
+```
 
