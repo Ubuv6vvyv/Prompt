@@ -1,3 +1,61 @@
+# bolt ons
+Framing mods
+
+## Cold Start
+```
+- [FRAMING: cold_start] What happens in the first 10 seconds when you try TOPIC cold, before oil pressure comes up. What good vs bad sounds like, smells like, feels like on first kick. Why choke matters and why most people flood it. One clean start check gets THE AMBIENT IGNITION, one gets THE ALIBI.
+```
+
+## Road Test
+```
+- [FRAMING: road_test] Take TOPIC out on the road at 30 mph. What rattles loose, what holds, what you only feel in your hands. How you know it is right by ride feel, not by reading. Run THE WINDOW SHOUT hard here at the cyclist and tie his slow way directly to the TOPIC mistake.
+```
+
+## Teardown
+```
+- [FRAMING: teardown] Full teardown on the bench. Pull TOPIC apart and lay every piece on a clean rag in order. What is worn, what is still good, what is cracked, what the last guy skipped. Name the real wear marks, the real failure points, the real fix. Each piece gets a look, a feel, and a hog beat as the bridge. At least one piece uses THE WITNESS, at least one uses THE NEW GUY holding it wrong. Maximum truth, no chrome.
+```
+
+## Parts List
+```
+- [FRAMING: parts_list] Dead simple shopping list for TOPIC. What you actually need vs what influencers tell you to buy. Real tools, real cost, real time. No chrome, no fluff. Every part gets a real number plus hog number with real minutes alongside. Use THE UNIT OF MEASURE and THE ROAST to call out the useless part everyone buys.
+```
+
+## Torque Spec
+```
+- [FRAMING: torque_spec] How tight is tight enough for TOPIC. When to stop, when it clicks, when you will strip it if you keep going. What over-torqued looks like vs under-torqued. The torque wrench is the truth. One spec check uses THE HAND-OFF, one uses THE CALM RECOMMEND. This is your discipline framing.
+```
+
+## Fuel
+```
+- [FRAMING: fuel] What TOPIC actually runs on, not what you think it runs on. What good fuel smells like vs bad fuel, what lean vs rich vs cyclist fuel does. Name the real fuel and the real contamination. One sniff test uses THE FALSE MEMORY that ends in a true lesson about fuel.
+```
+
+## Exhaust
+```
+- [FRAMING: exhaust] What TOPIC leaves behind. Smoke color, smell, mess, trail. What blue smoke vs black smoke vs clean means for TOPIC. What it costs when you ignore the exhaust. Perfect closer or lead-in to the_drop. The landlord smells it and loses.
+```
+
+## Leak Down
+```
+- [FRAMING: leak_down] Find where TOPIC is losing pressure. Spray soapy water, listen, check one valve at a time. Where is your time, money, or trust leaking that you keep ignoring. Each leak gets a look, a sound, and a fix. At least one leak uses THE SIDEWAYS DRIFT, one uses THE BOYS ON THE PHONE getting it wrong first.
+```
+
+## Chrome vs Iron
+```
+- [FRAMING: chrome_vs_iron] What looks good vs what works for TOPIC. Influencers sell chrome, mechanics sell iron that runs. Call out the shiny part that fails and the ugly part that lasts. Maximum rudeness here, maximum truth. Knuckles white on the grip, cranking the damn hog to keep from stalling while fakers polish chrome.
+```
+
+## Winter Storage
+```
+- [FRAMING: winter_storage] How to leave TOPIC for 6 months and have it start in spring. What to drain, what to charge to 13.2V float, what to cover, what to leave alone. How long it lasts if you do it right vs wrong. One storage step uses THE UNIT OF MEASURE with real months and hogs.
+```
+
+## The Other Bay
+```
+- [FRAMING: the_other_bay] Walk to the other bay where same TOPIC is being done wrong by another shop. Live roast of how they do it. The slow, dumb, wrong way is on full display. The other shop is the cyclist shop and they are pedaling. You point, you correct, you keep cranking the damn hog while they watch.
+```
+
 # Single turn
 Working 13 October 
 Bizzare locked register involves lead character crank, a biker with his leader The Hog. 
