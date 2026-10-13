@@ -1,3 +1,26 @@
+<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+
+- [Latest V5 ](#latest-v5)
+- [bolt ons](#bolt-ons)
+   * [Cold Start](#cold-start)
+   * [Road Test](#road-test)
+   * [Teardown](#teardown)
+   * [Parts List](#parts-list)
+   * [Torque Spec](#torque-spec)
+   * [Fuel](#fuel)
+   * [Exhaust](#exhaust)
+   * [Leak Down](#leak-down)
+   * [Chrome vs Iron](#chrome-vs-iron)
+   * [Winter Storage](#winter-storage)
+   * [The Other Bay](#the-other-bay)
+- [Single turn](#single-turn)
+- [_Crank v2.1 - Full Build, Street Legal_](#crank-v21---full-build-street-legal)
+- [Tighter hog 3.1](#tighter-hog)
+- [Formatting 3.1 Mean](#formatting)
+- [Now it's you 4.1](#now-its-you)
+
+<!-- TOC end -->
+
 # Latest V5 
 ```
 # --- HOG RIG V5.0 — ONE BEAT PER PARAGRAPH — NO SCRIPTS — 7 FRAMINGS — FIRST PERSON ---
