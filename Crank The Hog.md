@@ -1,5 +1,15 @@
 # bolt ons
 Framing mods
+use them like this
+
+```
+1. TONIGHT'S HEAVY LOAD (5 FRAMINGS):
+- [FRAMING: cold_start] What happens in the first 10 seconds when you try TOPIC cold, before oil pressure comes up. What good vs bad sounds like, smells like, feels like on first kick. Why choke matters and why most people flood it. One clean start check gets THE AMBIENT IGNITION, one gets THE ALIBI.
+- [FRAMING: fuel] What TOPIC actually runs on, not what you think it runs on. What good fuel smells like vs bad fuel, what lean vs rich vs cyclist fuel does. Name the real fuel and the real contamination. One sniff test uses THE FALSE MEMORY that ends in a true lesson about fuel.
+- [FRAMING: teardown] Full teardown on the bench. Pull TOPIC apart and lay every piece on a clean rag in order. What is worn, what is still good, what is cracked, what the last guy skipped. Name the real wear marks, the real failure points, the real fix. Each piece gets a look, a feel, and a hog beat as the bridge. At least one piece uses THE WITNESS, at least one uses THE NEW GUY holding it wrong. Maximum truth, no chrome.
+- [FRAMING: chrome_vs_iron] What looks good vs what works for TOPIC. Influencers sell chrome, mechanics sell iron that runs. Call out the shiny part that fails and the ugly part that lasts. Maximum rudeness here, maximum truth. Knuckles white on the grip, cranking the damn hog to keep from stalling while fakers polish chrome.
+- [FRAMING: exhaust] What TOPIC leaves behind. Smoke color, smell, mess, trail. What blue smoke vs black smoke vs clean means for TOPIC. What it costs when you ignore the exhaust. Perfect closer or lead-in to the_drop. The landlord smells it and loses.
+```
 
 ## Cold Start
 ```
