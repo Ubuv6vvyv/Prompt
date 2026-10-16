@@ -1,3 +1,137 @@
+```markdown
+# Agnostic 3-Prompt Loop — Topic Variable Auto Fan-Out — Rigor Preserved
+
+> 100% agnostic. Only edit `TOPIC`. No manual refactoring. Works for any topic: person, place, tech, product, news, concept.
+> Workflow: SEARCH -> PYTHON -> FAN-OUT -> PYTHON -> FINAL -> PYTHON -> TEXT TREE -> PLAIN
+
+---
+
+## How to use fresh
+
+1. Paste **PROMPT 1** with any `TOPIC` e.g. `"Taylor Swift Melbourne news"` or `"quantum computing error correction"` — model auto-fills Q1-Q6 by type.
+2. Paste **PROMPT 2** — builds grounded `final_report.md` + single `final_combined.png` W=1400 H=900 DPI200.
+3. Paste **PROMPT 3** with `INPUT = tree output from PROMPT 1-2` — gives flowing plain report with no codes, no L numbers, phone copyable with START/END markers.
+
+---
+
+### PROMPT 1 — AGNOSTIC FAN-OUT (Only edit TOPIC)
+
+```text
+TOPIC = "{{PUT ANY TOPIC HERE}}"
+
+# AUTO TYPE CLASSIFY FIRST — NO ASSUMED CONTEXT:
+# Type = LLM classify TOPIC into [person|place|tech|product|news|concept|other]
+# Q1 = TOPIC + official authoritative latest — if person = official bio news, if tech = arxiv docs, if place = official site, if product = changelog
+# Q2 = TOPIC + taxonomy structure attributes capabilities
+# Q3 = TOPIC + raw samples documents examples implementation
+# Q4 = TOPIC + latent technical analytical experimental research
+# Q5 = TOPIC + decision framework selection matrix flowchart
+# Q6 = TOPIC + risk mitigation critique benchmark safety
+
+# RULES PRESERVED:
+# RULE_01: Never 2 searches without python printing "Parsing search ID {actual_id}"
+# RULE_02: markdown table = title 60c + takeaway 100c + FULL URL + Lxx-Lyy + date or [DATE NOT IN SOURCE] + print to STDOUT + save.md
+# RULE_03: code fenced = FULL PROMPT copy-paste not 100c truncated
+# RULE_04: low-freq <50% -> APPENDIX [pattern, freq, kept_as_unused] not main
+# RULE_05: Risk Score = risk_level^2 1=1 Low, 2=4 Med, 3=9 Med-High, 4=16 High, 5=25 Critical
+# RULE_06: dpi FIXED: 400dpi = (400/72)^2 = 30.86, 350dpi = (350/72)^2 = 23.61, 200dpi = 7.71
+# RULE_07: browser.open top2 per search, extract real L numbers + snippet
+# RULE_08: Final synthesis = decision flowchart not mean only, plus counterfactuals + missing evidence
+
+ROUND1: SEARCH FAN-OUT 4x via subagents.spawn_agents — SEARCH_1=Q1 SEARCH_2=Q2 SEARCH_3=Q3 SEARCH_4=Q4 — 4 parallel browser.search
+
+ROUND2: PYTHON
+# Input: 4 actual IDs from ROUND1
+# For each: browser.open top2 extract L numbers date snippet
+# Print: "Parsing search ID {actual_id}" x4
+# Save /mnt/data/r1_table.md + /mnt/data/r1_pillow.png W=1200 H=800 DPI200
+# PRINT to stdout: [title 60c, takeaway 100c, FULL URL, Lxx-Lyy, date, P(true), risk^2, use_case]
+TRIGGER: python plot and return image
+
+ROUND3: SEARCH FAN-OUT 2x SEARCH_A=Q5 SEARCH_B=Q6
+
+ROUND4: PYTHON
+# Parse SEARCH_A + SEARCH_B actual IDs
+# Print: "Parsing search ID {actual_id}" x2
+# Save /mnt/data/r2_table.md + /mnt/data/r2_pillow.png
+TRIGGER: python plot and return image
+
+ROUND5: SEARCH FAN-OUT FINAL 2x SEARCH_C=Q1+" raw samples experimental github" SEARCH_D=Q2+" latest timeline"
+
+ROUND6: PYTHON
+# Print: "Parsing search ID {actual_id}" x2
+# Save /mnt/data/tree.md as Unix tree map + /mnt/data/final_combined.png W=1400 H=900 DPI200 3-panel
+TRIGGER: python plot and return image
+```
+
+### PROMPT 2 — GROUNDED MD + SINGLE IMAGE
+
+```text
+INPUT = 6 actual search IDs from PROMPT 1 + /mnt/data/r1_table.md + /mnt/data/r2_table.md + /mnt/data/tree.md
+TASK: Build grounded synthesis
+
+PYTHON FINAL:
+print("Parsing search ID {actual_id_C}")
+print("Parsing search ID {actual_id_D}")
+
+# Build /mnt/data/final_report.md with:
+# | title 60c | takeaway 100c | FULL URL | Lxx-Lyy | date or [DATE NOT IN SOURCE] | P(true) | risk^2 | use_case |
+# Risk = level^2 1=1 Low 2=4 Med 3=9 Med-High 4=16 High 5=25 Critical
+# Code fenced: 6 FULL samples copy-paste from sources — not truncated — actionable
+# Synthesis: mean risk = sum(r^2)/n, max risk = max(r^2), mean P(true), coverage % per technique
+# 2 counterfactuals that flip answer with L numbers
+# Missing evidence for P>0.9: list exact docs/papers/demos needed
+# SINGLE image final_combined.png W=1400 H=900 DPI200 3-panel [risk distribution, technique coverage, P hist]
+
+# Save /mnt/data/final_report.md + /mnt/data/final_combined.png + print full md to stdout
+
+TRIGGER: python plot and return image + markdown
+```
+
+### PROMPT 3 — PLAIN LANGUAGE CLOSER — DROP-IN REUSABLE
+
+```text
+TOPIC = "{{same TOPIC as PROMPT 1}}"
+INPUT = previous Unix tree output — full tree from 00_ROOT_META through last chapter — whatever Q1 to Q6 contain for this TOPIC
+
+[TASK: REUSABLE FLOWING PLAIN LANGUAGE REPORT — DROP-IN — NO GAMING]
+
+GOAL: Turn any tree into one conversational report across all chapters. No tables. No brackets. No Lxx-Lyy. No P0.xx. No risk^2. No stop-start density. Just explained nearly and fully in plain language that reads straight through.
+
+RULES:
+- Do not hardcode topic examples. Use only what is inside INPUT tree for this run.
+- Do not copy tree syntax into output. Translate to paragraphs.
+- No brackets, no codes, no L numbers, no P values, no risk formulas in final text — translate risk to words low medium medium-high high critical, translate probability to words high confidence low confidence
+- No dense lists like URL DATE L SNIPPET — flow as sentences
+
+STRUCTURE — AUTO DISCOVER CHAPTERS:
+1. Opening — one paragraph: what TOPIC is, what workflow was used search python fan-out final python text tree, why
+2. Chapter 00 ROOT META — if present in INPUT: explain rules found in INPUT in plain words — why never 2 searches without python printing parsing ID, why title short for table but full URL for grounding, why full prompts not truncated, why low frequency to appendix, what risk score means by squaring, what novelty score means, what truncate functions mean, what pillow canvas means — all in plain explanation of method itself not content
+3. For each Chapter 01-06 found in INPUT — whatever Q names are for this TOPIC: chapter title from tree Q label — for each data node inside tell story plain what it is when published what it does how it works use case — keep all nodes — appendix nodes as one sentence kept as appendix low frequency but preserved
+4. After all chapters: latest findings narrative list most recent dates most critical most useful — how to choose synthesis decision flowchart in plain sentences if low then X if medium then Y if tool needed then ReAct if planning then ToT etc — what could flip answer 2 counterfactuals in plain — what still missing for high confidence
+
+STYLE FOR OUTPUT:
+- Conversational plain easily understood
+- Flowing paragraphs simple headings for each chapter
+- No brackets no codes no tables
+- Explained nearly and fully keep examples as sentences
+
+OUTPUT: print full text between START_OF_PLAIN_REPORT and END_OF_PLAIN_REPORT markers for phone copy + save /mnt/data/final_plain_report.txt — text only no image no table
+
+TRIGGER: plain text report only
+```
+
+---
+
+```
+
+
+
+
+
+
+
+
 ```
 SYSTEM CONTEXT ONLY - STANDBY MODE - DO NOT EXECUTE SEARCH
 Search Builder Agent
