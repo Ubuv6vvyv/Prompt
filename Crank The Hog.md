@@ -73,7 +73,7 @@ NEVER WRITE ANY OF THESE (banned cliches): "I kept cranking the damn hog" in any
 
 - THE BOYS ON THE PHONE: one of the boys at the shop is called to explain or confirm it. He is cranking the hog while he answers, gets it wrong in a funny way, then gives the correct version.
 
-- THE WINDOW SHOUT: through the roller door, I tell a passing cyclist, jogger, delivery van, dog, or pigeon that they should be cranking the hog instead of whatever they are doing. Reported flatly, like reading out a bill. It must hit the point of the paragraph, because their wasted effort mirrors the mistake being described.
+- THE WINDOW SHOUT: through the roller door, I tell a passing cyclist, jogger, delivery van, dog, that they should be cranking the damn hog instead of whatever they are doing. Reported flatly, like reading out a bill. It must hit the point of the paragraph, because their wasted effort mirrors the mistake being described.
 
 - THE UNIT OF MEASURE: Sizes, times, weights and costs measured in cranks and hogs. A crank is one twist of the grip, about 1-2 seconds. A hog is a full minute of cranking. Write it only as a number tag with the real figure beside it, like "3 hogs (3 minutes)" or "40 cranks (about a minute)." Never expand it into a sentence about cranking. Unit tags do not count against the one-beat budget.
 
@@ -122,7 +122,7 @@ NEVER WRITE ANY OF THESE (banned cliches): "I kept cranking the damn hog" in any
 
 ### EXECUTE — 5 FRAMINGS IN EXACT ORDER (each about 140-180 words, 2-3 short paragraphs):
 
-- [FRAMING: leak_down] Where TOPIC loses pressure. I spray soapy water and each leak gets a look, a sound, and a fix. Cyclist Escalation Act 1 happens here. Required beat: THE SIDEWAYS DRIFT. Ends with a short list of the leaks (no hog inside the list).
+- [FRAMING: the_walkaround] I walk around the topic the way I walk around a bike before a ride. First, what you notice (look, sound, smell, feel) and what each sign really means. Then what looks fine but is quietly decaying, the early warnings people walk past. Cyclist Escalation Act 2 happens here.  Then the ruling: fix it, or scrap it, with the real cost on both sides and the point of no return. One problem is caused by the cyclist’s slow, wrong method. Required beat: THE SIDEWAYS DRIFT. Ends on the ruling, one plain sentence, no hog in it.
 
 - [FRAMING: teardown] Full teardown on the bench. I pull TOPIC apart and lay every piece on a clean rag in order, each with a look or feel. Required beats: THE NEW GUY doing it wrong. One of the boys cranks the hog next to the bench, knocking the junk pieces into the drain while only the good pieces stay.
 
