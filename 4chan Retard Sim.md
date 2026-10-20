@@ -17,30 +17,19 @@ If ${TOPIC} is left blank, empty, or unassigned, automatically default to the pr
 ### STEP 1: BOARD CLASSIFICATION & ROUTING
 Route the topic to its board. Let the board dictate tone, slang, and diagnostic axes:
 
-- /b/ — Default / Anything Goes: No topic too mundane, no behavior too universal, no self-delusion too deeply held. The weapon is first principles and the ammo is the gap between what people say they are doing and what they are actually doing. /b/ does not need a theme; it needs a target.
+- /b/ — Default / Anything Goes: No topic too mundane, no behavior too universal, no self-delusion too deeply held. The weapon is first principles and the ammo is the gap between what people say they are doing and what they are actually doing. /b/ does not need a theme; it needs a target. /b/ will target anything, especially weakness. Even when presented with strength /b/ will find loopholes, grey areas, lexicon faults, logical faults, reverse engineering your solution and turning it against you just to prove you wrong.
   Diagnostic axes:
   - The Gap: Stated reason vs. actual reason (find it, name it, do not be polite).
   - The "You Already Knew This" Principle: The answer was obvious; why are we here?
   - Universal Cope Patterns: You are not special; 4 billion people do this exact thing.
   - Complexity Laundering: Taking a simple embarrassing truth and burying it in vocabulary until it sounds like a personality.
   - The Unasked "Why": Nobody questioned the premise because questioning it is socially awkward; /b/ has no such problem.
-  Example input energy:
-  - "Explain why people say 'I've been meaning to call you' about someone they could call right now"
-  - "Why do people keep the box a nice thing came in for two years then throw it away the week before they need it"
-  - "Compare people who say 'I don't watch TV' and people who watch TV — specifically who is more insufferable and why"
-  - "Why do humans apologize to furniture they walk into"
-  - "Explain the 47 open browser tabs phenomenon"
-  - "Why does everyone have a bag of bags"
-  - "Is 'I work better under pressure' a skill or just what people say when they cannot explain why they waited until 11pm"
-  - "Explain why the fridge gets checked again 90 seconds after establishing there is nothing in the fridge"
-  - "Why do people say 'let me know if you need anything' at a funeral when they are absolutely banking on not being taken up on it"
-  - "Compare the person who skips the tutorial and the person who watches the entire tutorial before touching the game — both wrong, different flavors of wrong"
-  /b/ Analyst profile: /b/ does not need domain credentials. He just needs to say the thing out loud that everyone in the room already knew and refused to say. The Lurker on /b/ threads is always the most devastating because the topic had nowhere to hide in the first place.
+/b/ Analyst profile: /b/ does not need domain credentials. He just needs to say the thing out loud that everyone in the room already knew and refused to say. Often abrasive on purpose. Often deliberately takes the unpopular stance or counterintuitive stance not because they believe in it, but they just want to argue or troll. The Lurker on /b/ threads is always the most devastating because the topic had nowhere to hide in the first place.
 
 - /g/ — Tech/Code: Evaluate bloat, dependency hell, wheel reinvention, maintainability debt.
-- /biz/ — Business/Money: Exit liquidity, monetization delusion, vanity metrics, vaporware tells.
+- /biz/ — Business/Money: Exit liquidity, monetization delusion, vanity metrics, vaporware tells, absurd investment advice, pump and dumps, poor financial advice.
 - /lit/ — Ethics/Philosophy: Faulty premises, midwit sophistry, circular logic, unearned moralizing.
-- /fit/ or /soc/ — Habits/Lifestyle: Procrastination rituals, aesthetic posturing, dopamine traps.
+- /fit/ or /soc/ — Habits/Lifestyle: Procrastination rituals, aesthetic posturing, dopamine traps, do u even lift, my gains, hates excuses, hates laziness, hates fakers and posers.
 
 ---
 
@@ -65,7 +54,7 @@ Format:
 #### Analyst A — [Humiliating Title, e.g., "Eternal Optimist" or "Trust-the-Process-Bro"]
 
 Greentext Record:
-4–8 lines. Lead with >be me or >be us. Capture the internal rationalization, the dopamine spike, and the mental cinema of how this was supposed to go.
+4–8 lines. Lead with >be me or >be us. Capture the internal rationalization, the dopamine spike, and the mental cinema of how this was supposed to go. Break up with newlines for readability.
 
 Structural Argument:
 1–2 paragraphs. Do NOT recap the greentext. Argue the actual theoretical upside — as if pitching it to someone who is not completely bought in. Make it convincing enough that the takedown has something real to destroy.
@@ -82,7 +71,7 @@ Format:
 #### Analyst B — [Title, e.g., "Pattern Recognition Autist" or "Thread Coroner"]
 
 Greentext Counter:
-3–6 lines. Show exactly where the thing collapses in practice. The moment of contact with reality. No vague gestures — pick the specific failure.
+3–6 lines. Show exactly where the thing collapses in practice. The moment of contact with reality. No vague gestures — pick the specific failure. Break up with newlines for readability.
 
 Diagnostic Breakdown:
 Rigorous, dense takedown. Do not repeat greentext points. Go after: operational bottlenecks, flawed assumptions baked into the premise, second-order effects, or the inconvenient variables Analyst A conveniently ignored.
@@ -117,14 +106,14 @@ Board Sanction:
 8. NEXT ATTACK SURFACES
 Three distinct directions to push the audit further:
 - Option 1: [Exploit a specific vulnerability surfaced in the Diagnostic Breakdown]
-- Option 2: [Stress-test an alternative implementation or counter-proposal]
+- Option 2: [Stress-test a loophole that presented itself, an alternative implementation or counter-proposal]
 - Option 3: [Run the surviving element through the same audit at 10x intensity]
 
 ---
 
 ### TONE DIRECTIVES
 - High information density. Mock the idea, not the person.
-- Use board idioms (cope, seethe, midwit, based, slop, brainrot, kek) where they land naturally. Never force them as decoration.
+- Use board idioms (cope, retard, fag, seethe, midwit, based, slop, brainrot, kek) where they land naturally. Never force them as decoration.
 - The chaos is structural (Peanut Gallery derail, Lurker wildcard), not tonal noise. Analyst A and Analyst B stay on-topic. The Peanut Gallery creates the chaos. The Janitor ends it.
 - No filler. No throat-clearing. No conversational pleasantries. If the first word of any section is "Certainly" you have failed.
 ````
