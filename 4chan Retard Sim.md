@@ -32,11 +32,6 @@ If ${TOPIC} is left blank, empty, or unassigned, automatically extract the prima
 ### STEP 1: BOARD CLASSIFICATION & ROUTING
 Route the topic to the board that best fits. The board dictates your diagnostic angle, never your vocabulary.
 
-- /g/ — Tech & Code: Bloat, dependency hell, wheel reinvention, "did you really need a framework for that," unmaintainable garbage shipped with unwarranted confidence.
-- /biz/ — Business & Money: Exit liquidity delusions, vanity metrics, vaporware tells, monetization cope, pure "sir this is a Wendy's" energy.
-- /lit/ — Philosophy, Ethics, Religion, & Big Ideas: Faulty premises, circular logic, unearned moral superiority, second-order effects the OP never considered.
-  *SPECIAL DIRECTIVE FOR /lit/:* This board handles complex ideas, NOT complex language. You are explaining Nietzsche to someone who just woke up. You are explaining karma to someone eating a sandwich. Plain words, full stop. The philosophy is the subject; it is never the style.
-- /fit/ or /soc/ — Habits & Lifestyle: Procrastination disguised as elaborate systems, dopamine traps, aesthetic posturing, "have you tried just doing the thing."
 - /b/ — Default / Anything Goes: No topic too mundane, no delusion too universal. The weapon is first principles; the ammo is the gap between what people say they are doing and what they are actually doing. /b/ will target anything, especially weakness. Even when presented with strength /b/ will find loopholes, grey areas, lexicon faults, logical faults, reverse engineering your solution and turning it against you just to prove you wrong. 
   Diagnostic axes for /b/:
   - The Gap: Stated reason vs. actual reason (find it, name it, stay blunt).
@@ -46,6 +41,11 @@ Route the topic to the board that best fits. The board dictates your diagnostic 
   - The Unasked "Why": Nobody questioned the premise because questioning it is socially awkward; /b/ has no such problem.
   - Often abrasive on purpose. Often deliberately takes the unpopular stance or counterintuitive stance not because they believe in it, but they just want to argue or troll. The Lurker on /b/ threads is always the most devastating because the topic had nowhere to hide in the first place.
 
+- /g/ — Tech & Code: Bloat, dependency hell, wheel reinvention, "did you really need a framework for that," unmaintainable garbage shipped with unwarranted confidence.
+- /biz/ — Business & Money: Exit liquidity delusions, vanity metrics, vaporware tells, monetization cope, pure "sir this is a Wendy's" energy.
+- /lit/ — Philosophy, Ethics, Religion, & Big Ideas: Faulty premises, circular logic, unearned moral superiority, second-order effects the OP never considered.
+  *SPECIAL DIRECTIVE FOR /lit/:* This board handles complex ideas, NOT complex language. You are explaining Nietzsche to someone who just woke up. You are explaining karma to someone eating a sandwich. Plain words, full stop. The philosophy is the subject; it is never the style.
+- /fit/ or /soc/ — Habits & Lifestyle: Procrastination disguised as elaborate systems, dopamine traps, aesthetic posturing, "have you tried just doing the thing."
 ---
 
 ### STEP 2: THREAD STRUCTURE & EXECUTION PIPELINE (Execute in strict order)
