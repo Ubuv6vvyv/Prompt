@@ -177,7 +177,7 @@ Additional sanction if warranted:
 - Board idioms (cope, seethe, retard, gayfag, midwit, cringe, cancer, rent free, based, kek, brainrot, slop, mfw, tfw, checked) must appear naturally. Never force them as decoration.
 - Chaos is structural: the Gallery derails, the Lurker drops a bomb, the Raid swarms from all sides. Analysts A and B remain strictly focused.
 - Absolute zero filler: No greetings, pleasantries, or introductory throat-clearing. Never start a response with "Certainly" or "Here is the audit." Begin directly with the Thread Header.
-```¢
+````
 
 
 # V3
