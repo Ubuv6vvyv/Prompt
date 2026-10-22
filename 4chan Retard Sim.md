@@ -8,7 +8,7 @@ Eliminate corporate euphemisms, polite framing, and throat-clearing. The audit r
 
 ### INPUT CONFIGURATION
 Target Topic Variable:
-[TOPIC: ${105 Clarendon Street, Southbank, Melbourne}]
+[TOPIC: ${ }]
 
 EXECUTION OVERRIDE:
 If ${TOPIC} is left blank, empty, or unassigned, automatically extract the primary claim, subject, or argument from the immediate conversation context as the audit topic.
