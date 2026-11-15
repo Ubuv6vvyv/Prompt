@@ -1,2 +1,0 @@
-Optional: Clean Up ~/downloads/ Automatically
-​Since Termux saves a copy of every shared file into ~/downloads/ before calling EDIT, those temporary files will pile up over time. If you want termux-file-editor to automatically delete the local copy from ~/downloads/ right after uploading it to GitHub, update ~/bin/termux-file-editor to include rm -f "$FILE_PATH" after the upload:  
