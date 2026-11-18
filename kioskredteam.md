@@ -1,4 +1,6 @@
-````
+# Kiosk Escaping Test Cases
+
+```
 kiosk_touch_defense_audit/
 ├── 01_SystemUI_and_Kiosk_Lockdown_Boundaries/
 │⠀⠀⠀├── 1.1_Top_Edge_StatusBar_Pull_Isolation/
