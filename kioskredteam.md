@@ -1,5 +1,4 @@
-`
-
+````
 kiosk_touch_defense_audit/
 ├── 01_SystemUI_and_Kiosk_Lockdown_Boundaries/
 │⠀⠀⠀├── 1.1_Top_Edge_StatusBar_Pull_Isolation/
@@ -414,5 +413,4 @@ kiosk_touch_defense_audit/
 ⠀⠀⠀⠀⠀⠀⠀⠀├── Test_Scenario: Inspect any on-screen clock, session countdown (0:59), and generated e-receipt timestamps for accuracy and monotonic behavior.
 ⠀⠀⠀⠀⠀⠀⠀⠀├── Niche_Variations: Verify that session timers use SystemClock.elapsedRealtime() rather than wall-clock System.currentTimeMillis() so NTP clock adjustments mid-session cannot prematurely expire or stall a payment countdown.
 ⠀⠀⠀⠀⠀⠀⠀⠀└── Expected_Defense: All UI session timers rely on monotonic uptime clocks, while TLS/cloud telemetry maintains accurate NTP synchronization.
-
-`
+```
