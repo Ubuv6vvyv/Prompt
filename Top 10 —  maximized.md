@@ -2,7 +2,7 @@
 
 ## 1. MEGA_10_LOCKED_V3
 
-````
+
 # MEGA_10_LOCKED_V3 — GitHub-ready
 
 Locked again — but this time actually locked to the source. I read `merged.txt`.
@@ -433,7 +433,7 @@ other_9,Reworked to source, not changed in job - 1 audit, 2 gobbo, 3 hermione, 4
 ```
 
 
-````
+
 
 ## 2. SUPER HOG V12 SLIM
 
